@@ -12,8 +12,26 @@ const { Content, headings } = await render(entry);
 const d = entry.data;
 const published = new Intl.DateTimeFormat('en-US', { year:'numeric', month:'long', day:'numeric' }).format(d.pubDate);
 const categoryLabel = d.category.replaceAll('-', ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+const canonical = new URL(`/articles/${entry.id}`, Astro.site);
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: d.title,
+  description: d.description,
+  datePublished: d.pubDate.toISOString(),
+  dateModified: (d.updatedDate ?? d.pubDate).toISOString(),
+  mainEntityOfPage: canonical.href,
+  author: { '@type': 'Organization', name: d.author },
+  publisher: {
+    '@type': 'Organization',
+    name: 'DollarAngle',
+    url: Astro.site?.toString(),
+    logo: { '@type': 'ImageObject', url: new URL('/logo.svg', Astro.site).href }
+  }
+};
 ---
 <BaseLayout title={`${d.title} | DollarAngle`} description={d.description} type="article" noindex={d.draft}>
+<script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
 {showDrafts && d.draft && <div class="preview-bar">Draft preview — this article is not approved for publication and is marked noindex.</div>}
 <section class="article-hero"><div class="container"><span class="eyebrow">DollarAngle {d.franchise}</span><h1>{d.title}</h1><p class="article-deck">{d.description}</p><div class="article-meta"><span>By {d.author}</span><span>•</span><span>{published}</span><span>•</span><span>{d.readTime}</span><span>•</span><span>{categoryLabel}</span></div></div></section>
 <section class="section" style="padding-top:10px"><div class="container article-layout"><article class="article-body">{d.keyTakeaway && <blockquote><strong>The DollarAngle</strong><br />{d.keyTakeaway}</blockquote>}<Content /><div class="disclaimer"><strong>Financial education disclaimer:</strong> DollarAngle provides financial education, news and commentary for informational purposes only. Nothing here constitutes personalized financial, investment, tax or legal advice. Investing involves risk, including possible loss of principal. Consider your own circumstances and, where appropriate, consult a qualified professional.</div></article><aside class="sidebar"><h3>In this article</h3>{headings.filter((h) => h.depth === 2).map((h) => <a href={`#${h.slug}`}>{h.text}</a>)}<h3 style="margin-top:26px">Editorial standard</h3><p style="font-size:.86rem;color:#64748b">We separate factual claims from interpretation and show risks alongside opportunities.</p><a href="/editorial-policy" style="color:#059669">Read our policy →</a></aside></div></section>
