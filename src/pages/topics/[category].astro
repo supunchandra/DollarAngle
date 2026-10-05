@@ -3,8 +3,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArticleCard from '../../components/ArticleCard.astro';
 import { getVisibleArticles, showDrafts } from '../../lib/content';
 
-const categories = ['personal-finance','investing','markets','economy','crypto','real-estate'];
 export function getStaticPaths() {
+  const categories = ['personal-finance','investing','markets','economy','crypto','real-estate'];
   return categories.map((category) => ({ params: { category } }));
 }
 const { category } = Astro.params;
