@@ -43,7 +43,7 @@ If your workplace plan offers matching contributions, understand the formula and
 
 An employer match is unusual because it can create an immediate additional contribution tied to your own saving. The IRS specifically encourages workers to review their plan's matching formula and contribute enough to benefit from available matching contributions when feasible.
 
-Do not assume every employer match works the same way. Some plans match dollar-for-dollar up to a percentage; others use different formulas. Employer contributions can also be subject to vesting schedules.
+Do not assume every employer match works the same way. Some plans match dollar-for-dollar up to a percentage; others use different formulas. Your own salary deferrals are vested immediately, while some employer contributions can vest over time depending on the plan terms.
 
 ## Step 4: Attack expensive consumer debt
 
@@ -76,7 +76,7 @@ After high-cost debt and short-term fragility are under control, long-term inves
 
 For U.S. workers, tax-advantaged accounts can include workplace plans such as 401(k)s and individual retirement accounts. The right mix between traditional and Roth treatment depends on tax circumstances and eligibility.
 
-At this stage, simplicity has advantages. Diversified, low-cost investment funds are commonly used because they can spread exposure across many securities without requiring an investor to select individual winners.
+At this stage, simplicity has advantages. Diversified funds can spread exposure across many securities without requiring an investor to select individual winners, and investment fees matter because they reduce the amount left in the portfolio to compound over time.
 
 ## Step 7: Fund medium-term goals separately
 
