@@ -1,0 +1,22 @@
+---
+const nav = [
+  ['Latest', '/explore'],
+  ['Guides', '/topics/personal-finance'],
+  ['Investing', '/topics/investing'],
+  ['Markets', '/topics/markets'],
+  ['Economy', '/topics/economy'],
+  ['Real Estate', '/topics/real-estate']
+];
+---
+<header class="header">
+  <div class="container nav">
+    <a class="brand" href="/" aria-label="DollarAngle home"><i class="brand-mark"></i><span>DOLLAR</span><span>ANGLE</span></a>
+    <nav class="nav-links" data-nav-links>
+      {nav.map(([label, href]) => <a href={href}>{label}</a>)}
+    </nav>
+    <div class="nav-actions">
+      <a class="btn btn-primary" href="/#newsletter">Subscribe</a>
+      <button class="mobile-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-mobile-toggle>☰</button>
+    </div>
+  </div>
+</header>

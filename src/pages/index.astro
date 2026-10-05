@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+import { getVisibleArticles, showDrafts } from '../lib/content';
+
+const all = await getVisibleArticles();
+const featured = all.find((entry) => entry.data.featured) ?? all[0];
+const latest = all.filter((entry) => entry.id !== featured?.id).slice(0,6);
+---
+<BaseLayout>
+  {showDrafts && <div class="preview-bar">Editorial preview mode — draft content is visible and is not approved for publication.</div>}
+  <section class="hero"><div class="container hero-grid"><div><span class="eyebrow">Money made clearer</span><h1>A smarter <span class="accent">angle</span> on your money.</h1><p>Understand personal finance, investing, markets and the economy without Wall Street jargon. DollarAngle turns complicated money stories into practical ideas you can actually use.</p><div class="hero-actions"><a class="btn btn-primary" href="/explore">Explore the latest</a><a class="btn btn-secondary" href="/topics/personal-finance">Start with the basics →</a></div></div>
+  {featured ? <article class="hero-card"><span class="eyebrow" style="color:#6ee7b7">DollarAngle {featured.data.franchise}</span><h2>{featured.data.title}</h2><p>{featured.data.description}</p><a class="card-link" href={`/articles/${featured.id}`}>Read the analysis →</a><div class="stat-row"><div class="stat"><strong>Plain English</strong><span>No finance degree required</span></div><div class="stat"><strong>Evidence first</strong><span>Sources over hype</span></div><div class="stat"><strong>Practical</strong><span>Real-world impact</span></div></div></article> : <article class="hero-card"><span class="eyebrow" style="color:#6ee7b7">DollarAngle</span><h2>Launch library is being reviewed.</h2><p>DollarAngle content stays private until it passes human editorial approval.</p></article>}
+  </div></section>
+
+  {latest.length > 0 && <section class="section"><div class="container"><div class="section-head"><div><span class="eyebrow">Latest angles</span><h2>Money, markets and what they mean for you.</h2></div><p>Every story answers the same question: what is the dollar angle, and why should an ordinary saver or investor care?</p></div><div class="grid-3">{latest.map((entry, i) => <ArticleCard entry={entry} dark={i % 3 !== 1} />)}</div></div></section>}
+
+  <section class="section"><div class="container feature-grid"><div class="feature dark"><div class="angle"></div><span class="eyebrow" style="color:#6ee7b7">Our editorial promise</span><h3>Facts first. Context second. Your decision stays yours.</h3><p>DollarAngle separates reporting from interpretation, shows risks alongside opportunities, and never presents speculation as guaranteed wealth.</p><a class="btn btn-primary" href="/editorial-policy" style="margin-top:18px">Read our editorial policy</a></div><div class="feature"><span class="eyebrow">Explore</span><h3 style="font-size:2.2rem">Build your financial foundation.</h3><div class="topic-list"><a class="topic-item" href="/topics/personal-finance">Personal Finance <span>→</span></a><a class="topic-item" href="/topics/investing">Investing <span>→</span></a><a class="topic-item" href="/topics/economy">Economy <span>→</span></a><a class="topic-item" href="/topics/markets">Markets & News <span>→</span></a><a class="topic-item" href="/topics/real-estate">Real Estate <span>→</span></a><a class="topic-item" href="/topics/crypto">Crypto <span>→</span></a></div></div></div></section>
+
+  <section class="section" id="newsletter"><div class="container newsletter"><div><h2>One useful money angle. No noise.</h2><p>Practical financial education and the stories that matter, delivered when there’s something worth reading.</p></div><div><form class="news-form" data-placeholder-form><input type="email" placeholder="you@example.com" aria-label="Email address" required /><button class="btn btn-primary" type="submit">Join DollarAngle</button></form><div class="form-note">Newsletter provider will be connected before launch.</div></div></div></section>
+</BaseLayout>

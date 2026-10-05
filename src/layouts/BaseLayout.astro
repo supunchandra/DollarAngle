@@ -1,0 +1,68 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+const {
+  title = 'DollarAngle — A smarter angle on your money',
+  description = 'DollarAngle explains personal finance, investing, markets and the economy in plain English for people building a stronger financial future.',
+  image = '/logo.svg',
+  type = 'website',
+  noindex = false
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const imageUrl = new URL(image, Astro.site);
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    {noindex && <meta name="robots" content="noindex,nofollow" />}
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={imageUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      name: 'DollarAngle',
+      description: 'Financial education and commentary publication.',
+      url: Astro.site?.toString()
+    })} />
+  </head>
+  <body>
+    <Header />
+    <main><slot /></main>
+    <Footer />
+    <script is:inline>
+      const toggle = document.querySelector('[data-mobile-toggle]');
+      const nav = document.querySelector('[data-nav-links]');
+      if (toggle && nav) {
+        toggle.addEventListener('click', () => {
+          const open = nav.dataset.open === 'true';
+          nav.dataset.open = String(!open);
+          toggle.setAttribute('aria-expanded', String(!open));
+        });
+      }
+      document.querySelectorAll('[data-placeholder-form]').forEach((form) => {
+        form.addEventListener('submit', (event) => {
+          event.preventDefault();
+          const button = form.querySelector('button');
+          if (!button) return;
+          button.textContent = 'Integration coming next';
+          button.disabled = true;
+        });
+      });
+    </script>
+  </body>
+</html>

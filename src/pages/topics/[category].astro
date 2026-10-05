@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import { getVisibleArticles, showDrafts } from '../../lib/content';
+
+const categories = ['personal-finance','investing','markets','economy','crypto','real-estate'];
+export function getStaticPaths() {
+  return categories.map((category) => ({ params: { category } }));
+}
+const { category } = Astro.params;
+const label = category.replaceAll('-', ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+const articles = (await getVisibleArticles()).filter((entry) => entry.data.category === category);
+---
+<BaseLayout title={`${label} | DollarAngle`} description={`DollarAngle ${label} guides and analysis in plain English.`}>
+{showDrafts && <div class="preview-bar">Editorial preview mode — draft content is visible and is not approved for publication.</div>}
+<section class="page-hero"><div class="container"><span class="eyebrow">DollarAngle topic</span><h1>{label}</h1><p>Clear, practical coverage designed to improve financial understanding without hype or false certainty.</p></div></section>
+<section class="section" style="padding-top:10px"><div class="container">{articles.length ? <div class="grid-3">{articles.map((entry, i) => <ArticleCard entry={entry} dark={i % 2 === 0} />)}</div> : <div class="empty">No articles have been approved for public release in this topic yet.</div>}</div></section>
+</BaseLayout>

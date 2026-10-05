@@ -1,0 +1,7 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Contact | DollarAngle" description="Contact DollarAngle for editorial feedback, corrections and business inquiries.">
+<section class="page-hero"><div class="container"><span class="eyebrow">Contact</span><h1>Talk to DollarAngle.</h1><p>Use this page for editorial feedback, corrections and business inquiries. The production form endpoint will be connected before public launch.</p></div></section>
+<section class="section" style="padding-top:10px"><div class="container contact-grid"><div class="contact-card"><h2>What belongs here</h2><p>Corrections, source questions, partnership inquiries and general feedback.</p><p><strong>Financial questions:</strong> DollarAngle cannot provide individualized financial advice through this form.</p></div><form class="contact-form" data-placeholder-form><label for="name">Name</label><input id="name" name="name" autocomplete="name" required /><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required /><label for="message">Message</label><textarea id="message" name="message" required></textarea><button class="btn btn-primary" type="submit" style="margin-top:18px">Send message</button><p class="form-note">Form backend is intentionally disabled in this pre-launch build.</p></form></div></section>
+</BaseLayout>
