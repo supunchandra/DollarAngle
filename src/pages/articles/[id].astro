@@ -13,15 +13,23 @@ const d = entry.data;
 const published = new Intl.DateTimeFormat('en-US', { year:'numeric', month:'long', day:'numeric' }).format(d.pubDate);
 const categoryLabel = d.category.replaceAll('-', ' ').replace(/\b\w/g, (c) => c.toUpperCase());
 const canonical = new URL(`/articles/${entry.id}`, Astro.site);
+const seoTitle = d.seoTitle ?? d.title;
+const seoDescription = d.seoDescription ?? d.description;
+const socialImage = d.socialImage ?? '/og-default.png';
+const socialImageUrl = new URL(socialImage, Astro.site);
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
   headline: d.title,
-  description: d.description,
+  description: seoDescription,
+  image: socialImageUrl.href,
   datePublished: d.pubDate.toISOString(),
   dateModified: (d.updatedDate ?? d.pubDate).toISOString(),
   mainEntityOfPage: canonical.href,
   author: { '@type': 'Organization', name: d.author },
+  articleSection: categoryLabel,
+  keywords: d.tags.join(', '),
+  isAccessibleForFree: true,
   publisher: {
     '@type': 'Organization',
     name: 'DollarAngle',
@@ -30,7 +38,7 @@ const articleSchema = {
   }
 };
 ---
-<BaseLayout title={`${d.title} | DollarAngle`} description={d.description} type="article" noindex={d.draft}>
+<BaseLayout title={`${seoTitle} | DollarAngle`} description={seoDescription} image={socialImage} imageAlt={d.title} type="article" noindex={d.draft}>
 <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
 {showDrafts && d.draft && <div class="preview-bar">Draft preview — this article is not approved for publication and is marked noindex.</div>}
 <section class="article-hero"><div class="container"><span class="eyebrow">DollarAngle {d.franchise}</span><h1>{d.title}</h1><p class="article-deck">{d.description}</p><div class="article-meta"><span>By {d.author}</span><span>•</span><span>{published}</span><span>•</span><span>{d.readTime}</span><span>•</span><span>{categoryLabel}</span></div></div></section>
