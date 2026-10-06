@@ -1,6 +1,9 @@
 ---
 title: "A simple financial order of operations for when everything feels important"
 description: "Emergency savings, debt, retirement, investing and big goals all compete for the same dollar. Use this framework to decide what comes first."
+seoTitle: "Financial Order of Operations: What Comes First?"
+seoDescription: "Emergency fund, debt, 401(k), investing or a house? Use this practical financial order of operations to decide where your next dollar should go."
+socialImage: "/og-default.png"
 category: personal-finance
 franchise: Guides
 author: DollarAngle Editorial
@@ -18,6 +21,19 @@ Trying to do all of them aggressively at once can leave you making tiny progress
 A better approach is to use an **order of operations**: a sequence that protects you from common financial shocks first, captures unusually valuable benefits next, and then moves toward longer-term wealth building.
 
 This is a framework, not a personalized financial plan. Your taxes, job stability, family situation, insurance needs and debt terms can change the order.
+
+### The quick order
+
+1. Keep essential bills and minimum debt payments current.
+2. Build a starter emergency buffer.
+3. Capture an employer retirement match when available and appropriate.
+4. Pay down expensive consumer debt.
+5. Expand your emergency reserve.
+6. Increase retirement and long-term investing.
+7. Fund medium-term goals separately.
+8. Raise your ownership and investing rate as income grows.
+
+The details matter, but this sequence gives each new dollar a clear job.
 
 ## Step 1: Keep the financial machine running
 
