@@ -130,7 +130,9 @@ The goal is not a perfect sequence. It is a financial system strong enough that 
 - [CFPB: An essential guide to building an emergency fund](https://www.consumerfinance.gov/an-essential-guide-to-building-an-emergency-fund/)
 - [IRS: Matching contributions help you save more for retirement](https://www.irs.gov/retirement-plans/matching-contributions-help-you-save-more-for-retirement)
 - [IRS: Retirement topics — contributions](https://www.irs.gov/retirement-plans/plan-participant-employee/retirement-topics-contributions)
+- [U.S. Department of Labor: 401(k) plans for small businesses](https://www.dol.gov/sites/dolgov/files/EBSA/about-ebsa/our-activities/resource-center/publications/401k-plans-for-small-businesses.pdf)
 - [Investor.gov: Asset allocation and diversification](https://www.investor.gov/introduction-investing/getting-started/asset-allocation)
+- [Investor.gov: Understanding fees](https://www.investor.gov/introduction-investing/getting-started/understanding-fees)
 - [CFPB: Debt action plan](https://files.consumerfinance.gov/f/documents/cfpb_your-money-your-goals_debt-action-plan_tool_2018-11.pdf)
 
 *DollarAngle provides financial education and commentary for informational purposes only. It is not personalized financial, investment, tax or legal advice. Investing involves risk, including possible loss of principal.*
