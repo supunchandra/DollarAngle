@@ -10,6 +10,7 @@ const articles = defineCollection({
     seoTitle: z.string().optional(),
     seoDescription: z.string().optional(),
     socialImage: z.string().optional(),
+    authorId: z.string().optional(),
     category: z.enum(['personal-finance', 'investing', 'markets', 'economy', 'crypto', 'real-estate']),
     franchise: z.enum(['Daily', 'Guides', 'Explained', 'Signals']),
     author: z.string().default('DollarAngle Editorial'),

@@ -1,0 +1,13 @@
+---
+const { editor } = Astro.props;
+const initials = editor.name.split(' ').map((part: string) => part[0]).join('').slice(0, 2).toUpperCase();
+---
+<div class="author-box">
+  <div class="author-avatar" aria-hidden="true">{initials}</div>
+  <div class="author-copy">
+    <p class="author-kicker">DollarAngle editorial byline</p>
+    <h2>{editor.name}</h2>
+    <p class="author-role">{editor.role}</p>
+    <p class="author-bio">{editor.shortBio}</p>
+  </div>
+</div>
