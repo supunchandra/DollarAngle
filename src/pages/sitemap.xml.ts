@@ -27,7 +27,7 @@ function escapeXml(value: string) {
 }
 
 export async function GET({ site }: { site: URL | undefined }) {
-  const base = site ?? new URL('https://dollarangle.vercel.app');
+  const base = site ?? new URL('https://dollarangle.com');
   const articles = await getVisibleArticles();
 
   const urls = [
