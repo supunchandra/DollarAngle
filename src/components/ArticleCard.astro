@@ -1,15 +1,16 @@
 ---
-const { entry, dark = false } = Astro.props;
+const { entry, dark = false, headingLevel = 3 } = Astro.props;
 const d = entry.data;
 const categoryLabel = d.category.replaceAll('-', ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+const Heading = headingLevel === 2 ? 'h2' : 'h3';
 ---
 <a class="card" href={`/articles/${entry.id}`}>
   <div class:list={["card-media", { dark }]}>
-    {dark && <div class="mini-chart"><svg viewBox="0 0 300 70" preserveAspectRatio="none"><path d="M0,55 C35,58 43,27 80,36 S125,13 154,26 S211,18 236,12 S270,19 300,5" fill="none" stroke="#34d399" stroke-width="4" /></svg></div>}
+    {dark && <div class="mini-chart"><svg viewBox="0 0 300 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,55 C35,58 43,27 80,36 S125,13 154,26 S211,18 236,12 S270,19 300,5" fill="none" stroke="#34d399" stroke-width="4" /></svg></div>}
   </div>
   <div class="card-body">
     <span class="kicker">DollarAngle {d.franchise}</span>
-    <h3>{d.title}</h3>
+    <Heading>{d.title}</Heading>
     <p>{d.description}</p>
     <div class="meta"><span>{d.readTime}</span><span>{categoryLabel}</span></div>
   </div>
