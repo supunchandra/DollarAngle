@@ -1,10 +1,9 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { inject } from '@vercel/analytics';
+import { Analytics } from '@vercel/analytics/astro';
 import '../styles/global.css';
 
-inject();
 
 const {
   title = 'DollarAngle — A smarter angle on your money',
@@ -83,6 +82,7 @@ const siteSchema = {
     <Header />
     <main><slot /></main>
     <Footer />
+    <Analytics />
     <script is:inline>
       const toggle = document.querySelector('[data-mobile-toggle]');
       const nav = document.querySelector('[data-nav-links]');
