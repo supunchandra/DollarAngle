@@ -25,7 +25,7 @@ A better approach is to use an **order of operations**: a sequence that protects
 
 This is a framework, not a personalized financial plan. Your taxes, job stability, family situation, insurance needs and debt terms can change the order.
 
-![Man reviewing household finances at a kitchen table with bills, a notebook and a calculator](/article-assets/financial-order-budget-planning.jpg)
+![Man reviewing household finances at a kitchen table with bills, papers, a notebook and a calculator](/article-assets/thoughtful-home-office-at-the-kitchen-table.png)
 
 *A clear financial system starts by giving each dollar a job.*
 
