@@ -4,15 +4,14 @@ import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 
 const {
-  title = 'DollarAngle — A smarter angle on your money',
+  title = 'DollarAngle | A smarter angle on your money',
   description = 'DollarAngle explains personal finance, investing, markets and the economy in plain English for people building a stronger financial future.',
   image = '/og-default.png',
-  imageAlt = 'DollarAngle — A smarter angle on your money',
+  imageAlt = 'DollarAngle | A smarter angle on your money',
   imageWidth = 1200,
   imageHeight = 630,
   imageType = 'image/png',
-  type = 'website',
-  noindex = false
+  type = 'website'
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -31,10 +30,7 @@ const siteSchema = {
       name: 'DollarAngle',
       description: 'Financial education and commentary publication.',
       url: siteUrl,
-      logo: {
-        '@type': 'ImageObject',
-        url: new URL('/logo.svg', siteUrl).href
-      }
+      logo: { '@type': 'ImageObject', url: new URL('/logo.svg', siteUrl).href }
     },
     {
       '@type': 'WebSite',
@@ -56,7 +52,7 @@ const siteSchema = {
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="describedby" href="/llms.txt" type="text/markdown" />
-    {noindex && <meta name="robots" content="noindex,nofollow" />}
+    <meta name="robots" content="noindex,nofollow" />
     {googleVerification && <meta name="google-site-verification" content={googleVerification} />}
     <meta property="og:site_name" content="DollarAngle" />
     <meta property="og:locale" content="en_US" />

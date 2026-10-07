@@ -1,6 +1,6 @@
 import { getCollection } from 'astro:content';
 
-export const showDrafts = import.meta.env.SHOW_DRAFTS === 'true';
+export const showDrafts = true;
 
 export async function getVisibleArticles() {
   const entries = await getCollection('articles');
