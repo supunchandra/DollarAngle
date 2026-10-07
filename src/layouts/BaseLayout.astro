@@ -1,7 +1,10 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { inject } from '@vercel/analytics';
 import '../styles/global.css';
+
+inject();
 
 const {
   title = 'DollarAngle — A smarter angle on your money',
