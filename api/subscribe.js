@@ -62,7 +62,8 @@ export default async function handler(request, response) {
   }
 
   const segmentId = process.env.RESEND_SEGMENT_ID;
-  if (!process.env.RESEND_API_KEY || !segmentId) {
+  const topicId = process.env.RESEND_TOPIC_ID;
+  if (!process.env.RESEND_API_KEY || !segmentId || !topicId) {
     return sendJson(response, 503, { ok: false });
   }
 
@@ -92,6 +93,20 @@ export default async function handler(request, response) {
         return sendJson(response, 502, { ok: false });
       }
 
+      const updateTopic = await resendRequest(
+        `/contacts/${encodedEmail}/topics`,
+        {
+          method: 'PATCH',
+          body: JSON.stringify([
+            { id: topicId, subscription: 'opt_in' }
+          ])
+        }
+      );
+
+      if (!updateTopic.ok) {
+        return sendJson(response, 502, { ok: false });
+      }
+
       return sendJson(response, 200, { ok: true });
     }
 
@@ -104,7 +119,8 @@ export default async function handler(request, response) {
       body: JSON.stringify({
         email,
         unsubscribed: false,
-        segments: [{ id: segmentId }]
+        segments: [{ id: segmentId }],
+        topics: [{ id: topicId, subscription: 'opt_in' }]
       })
     });
 
