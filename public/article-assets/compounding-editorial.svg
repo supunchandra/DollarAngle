@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+<title id="title">Long-term investing routine and compounding</title>
+<desc id="desc">Editorial illustration of a person reviewing a long-term savings plan with monthly contributions and a rising account balance over time.</desc>
+<rect width="1200" height="675" rx="36" fill="#F7FAF9"/>
+<circle cx="1030" cy="125" r="170" fill="#E5F4ED"/>
+<circle cx="1080" cy="585" r="215" fill="#EEF2F6"/>
+<text x="70" y="88" fill="#132A23" font-family="Arial,Helvetica,sans-serif" font-size="38" font-weight="700">Compounding needs time, contributions and patience</text>
+<text x="70" y="130" fill="#5F6F69" font-family="Arial,Helvetica,sans-serif" font-size="21">Long-term growth starts with money that is actually saved and invested.</text>
+<rect x="80" y="205" width="565" height="350" rx="28" fill="#FFFFFF" stroke="#D6E2DD" stroke-width="3"/>
+<text x="120" y="255" fill="#64746E" font-family="Arial,Helvetica,sans-serif" font-size="19">MONTHLY CONTRIBUTION</text>
+<text x="120" y="305" fill="#1C7C5B" font-family="Arial,Helvetica,sans-serif" font-size="46" font-weight="700">$500</text>
+<rect x="120" y="350" width="450" height="140" rx="20" fill="#10231D"/>
+<polyline points="155,450 220,420 285,430 350,382 425,365 510,315" fill="none" stroke="#65C89D" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="155" cy="450" r="9" fill="#65C89D"/><circle cx="220" cy="420" r="9" fill="#65C89D"/><circle cx="285" cy="430" r="9" fill="#65C89D"/><circle cx="350" cy="382" r="9" fill="#65C89D"/><circle cx="425" cy="365" r="9" fill="#65C89D"/><circle cx="510" cy="315" r="9" fill="#65C89D"/>
+<text x="690" y="235" fill="#132A23" font-family="Arial,Helvetica,sans-serif" font-size="27" font-weight="700">What you can influence</text>
+<g font-family="Arial,Helvetica,sans-serif" font-size="22">
+<rect x="690" y="275" width="390" height="58" rx="18" fill="#FFFFFF" stroke="#D6E2DD" stroke-width="2"/><text x="720" y="312" fill="#253A33">How much you contribute</text>
+<rect x="690" y="350" width="390" height="58" rx="18" fill="#FFFFFF" stroke="#D6E2DD" stroke-width="2"/><text x="720" y="387" fill="#253A33">How long you stay invested</text>
+<rect x="690" y="425" width="390" height="58" rx="18" fill="#FFFFFF" stroke="#D6E2DD" stroke-width="2"/><text x="720" y="462" fill="#253A33">How much friction you pay</text>
+</g>
+<text x="70" y="620" fill="#6C7A75" font-family="Arial,Helvetica,sans-serif" font-size="17">Editorial illustration. Investment returns are not guaranteed.</text>
+</svg>
