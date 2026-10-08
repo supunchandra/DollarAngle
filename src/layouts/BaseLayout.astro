@@ -93,6 +93,55 @@ const siteSchema = {
           toggle.setAttribute('aria-expanded', String(!open));
         });
       }
+      const newsletterForm = document.querySelector('[data-newsletter-form]');
+      if (newsletterForm) {
+        newsletterForm.addEventListener('submit', async (event) => {
+          event.preventDefault();
+
+          const button = newsletterForm.querySelector('button[type="submit"]');
+          const emailInput = newsletterForm.querySelector('input[name="email"]');
+          const consentInput = newsletterForm.querySelector('input[name="consent"]');
+          const websiteInput = newsletterForm.querySelector('input[name="website"]');
+          const status = document.querySelector('[data-newsletter-status]');
+
+          if (!button || !emailInput || !consentInput || !status) return;
+
+          if (!emailInput.checkValidity() || !consentInput.checked) {
+            newsletterForm.reportValidity();
+            return;
+          }
+
+          const originalLabel = button.textContent;
+          button.disabled = true;
+          button.textContent = 'Joining...';
+          status.textContent = 'Adding you to DollarAngle...';
+
+          try {
+            const response = await fetch('/api/subscribe', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                email: emailInput.value,
+                consent: consentInput.checked,
+                website: websiteInput?.value ?? ''
+              })
+            });
+
+            if (!response.ok) {
+              throw new Error('Newsletter signup failed');
+            }
+
+            newsletterForm.reset();
+            button.textContent = 'Joined';
+            status.textContent = 'You’re in. Watch your inbox for the next useful money angle.';
+          } catch (error) {
+            button.disabled = false;
+            button.textContent = originalLabel;
+            status.textContent = 'Something went wrong. Please try again in a moment.';
+          }
+        });
+      }
+
       document.querySelectorAll('[data-placeholder-form]').forEach((form) => {
         form.addEventListener('submit', (event) => {
           event.preventDefault();
