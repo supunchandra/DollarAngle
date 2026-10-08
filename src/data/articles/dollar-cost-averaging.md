@@ -1,5 +1,5 @@
 ---
-title: "Dollar-cost averaging solves a behavior problem — not the problem of predicting markets"
+title: "Dollar-cost averaging solves a behavior problem, not the problem of predicting markets"
 description: "Regular investing can reduce timing anxiety and automate discipline, but it does not guarantee profits or make expensive investments cheap."
 seoTitle: "Dollar-Cost Averaging: What It Does, What It Doesn’t, and When It Helps"
 seoDescription: "Learn how dollar-cost averaging works, why regular investing can reduce timing anxiety, and why it does not eliminate investment risk."
@@ -11,7 +11,7 @@ author: DollarAngle Editorial
 pubDate: 2026-10-08
 readTime: "8 min read"
 featured: false
-draft: false
+draft: true
 tags: ["dollar-cost averaging", "investing", "market timing", "401(k)"]
 keyTakeaway: "Dollar-cost averaging is powerful because it creates a process you can follow through market noise. It does not eliminate market risk or guarantee a better return than investing a lump sum immediately."
 ---
@@ -110,7 +110,7 @@ That does not mean ignoring meaningful changes in your finances or investment th
 
 Dollar-cost averaging is less about finding the perfect entry price and more about removing the need to find one.
 
-Use it as a discipline tool inside a diversified, goal-based plan—not as a promise that regular buying defeats investment risk.
+Use it as a discipline tool inside a diversified, goal-based plan, not as a promise that regular buying defeats investment risk.
 
 ## Sources & further reading
 
