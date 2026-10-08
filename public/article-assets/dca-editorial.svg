@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+<title id="title">Regular investing as a repeatable routine</title>
+<desc id="desc">Editorial illustration of a desk with a laptop, calendar, recurring contribution arrows, and investment account balance cards.</desc>
+<rect width="1200" height="675" rx="36" fill="#F7FAF9"/>
+<rect x="0" y="0" width="1200" height="675" rx="36" fill="#F7FAF9"/>
+<circle cx="1000" cy="105" r="170" fill="#E4F3ED"/>
+<circle cx="1090" cy="570" r="210" fill="#EEF2F6"/>
+<text x="70" y="90" fill="#132A23" font-family="Arial,Helvetica,sans-serif" font-size="38" font-weight="700">Make investing a routine, not a prediction contest</text>
+<text x="70" y="132" fill="#5F6F69" font-family="Arial,Helvetica,sans-serif" font-size="21">A fixed contribution schedule can reduce the pressure to find a perfect entry point.</text>
+<rect x="90" y="220" width="520" height="300" rx="28" fill="#FFFFFF" stroke="#D7E3DE" stroke-width="3"/>
+<rect x="145" y="265" width="410" height="210" rx="18" fill="#10231D"/>
+<rect x="175" y="300" width="350" height="22" rx="11" fill="#27473D"/>
+<rect x="175" y="340" width="265" height="18" rx="9" fill="#3DA779"/>
+<rect x="175" y="375" width="310" height="18" rx="9" fill="#87CDB0"/>
+<polyline points="185,445 255,410 330,425 405,365 500,335" fill="none" stroke="#62C89C" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="185" cy="445" r="9" fill="#62C89C"/><circle cx="255" cy="410" r="9" fill="#62C89C"/><circle cx="330" cy="425" r="9" fill="#62C89C"/><circle cx="405" cy="365" r="9" fill="#62C89C"/><circle cx="500" cy="335" r="9" fill="#62C89C"/>
+<rect x="225" y="520" width="250" height="24" rx="12" fill="#BECBC6"/>
+<rect x="675" y="210" width="370" height="180" rx="28" fill="#FFFFFF" stroke="#D7E3DE" stroke-width="3"/>
+<text x="710" y="255" fill="#132A23" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="700">AUTOMATIC CONTRIBUTION</text>
+<text x="710" y="302" fill="#1C7C5B" font-family="Arial,Helvetica,sans-serif" font-size="46" font-weight="700">$500</text>
+<text x="710" y="342" fill="#66756F" font-family="Arial,Helvetica,sans-serif" font-size="20">Every month</text>
+<path d="M720 430 C760 390, 820 390, 860 430 C900 470, 960 470, 1000 430" fill="none" stroke="#1C7C5B" stroke-width="10" stroke-linecap="round"/>
+<polygon points="995,412 1035,430 995,448" fill="#1C7C5B"/>
+<rect x="675" y="475" width="370" height="110" rx="24" fill="#132A23"/>
+<text x="710" y="520" fill="#FFFFFF" font-family="Arial,Helvetica,sans-serif" font-size="23" font-weight="700">Decision removed:</text>
+<text x="710" y="558" fill="#CFE5DC" font-family="Arial,Helvetica,sans-serif" font-size="21">"Is today the perfect day?"</text>
+<text x="70" y="625" fill="#6C7A75" font-family="Arial,Helvetica,sans-serif" font-size="17">Editorial illustration. Dollar-cost averaging does not guarantee a profit or prevent loss.</text>
+</svg>
