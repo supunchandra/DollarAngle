@@ -48,31 +48,49 @@ const encodedEmailBody = encodeURIComponent(`I thought you might find this usefu
 </details>
 
 <script is:inline>
-  document.querySelectorAll('[data-share-copy]').forEach((button) => {
-    button.addEventListener('click', async () => {
-      const url = button.getAttribute('data-share-url');
-      const label = button.querySelector('[data-share-copy-label]');
-      if (!url || !label) return;
+  document.querySelectorAll('.article-share').forEach((share) => {
+    const copyButton = share.querySelector('[data-share-copy]');
 
-      try {
-        await navigator.clipboard.writeText(url);
-      } catch {
-        const textarea = document.createElement('textarea');
-        textarea.value = url;
-        textarea.setAttribute('readonly', '');
-        textarea.style.position = 'fixed';
-        textarea.style.opacity = '0';
-        document.body.appendChild(textarea);
-        textarea.select();
-        document.execCommand('copy');
-        textarea.remove();
+    if (copyButton) {
+      copyButton.addEventListener('click', async () => {
+        const url = copyButton.getAttribute('data-share-url');
+        const label = copyButton.querySelector('[data-share-copy-label]');
+        if (!url || !label) return;
+
+        try {
+          await navigator.clipboard.writeText(url);
+        } catch {
+          const textarea = document.createElement('textarea');
+          textarea.value = url;
+          textarea.setAttribute('readonly', '');
+          textarea.style.position = 'fixed';
+          textarea.style.opacity = '0';
+          document.body.appendChild(textarea);
+          textarea.select();
+          document.execCommand('copy');
+          textarea.remove();
+        }
+
+        const original = label.textContent;
+        label.textContent = 'Copied';
+        window.setTimeout(() => {
+          label.textContent = original || 'Copy link';
+          share.removeAttribute('open');
+        }, 900);
+      });
+    }
+
+    document.addEventListener('click', (event) => {
+      if (share.hasAttribute('open') && !share.contains(event.target)) {
+        share.removeAttribute('open');
       }
+    });
 
-      const original = label.textContent;
-      label.textContent = 'Copied';
-      window.setTimeout(() => {
-        label.textContent = original || 'Copy link';
-      }, 1600);
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && share.hasAttribute('open')) {
+        share.removeAttribute('open');
+        share.querySelector('summary')?.focus();
+      }
     });
   });
 </script>
