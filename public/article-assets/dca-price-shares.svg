@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+<title id="title">How a fixed contribution buys different numbers of shares</title>
+<desc id="desc">Illustrative example showing a 500 dollar contribution buying 10 shares at 50 dollars, 12.5 shares at 40 dollars, and 20 shares at 25 dollars.</desc>
+<rect width="1200" height="620" rx="34" fill="#F8FAFC"/>
+<text x="70" y="78" fill="#10231D" font-family="Arial,Helvetica,sans-serif" font-size="36" font-weight="700">Same contribution, different number of shares</text>
+<text x="70" y="118" fill="#64748B" font-family="Arial,Helvetica,sans-serif" font-size="20">Illustrative example only. Real investment prices and returns vary.</text>
+<g font-family="Arial,Helvetica,sans-serif">
+<rect x="70" y="175" width="310" height="310" rx="26" fill="#FFFFFF" stroke="#DCE5E1" stroke-width="3"/>
+<text x="105" y="225" fill="#64748B" font-size="18">MONTH 1</text><text x="105" y="275" fill="#10231D" font-size="34" font-weight="700">Price: $50</text><text x="105" y="330" fill="#1B8A63" font-size="28" font-weight="700">$500 buys 10 shares</text>
+<rect x="105" y="375" width="180" height="40" rx="20" fill="#E5F5EE"/><text x="195" y="402" text-anchor="middle" fill="#1B8A63" font-size="18" font-weight="700">10 SHARES</text>
+<rect x="445" y="175" width="310" height="310" rx="26" fill="#FFFFFF" stroke="#DCE5E1" stroke-width="3"/>
+<text x="480" y="225" fill="#64748B" font-size="18">MONTH 2</text><text x="480" y="275" fill="#10231D" font-size="34" font-weight="700">Price: $40</text><text x="480" y="330" fill="#1B8A63" font-size="28" font-weight="700">$500 buys 12.5 shares</text>
+<rect x="480" y="375" width="205" height="40" rx="20" fill="#E5F5EE"/><text x="582" y="402" text-anchor="middle" fill="#1B8A63" font-size="18" font-weight="700">12.5 SHARES</text>
+<rect x="820" y="175" width="310" height="310" rx="26" fill="#FFFFFF" stroke="#DCE5E1" stroke-width="3"/>
+<text x="855" y="225" fill="#64748B" font-size="18">MONTH 3</text><text x="855" y="275" fill="#10231D" font-size="34" font-weight="700">Price: $25</text><text x="855" y="330" fill="#1B8A63" font-size="28" font-weight="700">$500 buys 20 shares</text>
+<rect x="855" y="375" width="190" height="40" rx="20" fill="#E5F5EE"/><text x="950" y="402" text-anchor="middle" fill="#1B8A63" font-size="18" font-weight="700">20 SHARES</text>
+<text x="70" y="550" fill="#10231D" font-size="25" font-weight="700">The mechanism is simple:</text>
+<text x="345" y="550" fill="#52615C" font-size="23">lower prices buy more shares, higher prices buy fewer shares.</text>
+</g>
+</svg>
