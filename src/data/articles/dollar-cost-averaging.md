@@ -11,7 +11,7 @@ author: DollarAngle Editorial
 pubDate: 2026-10-08
 readTime: "9 min read"
 featured: false
-draft: true
+draft: false
 tags: ["dollar-cost averaging", "investing", "market timing", "401(k)"]
 keyTakeaway: "Dollar-cost averaging is useful because it creates a process you can follow through market noise. It does not eliminate market risk or guarantee a better return than investing a lump sum immediately."
 ---
