@@ -1,0 +1,78 @@
+---
+interface Props {
+  url: string;
+  title: string;
+}
+
+const { url, title } = Astro.props;
+const encodedUrl = encodeURIComponent(url);
+const encodedTitle = encodeURIComponent(title);
+const encodedEmailBody = encodeURIComponent(`I thought you might find this useful: ${title}\n\n${url}`);
+---
+
+<details class="article-share">
+  <summary class="article-share-trigger" aria-label="Share this article">
+    <span class="article-share-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" role="img">
+        <circle cx="18" cy="5" r="2.25"></circle>
+        <circle cx="6" cy="12" r="2.25"></circle>
+        <circle cx="18" cy="19" r="2.25"></circle>
+        <path d="M8 11l8-5M8 13l8 5"></path>
+      </svg>
+    </span>
+    <span class="article-share-label">Share</span>
+  </summary>
+
+  <div class="article-share-menu" role="menu" aria-label="Share options">
+    <a role="menuitem" href={`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`} target="_blank" rel="noopener noreferrer">
+      <span class="share-brand share-brand-facebook" aria-hidden="true">f</span>
+      <span>Facebook</span>
+    </a>
+    <a role="menuitem" href={`https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`} target="_blank" rel="noopener noreferrer">
+      <span class="share-brand" aria-hidden="true">X</span>
+      <span>X (Twitter)</span>
+    </a>
+    <a role="menuitem" href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`} target="_blank" rel="noopener noreferrer">
+      <span class="share-brand share-brand-linkedin" aria-hidden="true">in</span>
+      <span>LinkedIn</span>
+    </a>
+    <a role="menuitem" href={`mailto:?subject=${encodedTitle}&body=${encodedEmailBody}`}>
+      <span class="share-brand" aria-hidden="true">✉</span>
+      <span>Email</span>
+    </a>
+    <button type="button" role="menuitem" data-share-copy data-share-url={url}>
+      <span class="share-brand" aria-hidden="true">⧉</span>
+      <span data-share-copy-label>Copy link</span>
+    </button>
+  </div>
+</details>
+
+<script is:inline>
+  document.querySelectorAll('[data-share-copy]').forEach((button) => {
+    button.addEventListener('click', async () => {
+      const url = button.getAttribute('data-share-url');
+      const label = button.querySelector('[data-share-copy-label]');
+      if (!url || !label) return;
+
+      try {
+        await navigator.clipboard.writeText(url);
+      } catch {
+        const textarea = document.createElement('textarea');
+        textarea.value = url;
+        textarea.setAttribute('readonly', '');
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        textarea.remove();
+      }
+
+      const original = label.textContent;
+      label.textContent = 'Copied';
+      window.setTimeout(() => {
+        label.textContent = original || 'Copy link';
+      }, 1600);
+    });
+  });
+</script>
