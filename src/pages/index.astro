@@ -4,9 +4,9 @@ import { getVisibleArticles, showDrafts } from '../lib/content';
 
 const all = await getVisibleArticles();
 const published = all.filter((entry) => !entry.data.draft);
-const preferredIds = ['financial-order-of-operations', 'emergency-fund-without-putting-life-on-hold', 'what-is-an-etf', 'diversification-before-stock-picking', 'dollar-cost-averaging'];
+const preferredIds = ['financial-order-of-operations', 'emergency-fund-without-putting-life-on-hold', 'what-is-an-etf', 'diversification-before-stock-picking'];
 const featured = preferredIds.map((id) => published.find((entry) => entry.id === id)).filter(Boolean);
-for (const entry of published) { if (featured.length >= 5) break; if (!featured.some((f) => f.id === entry.id)) featured.push(entry); }
+for (const entry of published) { if (featured.length >= 4) break; if (!featured.some((f) => f.id === entry.id)) featured.push(entry); }
 const artwork = {
   'financial-order-of-operations': '/article-assets/compounding-editorial.svg',
   'emergency-fund-without-putting-life-on-hold': '/article-assets/dca-editorial.svg',
@@ -53,15 +53,15 @@ const videoConcepts = [
         <div class="refresh-trust"><span>✓ Beginner friendly</span><span>✓ Sources and context</span><span>✓ Real-life decisions</span></div>
       </div>
       <div class="refresh-visual">
-        <div class="refresh-image"><img src="/article-assets/compounding-editorial.svg" alt="Illustration of regular saving, investment contributions and growing financial confidence" width="1200" height="675" fetchpriority="high" /></div>
-        <div class="refresh-floating"><strong>Small steps.</strong><span>More confident money decisions.</span></div>
+        <div class="refresh-image"><img src="/article-assets/homepage-life-hero.svg" alt="Woman studying personal finance on a laptop beside books and plants" width="1200" height="675" fetchpriority="high" /></div>
+        <div class="refresh-floating"><strong>Small steps.</strong><span>A brighter financial future.</span></div>
       </div>
     </div>
   </section>
 
   <section class="container refresh-learning" id="start-here" aria-labelledby="learning-heading">
     <div class="refresh-learning-head"><span class="refresh-eyebrow">Not sure where to begin?</span><h2 id="learning-heading">Start here</h2><p>Follow a beginner-friendly path and build your financial foundation one topic at a time.</p></div>
-    <div class="refresh-steps">{groups.map(item => <a class="refresh-step" href={item.href}><span class="refresh-number">{item.number}</span><span class="refresh-step-icon" aria-hidden="true">{item.icon}</span><strong>{item.label}</strong><small>{item.detail}</small><span class="refresh-arrow">Explore →</span></a>)}</div>
+    <div class="refresh-steps">{groups.map(item => <a class="refresh-step" href={item.href}><span class="refresh-number">{item.number}</span><span class="refresh-step-icon" aria-hidden="true">{item.number}</span><strong>{item.label}</strong><small>{item.detail}</small><span class="refresh-arrow">Explore →</span></a>)}</div>
   </section>
 
   <section class="container refresh-section" id="articles">
@@ -73,8 +73,8 @@ const videoConcepts = [
   </section>
 
   <section class="container refresh-section" id="watch">
-    <div class="refresh-section-header"><div><span class="refresh-eyebrow">Learn visually</span><h2>Watch &amp; learn</h2><p>Short video lessons are coming to DollarAngle. Here is the learning lineup we are preparing.</p></div><a href="/explore">Read guides instead →</a></div>
-    <div class="refresh-video-grid">{videoConcepts.map(v => <article class={`refresh-video-card ${v.tone}`}><div class="refresh-video-art"><span aria-hidden="true">{v.icon}</span><span class="refresh-play" aria-hidden="true">▶</span><span class="refresh-video-badge">Planned video</span></div><h3>{v.title}</h3><p>{v.description}</p></article>)}</div>
+    <div class="refresh-section-header"><div><span class="refresh-eyebrow">Learn visually</span><h2>Watch &amp; learn</h2><p>Upcoming educational video topics. Real videos will appear here once they are ready.</p></div><a href="/explore">Read guides instead →</a></div>
+    <div class="refresh-video-grid">{videoConcepts.map(v => <article class={`refresh-video-card ${v.tone}`}><div class="refresh-video-art"><span aria-hidden="true">▶</span><span class="refresh-play" aria-hidden="true">▶</span><span class="refresh-video-badge">Planned video</span></div><h3>{v.title}</h3><p>{v.description}</p></article>)}</div>
     <p class="refresh-editor-note">Video cards are design previews, not playable videos. We will embed only real, verified YouTube videos, with click-to-load players to protect performance and privacy.</p>
   </section>
 
@@ -87,7 +87,7 @@ const videoConcepts = [
 
   <section class="container refresh-section">
     <div class="refresh-section-header"><div><span class="refresh-eyebrow">Find your angle</span><h2>Explore by topic</h2></div><a href="/explore">Browse everything →</a></div>
-    <div class="refresh-topic-grid">{topics.map(topic=><a href={topic.href}><span aria-hidden="true">{topic.icon}</span><strong>{topic.title}</strong></a>)}</div>
+    <div class="refresh-topic-grid">{topics.map(topic=><a href={topic.href}><span aria-hidden="true">↗</span><strong>{topic.title}</strong></a>)}</div>
   </section>
 
   <section class="container refresh-newsletter" id="newsletter"><div class="refresh-newsletter-text"><span class="refresh-newsletter-icon" aria-hidden="true">✉</span><div><h2>Better money knowledge, once a week.</h2><p>Join the DollarAngle Sunday newsletter for useful articles and practical financial education. One email per week, no daily noise.</p></div></div>
@@ -95,40 +95,40 @@ const videoConcepts = [
   </section>
   <style>
     :global(body){background:#fff}
-    .refresh-hero{background:linear-gradient(118deg,#f0fcfc 0%,#eaf9f7 50%,#e4f3f6 100%);padding:52px 0 58px}
-    .refresh-hero-layout{display:grid;grid-template-columns:1.05fr 1fr;align-items:center;gap:34px}
+    .refresh-hero{background:#f0f9f7;padding:42px 0 48px}
+    .refresh-hero-layout{display:grid;grid-template-columns:.9fr 1.1fr;align-items:center;gap:28px}
     .refresh-eyebrow{color:#087f79;font-size:.72rem;text-transform:uppercase;letter-spacing:.095em;font-weight:850}
-    .refresh-intro h1{font-size:clamp(2.8rem,5.2vw,5rem);line-height:1.05;letter-spacing:-.065em;max-width:660px;color:#0b2235;margin:16px 0 20px}
+    .refresh-intro h1{font-family:Georgia,Cambria,serif;font-size:clamp(2.8rem,5.2vw,4.9rem);font-weight:700;line-height:1.07;letter-spacing:-.065em;max-width:660px;color:#0b2235;margin:16px 0 20px}
     .refresh-intro h1 span{color:#008e7f}
     .refresh-intro>p{font-size:1.11rem;line-height:1.65;max-width:550px;color:#405466}
     .refresh-actions{display:flex;gap:13px;flex-wrap:wrap;margin:28px 0}
     .refresh-primary,.refresh-outline{padding:15px 21px;border-radius:12px;font-weight:800;display:inline-flex;align-items:center;gap:18px}
     .refresh-primary{background:#008e7f;color:#fff}.refresh-outline{background:#fff;border:1px solid #b6cbd1;color:#102b3d}
     .refresh-trust{display:flex;gap:17px;flex-wrap:wrap;font-size:.83rem;color:#24576a;font-weight:650}
-    .refresh-visual{position:relative}.refresh-image{overflow:hidden;background:white;border:8px solid #fff;border-radius:30px;box-shadow:0 26px 65px #0f4a5624}
-    .refresh-image img{display:block;width:100%;height:auto;aspect-ratio:1.25;object-fit:cover}
+    .refresh-visual{position:relative}.refresh-image{overflow:hidden;background:#eaf6f4;border-radius:8px}
+    .refresh-image img{display:block;width:100%;height:auto;aspect-ratio:1.5;object-fit:cover}
     .refresh-floating{position:absolute;right:-8px;bottom:-22px;max-width:240px;background:#fff;border:1px solid #d8ece8;box-shadow:0 10px 35px #0c4f4a24;padding:15px 21px;border-radius:16px;color:#0c483e}
     .refresh-floating strong,.refresh-floating span{display:block}.refresh-floating span{font-size:.88rem;margin-top:5px}
-    .refresh-learning{display:grid;grid-template-columns:230px 1fr;gap:28px;background:#edf9fa;border-radius:24px;padding:28px;margin-top:25px}
-    .refresh-learning h2,.refresh-section h2{font-size:clamp(1.5rem,2.4vw,2.25rem);color:#102238;letter-spacing:-.035em;margin:6px 0}
+    .refresh-learning{display:grid;grid-template-columns:230px 1fr;gap:28px;background:#edf9fa;border-radius:10px;padding:24px;margin-top:22px}
+    .refresh-learning h2,.refresh-section h2{font-family:Georgia,Cambria,serif;font-size:clamp(1.5rem,2.4vw,2.25rem);color:#102238;letter-spacing:-.035em;margin:6px 0}
     .refresh-learning p,.refresh-section-header p{color:#66788a;line-height:1.5;margin:8px 0}
     .refresh-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
     .refresh-step{position:relative;display:flex;flex-direction:column;align-items:flex-start;min-width:0;gap:7px;background:#fff;border-radius:15px;padding:18px 13px;box-shadow:0 2px 8px #07485a0b;border:1px solid #e4eef2;transition:transform .18s}
     .refresh-step:hover,.refresh-article-card:hover{transform:translateY(-3px)}
-    .refresh-number{font-size:.72rem;color:#008b84;font-weight:900}.refresh-step-icon{font-size:1.7rem}.refresh-step strong{font-size:.94rem}.refresh-step small{color:#66788a;font-size:.75rem;line-height:1.5}.refresh-arrow{font-size:.77rem;color:#008e7f;font-weight:800;margin-top:auto}
-    .refresh-section{padding-top:52px}
+    .refresh-number{font-size:.72rem;color:#008b84;font-weight:900}.refresh-step-icon{font-family:Georgia,serif;font-size:1.5rem;color:#0a766f;opacity:.65}.refresh-step strong{font-size:.94rem}.refresh-step small{color:#66788a;font-size:.75rem;line-height:1.5}.refresh-arrow{font-size:.77rem;color:#008e7f;font-weight:800;margin-top:auto}
+    .refresh-section{padding-top:42px}
     .refresh-section-header{display:flex;align-items:flex-end;justify-content:space-between;gap:15px;margin-bottom:20px}
     .refresh-section-header>a{color:#00796f;font-weight:750;font-size:.87rem;white-space:nowrap}
-    .refresh-article-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
-    .refresh-article-card{overflow:hidden;border:1px solid #e2eaf0;border-radius:14px;background:#fff;box-shadow:0 8px 21px #0c243108;transition:transform .18s}
+    .refresh-article-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+    .refresh-article-card{overflow:hidden;border:1px solid #e2eaf0;border-radius:9px;background:#fff;transition:transform .18s}
     .refresh-art{background:#ecf8f2;aspect-ratio:1.35;overflow:hidden}.refresh-art img{display:block;width:100%;height:100%;object-fit:cover}
     .refresh-card-content{padding:15px}.refresh-category{font-weight:900;font-size:.66rem;letter-spacing:.04em;color:#078370;text-transform:uppercase}
     .refresh-card-content h3{margin:8px 0;font-size:1.02rem;line-height:1.3;letter-spacing:-.025em}.refresh-card-content p{color:#66788a;font-size:.77rem;line-height:1.5;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
     .refresh-card-content small{font-size:.72rem;color:#5c7083}
     .refresh-video-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
     .refresh-video-art{position:relative;display:grid;place-items:center;height:160px;border-radius:14px;overflow:hidden;background:linear-gradient(140deg,#005d51,#53b99b)}
-    .refresh-video-art>span:first-child{font-size:4.5rem}.refresh-video-card.sky .refresh-video-art{background:linear-gradient(140deg,#206994,#95d9e8)}.refresh-video-card.peach .refresh-video-art{background:linear-gradient(140deg,#bf6a47,#f3d4ad)}.refresh-video-card.violet .refresh-video-art{background:linear-gradient(140deg,#65569b,#d0c4ec)}
-    .refresh-play{position:absolute;display:grid;place-items:center;width:48px;height:48px;background:#fa424b;color:#fff;border:3px solid #fff;border-radius:50%;font-size:1rem}
+    .refresh-video-art>span:first-child{font-size:2.3rem;color:#fff;opacity:.6}.refresh-video-card.sky .refresh-video-art{background:linear-gradient(140deg,#206994,#95d9e8)}.refresh-video-card.peach .refresh-video-art{background:linear-gradient(140deg,#bf6a47,#f3d4ad)}.refresh-video-card.violet .refresh-video-art{background:linear-gradient(140deg,#65569b,#d0c4ec)}
+    .refresh-play{display:none;width:48px;height:48px;background:#fa424b;color:#fff;border:3px solid #fff;border-radius:50%;font-size:1rem}
     .refresh-video-badge{position:absolute;bottom:9px;right:9px;background:#102839;color:#fff;padding:4px 7px;border-radius:4px;font-size:.65rem}
     .refresh-video-card h3{margin:10px 0 4px;font-size:.95rem}.refresh-video-card p{margin:0;color:#607387;font-size:.82rem;line-height:1.5}.refresh-editor-note{font-size:.75rem;color:#718396;margin:12px 0 0}
     .refresh-news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
@@ -137,8 +137,8 @@ const videoConcepts = [
     .refresh-news-card span:last-child{display:flex;flex-direction:column;gap:6px}.refresh-news-card small{text-transform:uppercase;font-size:.68rem;font-weight:800;color:#008a7b}.refresh-news-card strong{font-size:.9rem;line-height:1.36}.refresh-news-card em{font-size:.74rem;color:#118879;font-style:normal}
     .refresh-news-empty{color:#64748b}.refresh-topic-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:9px}
     .refresh-topic-grid a{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:105px;gap:10px;background:#fafdfd;border:1px solid #e4edf1;border-radius:14px;font-size:.78rem;text-align:center}
-    .refresh-topic-grid span{font-size:1.7rem}
-    .refresh-newsletter{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center;margin-top:60px;padding:30px;border-radius:20px;background:linear-gradient(110deg,#ddf5ef,#d5eff5)}
+    .refresh-topic-grid span{font-size:1.2rem;color:#0a8177}
+    .refresh-newsletter{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center;margin-top:60px;padding:30px;border-radius:10px;background:#dff2ee}
     .refresh-newsletter-text{display:flex;align-items:center;gap:19px}.refresh-newsletter-icon{width:55px;height:55px;flex-shrink:0;border-radius:50%;background:#008e7f;color:white;display:grid;place-items:center;font-size:2rem}
     .refresh-newsletter h2{margin:0 0 8px;color:#102238;font-size:1.5rem}.refresh-newsletter p{color:#395e69;font-size:.85rem;line-height:1.5;margin:0}
     .refresh-newsletter :global(.news-form input[type="email"]){background:white;color:#102238;border:1px solid #b7d8d7;border-radius:10px;min-width:0;flex:1}
