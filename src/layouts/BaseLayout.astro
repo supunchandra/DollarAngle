@@ -142,15 +142,58 @@ const siteSchema = {
         });
       }
 
-      document.querySelectorAll('[data-placeholder-form]').forEach((form) => {
-        form.addEventListener('submit', (event) => {
+      const contactForm = document.querySelector('[data-contact-form]');
+      if (contactForm) {
+        contactForm.addEventListener('submit', async (event) => {
           event.preventDefault();
-          const button = form.querySelector('button');
-          if (!button) return;
-          button.textContent = 'Integration coming next';
+
+          const button = contactForm.querySelector('button[type="submit"]');
+          const status = document.querySelector('[data-contact-status]');
+          const nameInput = contactForm.querySelector('input[name="name"]');
+          const emailInput = contactForm.querySelector('input[name="email"]');
+          const topicInput = contactForm.querySelector('select[name="topic"]');
+          const messageInput = contactForm.querySelector('textarea[name="message"]');
+          const websiteInput = contactForm.querySelector('input[name="website"]');
+
+          if (!button || !status || !nameInput || !emailInput || !topicInput || !messageInput) return;
+
+          if (!contactForm.checkValidity()) {
+            contactForm.reportValidity();
+            return;
+          }
+
+          const originalLabel = button.textContent;
           button.disabled = true;
+          button.textContent = 'Sending...';
+          status.textContent = 'Sending your message to DollarAngle...';
+
+          try {
+            const response = await fetch('/api/contact', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                name: nameInput.value,
+                email: emailInput.value,
+                topic: topicInput.value,
+                message: messageInput.value,
+                website: websiteInput?.value ?? ''
+              })
+            });
+
+            if (!response.ok) {
+              throw new Error('Contact form submission failed');
+            }
+
+            contactForm.reset();
+            button.textContent = 'Message sent';
+            status.textContent = 'Thanks. Your message reached the DollarAngle contact inbox.';
+          } catch (error) {
+            button.disabled = false;
+            button.textContent = originalLabel;
+            status.textContent = 'Something went wrong. Please try again in a moment.';
+          }
         });
-      });
+      }
     </script>
   </body>
 </html>
