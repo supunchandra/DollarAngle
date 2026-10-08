@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+<title id="title">Diversified portfolio editorial illustration</title>
+<desc id="desc">A central diversified core connects to stocks, bonds, international investments and cash while a separate concentrated single-stock block shows higher dependency on one outcome.</desc>
+<rect width="1200" height="675" rx="36" fill="#0F1720"/>
+<text x="72" y="92" fill="#F8FAFC" font-family="Arial,Helvetica,sans-serif" font-size="34" font-weight="700">Build a portfolio that can survive being wrong</text>
+<text x="72" y="130" fill="#94A3B8" font-family="Arial,Helvetica,sans-serif" font-size="19">Diversification spreads the sources of risk instead of relying on one forecast.</text>
+<circle cx="500" cy="365" r="105" fill="#10B981"/>
+<circle cx="500" cy="365" r="76" fill="#0F1720"/>
+<text x="500" y="354" text-anchor="middle" fill="#F8FAFC" font-family="Arial,Helvetica,sans-serif" font-size="25" font-weight="700">DIVERSIFIED</text>
+<text x="500" y="385" text-anchor="middle" fill="#A7F3D0" font-family="Arial,Helvetica,sans-serif" font-size="25" font-weight="700">CORE</text>
+<g stroke="#64748B" stroke-width="4">
+<line x1="420" y1="300" x2="280" y2="210"/><line x1="580" y1="300" x2="720" y2="210"/><line x1="420" y1="430" x2="280" y2="520"/><line x1="580" y1="430" x2="720" y2="520"/>
+</g>
+<g font-family="Arial,Helvetica,sans-serif" text-anchor="middle">
+<rect x="150" y="155" width="260" height="110" rx="22" fill="#162534" stroke="#334155"/>
+<text x="280" y="202" fill="#F8FAFC" font-size="22" font-weight="700">U.S. stocks</text><text x="280" y="233" fill="#94A3B8" font-size="16">many companies and sectors</text>
+<rect x="590" y="155" width="260" height="110" rx="22" fill="#162534" stroke="#334155"/>
+<text x="720" y="202" fill="#F8FAFC" font-size="22" font-weight="700">International</text><text x="720" y="233" fill="#94A3B8" font-size="16">different markets and regions</text>
+<rect x="150" y="465" width="260" height="110" rx="22" fill="#162534" stroke="#334155"/>
+<text x="280" y="512" fill="#F8FAFC" font-size="22" font-weight="700">Bonds</text><text x="280" y="543" fill="#94A3B8" font-size="16">different return drivers</text>
+<rect x="590" y="465" width="260" height="110" rx="22" fill="#162534" stroke="#334155"/>
+<text x="720" y="512" fill="#F8FAFC" font-size="22" font-weight="700">Cash</text><text x="720" y="543" fill="#94A3B8" font-size="16">liquidity for near-term needs</text>
+</g>
+<rect x="930" y="220" width="205" height="290" rx="28" fill="#1E293B" stroke="#475569" stroke-width="2"/>
+<circle cx="1032" cy="315" r="55" fill="#334155"/>
+<path d="M1005 346 L1032 282 L1059 346 Z" fill="#F8FAFC"/>
+<text x="1032" y="408" text-anchor="middle" fill="#F8FAFC" font-family="Arial,Helvetica,sans-serif" font-size="21" font-weight="700">ONE BIG BET</text>
+<text x="1032" y="441" text-anchor="middle" fill="#94A3B8" font-family="Arial,Helvetica,sans-serif" font-size="15">one company</text>
+<text x="1032" y="465" text-anchor="middle" fill="#94A3B8" font-family="Arial,Helvetica,sans-serif" font-size="15">one thesis</text>
+<text x="1032" y="489" text-anchor="middle" fill="#FCA5A5" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700">one failure point</text>
+<text x="72" y="625" fill="#64748B" font-family="Arial,Helvetica,sans-serif" font-size="16">DollarAngle • A smarter angle on your money</text>
+</svg>

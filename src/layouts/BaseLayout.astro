@@ -23,6 +23,7 @@ const siteUrl = Astro.site?.toString() ?? 'https://dollarangle.com/';
 const organizationId = new URL('/#organization', siteUrl).href;
 const websiteId = new URL('/#website', siteUrl).href;
 const googleVerification = process.env.GOOGLE_SITE_VERIFICATION;
+const previewNoindex = true;
 
 const siteSchema = {
   '@context': 'https://schema.org',
@@ -58,7 +59,7 @@ const siteSchema = {
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="describedby" href="/llms.txt" type="text/markdown" />
-    {noindex && <meta name="robots" content="noindex,nofollow" />}
+    {(noindex || previewNoindex) && <meta name="robots" content="noindex,nofollow" />}
     {googleVerification && <meta name="google-site-verification" content={googleVerification} />}
     <meta property="og:site_name" content="DollarAngle" />
     <meta property="og:locale" content="en_US" />
