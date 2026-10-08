@@ -138,6 +138,10 @@ Before choosing individual stocks, ask:
 
 Ticker selection comes after those questions.
 
+![Man reviewing a portfolio plan at home with a laptop and allocation charts](/article-assets/diversification-generic.jpg)
+
+*Diversification begins with planning the portfolio as a whole, not just searching for the next winning stock.*
+
 ## Think in terms of a risk budget
 
 A useful way to think about portfolio construction is to give concentration a **risk budget**.
