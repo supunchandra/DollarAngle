@@ -1,13 +1,13 @@
 ---
-const { entry, dark = false, headingLevel = 3 } = Astro.props;
+import { articleThumbnail } from '../lib/articleImages';
+const { entry, headingLevel = 3 } = Astro.props;
 const d = entry.data;
 const categoryLabel = d.category.replaceAll('-', ' ').replace(/\b\w/g, (c) => c.toUpperCase());
 const Heading = headingLevel === 2 ? 'h2' : 'h3';
+const image = articleThumbnail(entry);
 ---
-<a class="card" href={`/articles/${entry.id}`}>
-  <div class:list={["card-media", { dark }]}>
-    {dark && <div class="mini-chart"><svg viewBox="0 0 300 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,55 C35,58 43,27 80,36 S125,13 154,26 S211,18 236,12 S270,19 300,5" fill="none" stroke="#34d399" stroke-width="4" /></svg></div>}
-  </div>
+<a class="card editorial-card" href={`/articles/${entry.id}`}>
+  <div class="card-media editorial-media"><img src={image} width="640" height="400" loading="lazy" decoding="async" alt="" /></div>
   <div class="card-body">
     <span class="kicker">DollarAngle {d.franchise}</span>
     <Heading>{d.title}</Heading>
@@ -15,3 +15,14 @@ const Heading = headingLevel === 2 ? 'h2' : 'h3';
     <div class="meta"><span>{d.readTime}</span><span>{categoryLabel}</span></div>
   </div>
 </a>
+<style>
+.editorial-card{border-radius:12px;transition:transform .2s ease,box-shadow .2s ease}
+.editorial-card:hover,.editorial-card:focus-visible{transform:translateY(-3px);box-shadow:0 16px 34px rgba(14,35,45,.11)}
+.editorial-media{height:auto;aspect-ratio:1.55;background:#ecf2f0}
+.editorial-media img{display:block;width:100%;height:100%;object-fit:cover}
+.editorial-card h2,.editorial-card h3{font-family:Georgia,Cambria,serif;line-height:1.2;letter-spacing:-.02em}
+.editorial-card .card-body{display:flex;flex-direction:column;gap:8px}
+.editorial-card .card-body h2,.editorial-card .card-body h3{margin:0}
+.editorial-card .card-body p{font-size:.88rem;line-height:1.5;margin:0}
+.editorial-card .meta{margin-top:12px}
+</style>

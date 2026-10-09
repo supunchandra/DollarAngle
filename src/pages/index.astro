@@ -1,21 +1,148 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ArticleCard from '../components/ArticleCard.astro';
-import { getVisibleArticles, showDrafts } from '../lib/content';
+import { getVisibleArticles } from '../lib/content';
+import { articleThumbnail } from '../lib/articleImages';
 
-const all = await getVisibleArticles();
-const featured = all.find((entry) => entry.data.featured) ?? all[0];
-const latest = all.filter((entry) => entry.id !== featured?.id).slice(0,6);
+const entries = (await getVisibleArticles()).filter(a => !a.data.draft);
+const hero = entries.find(e => e.id === 'compounding-needs-time') ?? entries[0];
+const priority = ['financial-order-of-operations','emergency-fund-without-putting-life-on-hold','diversification-before-stock-picking'];
+const side = priority.map(id=>entries.find(e=>e.id===id)).filter(Boolean);
+for (const entry of entries) if(side.length<3 && entry.id!==hero?.id && !side.some(s=>s.id===entry.id)) side.push(entry);
+const latest = entries.filter(e => e.id!==hero?.id).slice(0,5);
+const recent = entries.filter(e=>e.id!==hero?.id).slice(5,8);
+const img=(entry,i=0)=>articleThumbnail(entry);
+const slideIds=['compounding-needs-time','financial-order-of-operations','diversification-before-stock-picking'];
+const slideImages=[
+ 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&w=1600&q=82',
+ 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1600&q=82',
+ 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=82'
+];
+const slides=slideIds.map((id,i)=>({entry:entries.find(e=>e.id===id),image:slideImages[i]})).filter(s=>s.entry);
+const topics = [
+ {name:'Personal Finance',url:'/topics/personal-finance',number:'01',theme:'mint',description:'Budgets, saving, debt and everyday money decisions.',icon:'wallet'},
+ {name:'Investing',url:'/topics/investing',number:'02',theme:'blue',description:'Stocks, ETFs, retirement and long-term wealth.',icon:'chart'},
+ {name:'Markets',url:'/topics/markets',number:'03',theme:'amber',description:'Headlines, volatility and what really matters.',icon:'markets'},
+ {name:'Economy',url:'/topics/economy',number:'04',theme:'lavender',description:'Inflation, interest rates and policy.',icon:'bank'},
+ {name:'Real Estate',url:'/topics/real-estate',number:'05',theme:'coral',description:'Housing, mortgages, renting and ownership.',icon:'home'},
+ {name:'Crypto',url:'/topics/crypto',number:'06',theme:'teal',description:'Digital assets, risk and regulation.',icon:'coin'}
+];
 ---
-<BaseLayout>
-  {showDrafts && <div class="preview-bar">Editorial preview mode — draft content is visible and is not approved for publication.</div>}
-  <section class="hero"><div class="container hero-grid"><div><span class="eyebrow">Money made clearer</span><h1>A smarter <span class="accent">angle</span> on your money.</h1><p>Understand personal finance, investing, markets and the economy without Wall Street jargon. DollarAngle turns complicated money stories into practical ideas you can actually use.</p><div class="hero-actions"><a class="btn btn-primary" href="/explore">Explore the latest</a><a class="btn btn-secondary" href="/topics/personal-finance">Start with the basics →</a></div></div>
-  {featured ? <article class="hero-card"><span class="eyebrow" style="color:#6ee7b7">DollarAngle {featured.data.franchise}</span><h2>{featured.data.title}</h2><p>{featured.data.description}</p><a class="card-link" href={`/articles/${featured.id}`}>Read the analysis →</a><div class="stat-row"><div class="stat"><strong>Plain English</strong><span>No finance degree required</span></div><div class="stat"><strong>Evidence first</strong><span>Sources over hype</span></div><div class="stat"><strong>Practical</strong><span>Real-world impact</span></div></div></article> : <article class="hero-card"><span class="eyebrow" style="color:#6ee7b7">DollarAngle</span><h2>Launch library is being reviewed.</h2><p>DollarAngle content stays private until it passes human editorial approval.</p></article>}
-  </div></section>
-
-  {latest.length > 0 && <section class="section"><div class="container"><div class="section-head"><div><span class="eyebrow">Latest angles</span><h2>Money, markets and what they mean for you.</h2></div><p>Every story answers the same question: what is the dollar angle, and why should an ordinary saver or investor care?</p></div><div class="grid-3">{latest.map((entry, i) => <ArticleCard entry={entry} dark={i % 3 !== 1} />)}</div></div></section>}
-
-  <section class="section"><div class="container feature-grid"><div class="feature dark"><div class="angle"></div><span class="eyebrow" style="color:#6ee7b7">Our editorial promise</span><h3>Facts first. Context second. Your decision stays yours.</h3><p>DollarAngle separates reporting from interpretation, shows risks alongside opportunities, and never presents speculation as guaranteed wealth.</p><a class="btn btn-primary" href="/editorial-policy" style="margin-top:18px">Read our editorial policy</a></div><div class="feature"><span class="eyebrow">Explore</span><h3 style="font-size:2.2rem">Build your financial foundation.</h3><div class="topic-list"><a class="topic-item" href="/topics/personal-finance">Personal Finance <span>→</span></a><a class="topic-item" href="/topics/investing">Investing <span>→</span></a><a class="topic-item" href="/topics/economy">Economy <span>→</span></a><a class="topic-item" href="/topics/markets">Markets & News <span>→</span></a><a class="topic-item" href="/topics/real-estate">Real Estate <span>→</span></a><a class="topic-item" href="/topics/crypto">Crypto <span>→</span></a></div></div></div></section>
-
-  <section class="section" id="newsletter"><div class="container newsletter"><div><h2>One useful money angle. No noise.</h2><p>One useful email each week with practical financial education and the money stories worth understanding.</p></div><div><form class="news-form" data-newsletter-form><div class="news-form-row"><input type="email" name="email" placeholder="you@example.com" aria-label="Email address" autocomplete="email" required /><button class="btn btn-primary" type="submit">Join DollarAngle</button></div><input class="hp-field" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" /><label class="news-consent"><input type="checkbox" name="consent" required /><span>Yes, send me DollarAngle’s weekly newsletter. I can unsubscribe anytime.</span></label></form><div class="form-note" data-newsletter-status aria-live="polite">One email per week. We’ll use your email only for the DollarAngle newsletter. See our <a href="/privacy">Privacy Policy</a>.</div></div></div></section>
+<BaseLayout title="DollarAngle | A smarter angle on your money" description="Clear, independent personal finance reporting, investing guides and economic context for everyday decisions.">
+ <section class="da-shell container" aria-label="Featured coverage">
+   <div class="da-lead" data-hero-carousel aria-roledescription="carousel" aria-label="Featured DollarAngle stories">
+     {slides.map((slide,i)=><article class:list={['da-slide',{'is-active':i===0}]} data-hero-slide aria-hidden={i===0?'false':'true'}>
+       <img class="da-lead-image" src={slide.image} alt="" width="1600" height="960" loading={i===0?'eager':'lazy'} fetchpriority={i===0?'high':'auto'} />
+       <div class="da-lead-shade"></div>
+       <div class="da-lead-body">
+         <span class="da-chip">Featured story · {slide.entry.data.category.replaceAll('-',' ')}</span>
+         {i===0?<h1>{slide.entry.data.title}</h1>:<h2>{slide.entry.data.title}</h2>}
+         <p>{slide.entry.data.description}</p>
+         <a class="da-lead-button" href={`/articles/${slide.entry.id}`} tabindex={i===0?0:-1}>Read the story <span>→</span></a>
+         <div class="da-lead-footer"><span>✓ Evidence before hype</span><span>✓ Clear explanations</span><span>✓ Real-life decisions</span></div>
+       </div>
+     </article>)}
+     <div class="da-carousel-controls" aria-label="Featured story controls">
+       <button type="button" data-hero-prev aria-label="Previous featured story">‹</button>
+       <div class="da-carousel-dots">{slides.map((_,i)=><button type="button" data-hero-dot={i} class:list={['da-dot',{'is-active':i===0}]} aria-label={`Show featured story ${i+1}`} aria-current={i===0?'true':'false'} />)}</div>
+       <button type="button" data-hero-next aria-label="Next featured story">›</button>
+       <button type="button" data-hero-pause aria-label="Pause automatic slide rotation">Ⅱ</button>
+     </div>
+   </div>
+   <div class="da-side">{side.map((entry,i)=><a class="da-side-card" href={`/articles/${entry.id}`}>
+      <div><span class="da-tag">{entry.data.category.replaceAll('-',' ')}</span><h2>{entry.data.title}</h2><small>{entry.data.readTime} · DollarAngle</small></div>
+      <img src={img(entry,i)} width="350" height="210" alt="" loading="lazy"/>
+   </a>)}</div>
+ </section>
+ <section class="container da-section">
+   <div class="da-heading"><h2>Latest articles</h2><a href="/explore">View all articles →</a></div>
+   <div class="da-latest">{latest.map((entry,i)=><a class="da-article" href={`/articles/${entry.id}`}><div class="da-article-img"><img src={img(entry,i)} width="460" height="290" alt="" loading="lazy" decoding="async" /></div><div class="da-article-text"><span class="da-tag">{entry.data.category.replaceAll('-',' ')}</span><h3>{entry.data.title}</h3><small>{entry.data.readTime}</small></div></a>)}</div>
+ </section>
+ <section class="container da-section da-topic-section">
+   <div class="da-heading"><h2>Explore DollarAngle</h2><a href="/explore">All coverage →</a></div>
+   <div class="da-topics">{topics.map(topic=><a class={`da-topic-card da-topic-${topic.theme}`} href={topic.url} aria-label={`Explore ${topic.name}`}>
+      <span class="da-topic-number">{topic.number}</span>
+      <span class="da-topic-illustration" aria-hidden="true">
+        {topic.icon==='wallet' && <svg viewBox="0 0 80 80" fill="none"><rect x="12" y="22" width="54" height="42" rx="9" fill="#177d6d"/><path d="M16 29V20a7 7 0 0 1 7-7h32" stroke="#0c594c" stroke-width="5"/><rect x="44" y="36" width="27" height="18" rx="6" fill="#74c7b2"/><circle cx="55" cy="45" r="3" fill="#fff"/></svg>}
+        {topic.icon==='chart' && <svg viewBox="0 0 80 80" fill="none"><rect x="12" y="49" width="11" height="20" rx="2" fill="#a6c4ef"/><rect x="29" y="39" width="11" height="30" rx="2" fill="#72a4e1"/><rect x="46" y="28" width="11" height="41" rx="2" fill="#397bc6"/><path d="m11 40 20-13 13 2 19-22" stroke="#2368ae" stroke-width="5" stroke-linecap="round"/><path d="m52 7 12-1-1 13" stroke="#2368ae" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>}
+        {topic.icon==='markets' && <svg viewBox="0 0 80 80" fill="none" stroke="#c28620" stroke-width="3.5" stroke-linecap="round"><path d="M17 23v42M29 9v45M41 28v38M53 12v44M65 3v46"/><rect x="11" y="35" width="12" height="17" rx="2" fill="#f5c36d"/><rect x="23" y="21" width="12" height="18" rx="2" fill="#eeb04c"/><rect x="35" y="39" width="12" height="17" rx="2" fill="#f2c776"/><rect x="47" y="23" width="12" height="18" rx="2" fill="#e9a83f"/><rect x="59" y="14" width="12" height="20" rx="2" fill="#d7942c"/></svg>}
+        {topic.icon==='bank' && <svg viewBox="0 0 80 80" fill="none"><path d="M9 27 40 10l31 17v8H9z" fill="#b9b0e1" stroke="#8174b7" stroke-width="3"/><path d="M15 38v24m15-24v24m20-24v24m15-24v24" stroke="#9588c5" stroke-width="9"/><path d="M9 65h62v7H9z" fill="#8174b7"/><circle cx="40" cy="24" r="4" fill="#fff"/></svg>}
+        {topic.icon==='home' && <svg viewBox="0 0 80 80" fill="none"><path d="M9 39 40 11l31 28v31H9z" fill="#f8d4bd"/><path d="m6 39 34-31 34 31" stroke="#bc654d" stroke-width="7" stroke-linejoin="round"/><rect x="34" y="44" width="15" height="26" rx="2" fill="#b95c46"/><rect x="17" y="43" width="13" height="13" fill="#fff8e9"/><rect x="53" y="43" width="12" height="13" fill="#fff8e9"/></svg>}
+        {topic.icon==='coin' && <svg viewBox="0 0 80 80" fill="none"><circle cx="41" cy="40" r="31" fill="#0d736a" stroke="#87c6bd" stroke-width="5"/><circle cx="41" cy="40" r="24" stroke="#c6e8df" stroke-width="2"/><text x="41" y="54" text-anchor="middle" font-size="40" font-family="Georgia,serif" fill="#e0fff2">₿</text></svg>}
+      </span>
+      <h3>{topic.name}</h3>
+      <p>{topic.description}</p>
+      <span class="da-topic-action">Browse topic <span aria-hidden="true">→</span></span>
+    </a>)}</div>
+ </section>
+ <section class="container da-newsletter" id="newsletter">
+  <div class="da-newsletter-intro"><span class="da-envelope" aria-hidden="true">✉</span><div><h2>Better money stories in your inbox.</h2><p>Our best guides and most useful financial stories, delivered once a week on Sunday.</p></div></div>
+  <div class="da-newsletter-form"><form class="news-form" data-newsletter-form><div class="news-form-row"><input type="email" name="email" placeholder="Your email address" aria-label="Email address" autocomplete="email" required /><button class="btn btn-primary" type="submit">Subscribe</button></div><input class="hp-field" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" /><label class="news-consent"><input type="checkbox" name="consent" required /><span>Yes, send me DollarAngle's weekly newsletter. I can unsubscribe anytime.</span></label></form><div class="form-note" data-newsletter-status aria-live="polite">One email per week. See our <a href="/privacy">privacy policy</a>.</div></div>
+ </section>
+ <section class="container da-bottom da-section">
+  <div class="da-panel"><h2>More to read</h2>{recent.map((entry,i)=><a class="da-mini" href={`/articles/${entry.id}`}><img src={img(entry,i)} alt="" loading="lazy" width="110" height="85"/><span><strong>{entry.data.title}</strong><small>{entry.data.readTime}</small></span></a>)}</div>
+  <div class="da-panel"><h2>Editor's selection</h2>{[hero,...side].filter(Boolean).slice(0,4).map((entry,i)=><a class="da-rank" href={`/articles/${entry.id}`}><span>{String(i+1).padStart(2,'0')}</span><strong>{entry.data.title}</strong></a>)}</div>
+  <div class="da-panel"><h2>Watch &amp; learn</h2><div class="da-video-tease"><span aria-hidden="true">▶</span><p>Video explainers are coming soon.</p></div><p class="da-video-note">For now, explore our practical finance guides. We will only embed real, verified videos when they are ready.</p><a class="da-inline-link" href="/explore">Browse the guides →</a></div>
+ </section>
+ <style>
+   :global(body){background:#fdfdfc}
+   .da-shell{display:grid;grid-template-columns:minmax(0,1.78fr) minmax(290px,1fr);gap:14px;padding-top:22px}
+   .da-lead{position:relative;border-radius:8px;overflow:hidden;min-height:450px;background:#0c2630;color:#fff;isolation:isolate}
+   .da-slide{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .8s ease;pointer-events:none}.da-slide.is-active{opacity:1;visibility:visible;pointer-events:auto}.da-lead-image,.da-lead-shade{position:absolute;inset:0;width:100%;height:100%}
+   .da-lead-image{object-fit:cover}.da-lead-shade{background:linear-gradient(90deg,rgba(6,25,34,.83),rgba(8,26,34,.36) 75%),linear-gradient(0deg,rgba(6,25,34,.75),transparent 45%)}
+   .da-lead-body{position:relative;z-index:1;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;height:100%;min-height:450px;padding:38px 42px 24px;max-width:660px}
+   .da-chip{font-size:.7rem;letter-spacing:.13em;text-transform:uppercase;color:#b8efdb;font-weight:800}
+   .da-lead h1,.da-lead h2,.da-heading h2,.da-panel h2,.da-newsletter h2{font-family:Georgia,Cambria,serif;letter-spacing:-.035em}
+   .da-lead h1,.da-lead h2{font-size:clamp(2.15rem,3.5vw,3.35rem);font-weight:700;line-height:1.08;margin:13px 0;max-width:610px}
+   .da-lead-body>p{max-width:480px;line-height:1.6;color:#e6eeed;font-size:1.02rem}
+   .da-lead-button{background:#00775b;padding:13px 21px;border-radius:6px;font-weight:800;margin-top:15px;display:inline-flex;gap:25px;align-items:center}
+   .da-lead-footer{margin-top:auto;padding-top:29px;display:flex;flex-wrap:wrap;gap:15px;color:#f4f6f5;font-size:.7rem}
+   .da-side{display:grid;gap:12px;grid-template-rows:repeat(3,minmax(0,1fr))}
+   .da-side-card{display:grid;grid-template-columns:minmax(0,1fr) 39%;border:1px solid #e8ebe9;overflow:hidden;border-radius:8px;background:#fff;min-height:135px}
+   .da-side-card>div{padding:17px;display:flex;flex-direction:column;align-items:flex-start;gap:10px}
+   .da-tag{text-transform:uppercase;color:#087c61;font-size:.66rem;font-weight:900;letter-spacing:.04em}
+   .da-side-card h2{font:700 1.05rem/1.22 Georgia,Cambria,serif;margin:0}.da-side-card small,.da-article small{font-size:.72rem;color:#667789;margin-top:auto}
+   .da-side-card img{height:100%;width:100%;object-fit:cover}
+   .da-section{padding-top:35px}.da-heading{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:16px}
+   .da-heading h2{font-size:2rem;margin:0;color:#101b2b}.da-heading>a,.da-inline-link{font-size:.84rem;font-weight:700;color:#087e69}
+   .da-latest{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+   .da-article{border:1px solid #e8eceb;border-radius:7px;overflow:hidden;background:#fff}
+   .da-article-img{aspect-ratio:1.45;overflow:hidden;background:#e5f2ef}.da-article-img img{width:100%;height:100%;object-fit:cover;display:block}
+   .da-article-text{padding:14px;display:flex;flex-direction:column;gap:8px;min-height:158px}.da-article h3{font:700 1.02rem/1.28 Georgia,Cambria,serif;letter-spacing:-.02em;margin:0}
+   .da-topics{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}.da-topic-card{--accent:#087965;--tint:#f0faf7;display:flex;flex-direction:column;align-items:flex-start;min-width:0;padding:17px 15px 21px;min-height:270px;border-radius:12px;background:var(--tint);border:1px solid color-mix(in srgb,var(--accent) 16%,#fff);transition:transform .2s ease,box-shadow .2s ease}.da-topic-card:hover,.da-topic-card:focus-visible{transform:translateY(-4px);box-shadow:0 14px 28px rgba(21,38,47,.09);outline-offset:3px}.da-topic-card.da-topic-blue{--accent:#1e61ac;--tint:#f2f7fe}.da-topic-card.da-topic-amber{--accent:#ab6a08;--tint:#fffaf2}.da-topic-card.da-topic-lavender{--accent:#61509c;--tint:#f7f6fd}.da-topic-card.da-topic-coral{--accent:#b35339;--tint:#fdf5f2}.da-topic-card.da-topic-teal{--accent:#087970;--tint:#f1faf9}.da-topic-number{font-size:.8rem;font-weight:800;color:var(--accent)}.da-topic-illustration{width:100%;height:92px;display:grid;place-items:center;margin:2px 0 6px}.da-topic-illustration svg{width:76px;height:76px;filter:drop-shadow(0 7px 7px rgba(15,34,48,.11))}.da-topic-card h3{font:700 1.2rem/1.2 Georgia,Cambria,serif;letter-spacing:-.025em;margin:4px 0 9px;color:#102137}.da-topic-card p{font-size:.82rem;line-height:1.5;color:#44596a;margin:0 0 22px}.da-topic-action{margin-top:auto;color:var(--accent);font-size:.82rem;font-weight:800}
+   .da-newsletter{margin-top:38px;display:grid;grid-template-columns:1fr .95fr;gap:35px;align-items:center;padding:28px 36px;background:#e7f0e8;border-radius:9px}
+   .da-newsletter-intro{display:flex;gap:20px;align-items:center}.da-envelope{height:55px;width:55px;flex-shrink:0;display:grid;place-items:center;background:#d1e5d7;border-radius:50%;color:#00745c;font-size:1.7rem}
+   .da-newsletter h2{font-size:1.48rem;margin:0 0 6px}.da-newsletter p{font-size:.88rem;line-height:1.5;color:#53646a;margin:0}
+   .da-newsletter :global(.news-form input[type="email"]){background:#fff;color:#1c2933;border:1px solid #d1ddd7;border-radius:7px;min-width:0;flex:1}.da-newsletter :global(.news-form-row button){border-radius:7px;background:#00765b}
+   .da-newsletter :global(.news-consent),.da-newsletter :global(.form-note){color:#516763}.da-newsletter :global(.form-note a){color:#076b56}
+   .da-bottom{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+   .da-panel{border:1px solid #e9ecea;border-radius:9px;background:#fff;padding:20px;min-height:265px}.da-panel h2{margin:0 0 18px;font-size:1.35rem}
+   .da-mini{display:flex;gap:13px;border-bottom:1px solid #eef0ef;padding:8px 0}.da-mini img{width:78px;height:65px;object-fit:cover;border-radius:5px}.da-mini span{display:flex;flex-direction:column;gap:5px}.da-mini strong,.da-rank strong{font:700 .88rem/1.35 Georgia,Cambria,serif}.da-mini small{color:#718095;font-size:.72rem}
+   .da-rank{display:flex;align-items:flex-start;gap:13px;border-bottom:1px solid #eef0ef;padding:9px 0}.da-rank span{background:#057b61;color:white;flex-shrink:0;border-radius:50%;height:26px;width:26px;display:grid;place-items:center;font-size:.7rem;font-weight:800}
+   .da-video-tease{min-height:115px;border-radius:7px;background:#d9eae5;display:flex;gap:16px;align-items:center;justify-content:center;color:#173b33}.da-video-tease span{background:#0b8066;border-radius:50%;width:45px;height:45px;display:grid;place-items:center;color:white}.da-video-note{color:#687980;line-height:1.5;font-size:.82rem}
+   @media(max-width:1050px){.da-shell{grid-template-columns:1.2fr 1fr}.da-latest{grid-template-columns:repeat(3,1fr)}.da-side-card{grid-template-columns:1fr 34%}}
+   @media(max-width:780px){.da-shell{grid-template-columns:1fr}.da-side{grid-template-columns:repeat(3,1fr);grid-template-rows:auto}.da-side-card{grid-template-columns:1fr}.da-side-card img{height:120px;order:-1}.da-bottom,.da-newsletter{grid-template-columns:1fr}.da-topics{grid-template-columns:repeat(3,1fr)}.da-latest{grid-template-columns:repeat(2,1fr)}}
+   @media(max-width:530px){.da-lead,.da-lead-body{min-height:410px}.da-lead-body{padding:28px 23px 20px}.da-lead h1,.da-lead h2{font-size:2.15rem}.da-lead-footer{gap:8px}.da-side{grid-template-columns:1fr}.da-side-card{grid-template-columns:1fr 34%}.da-side-card img{height:100%;order:initial}.da-latest{grid-template-columns:1fr 1fr}.da-article h3{font-size:.9rem}.da-article-text{min-height:148px;padding:11px}.da-topics{grid-template-columns:repeat(2,1fr)}.da-topic-card{min-height:253px;padding:13px 12px}.da-topic-illustration{height:72px}.da-topic-illustration svg{height:65px;width:65px}.da-newsletter{padding:23px}.da-heading h2{font-size:1.65rem}}
+.da-carousel-controls{position:absolute;right:15px;bottom:18px;z-index:4;display:flex;align-items:center;gap:8px;background:rgba(7,30,32,.53);border-radius:24px;padding:5px 7px;backdrop-filter:blur(6px)}.da-carousel-controls button{border:0;color:white;background:transparent;cursor:pointer;min-width:31px;min-height:31px;font-size:1.35rem;border-radius:50%}.da-carousel-controls button:hover,.da-carousel-controls button:focus-visible{background:rgba(255,255,255,.24)}.da-carousel-dots{display:flex;gap:5px}.da-carousel-controls .da-dot{min-width:9px;min-height:9px;width:9px;height:9px;background:#a8c8c0;padding:0}.da-carousel-controls .da-dot.is-active{background:white;width:23px;border-radius:6px}.da-carousel-controls [data-hero-pause]{font-size:.94rem}.da-lead-footer{padding-right:130px}@media(max-width:530px){.da-carousel-controls{right:10px;bottom:8px}.da-lead-footer{padding-right:0;padding-bottom:35px}.da-lead-body>p{font-size:.91rem}}@media(prefers-reduced-motion:reduce){.da-slide{transition:none}}
+ </style>
+ <script is:inline>
+  (() => {
+   const root=document.querySelector('[data-hero-carousel]'); if(!root) return;
+   const slides=[...root.querySelectorAll('[data-hero-slide]')], dots=[...root.querySelectorAll('[data-hero-dot]')];
+   if(slides.length<2) return;
+   let current=0,paused=false,timer=null;
+   const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+   function show(next){current=(next+slides.length)%slides.length;slides.forEach((slide,i)=>{const active=i===current;slide.classList.toggle('is-active',active);slide.setAttribute('aria-hidden',String(!active));slide.querySelectorAll('a').forEach(a=>a.tabIndex=active?0:-1)});dots.forEach((dot,i)=>{dot.classList.toggle('is-active',i===current);dot.setAttribute('aria-current',String(i===current))})}
+   function stop(){if(timer){clearInterval(timer);timer=null}}
+   function start(){stop();if(!paused&&!reduced&&!document.hidden)timer=setInterval(()=>show(current+1),6500)}
+   root.querySelector('[data-hero-next]').addEventListener('click',()=>{show(current+1);start()});
+   root.querySelector('[data-hero-prev]').addEventListener('click',()=>{show(current-1);start()});
+   dots.forEach((dot,i)=>dot.addEventListener('click',()=>{show(i);start()}));
+   const pause=root.querySelector('[data-hero-pause]');pause.addEventListener('click',()=>{paused=!paused;pause.textContent=paused?'▶':'Ⅱ';pause.setAttribute('aria-label',paused?'Resume automatic slide rotation':'Pause automatic slide rotation');start()});
+   root.addEventListener('mouseenter',stop);root.addEventListener('mouseleave',start);
+   root.addEventListener('focusin',stop);root.addEventListener('focusout',start);
+   document.addEventListener('visibilitychange',start);
+   let touchX=null;root.addEventListener('touchstart',e=>{touchX=e.changedTouches[0].screenX},{passive:true});root.addEventListener('touchend',e=>{if(touchX===null)return;const delta=e.changedTouches[0].screenX-touchX;touchX=null;if(Math.abs(delta)>55){show(current+(delta<0?1:-1));start()}},{passive:true});
+   start();
+  })();
+ </script>
 </BaseLayout>
