@@ -24,6 +24,12 @@ export const editors: Record<string, EditorProfile> = {
     role: 'Current Developments Editor',
     shortBio: 'Ethan Walker is a DollarAngle editorial byline used for timely financial developments, policy changes and fast-moving stories.'
   },
+  'olivia-bennett': {
+    id: 'olivia-bennett',
+    name: 'Olivia Bennett',
+    role: 'Money & Relationships Editor',
+    shortBio: 'Olivia Bennett is a DollarAngle editorial byline for practical coverage of couples, dating, shared finances, marriage and family money decisions.'
+  },
   'ryan-mitchell': {
     id: 'ryan-mitchell',
     name: 'Ryan Mitchell',
@@ -35,6 +41,7 @@ export const editors: Record<string, EditorProfile> = {
 export function resolveEditor(category: string, franchise: string, authorId?: string) {
   if (authorId && editors[authorId]) return editors[authorId];
   if (franchise === 'Daily') return editors['ethan-walker'];
+  if (category === 'money-relationships') return editors['olivia-bennett'];
   if (category === 'personal-finance') return editors['daniel-brooks'];
   if (category === 'investing' || category === 'markets') return editors['michael-carter'];
   return editors['ryan-mitchell'];

@@ -54,7 +54,7 @@ content:
         type: select
         required: true
         options:
-          values: [personal-finance, investing, markets, economy, real-estate, crypto]
+          values: [personal-finance, investing, markets, economy, real-estate, crypto, money-relationships]
       - name: franchise
         label: Article format
         type: select
