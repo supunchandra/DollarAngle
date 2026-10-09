@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getVisibleArticles } from '../lib/content';
+import { articleThumbnail } from '../lib/articleImages';
 
 const entries = (await getVisibleArticles()).filter(a => !a.data.draft);
 const hero = entries.find(e => e.id === 'compounding-needs-time') ?? entries[0];
@@ -9,20 +10,7 @@ const side = priority.map(id=>entries.find(e=>e.id===id)).filter(Boolean);
 for (const entry of entries) if(side.length<3 && entry.id!==hero?.id && !side.some(s=>s.id===entry.id)) side.push(entry);
 const latest = entries.filter(e => e.id!==hero?.id).slice(0,5);
 const recent = entries.filter(e=>e.id!==hero?.id).slice(5,8);
-const images = {
- 'financial-order-of-operations':'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=700&q=80',
- 'emergency-fund-without-putting-life-on-hold':'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&w=700&q=80',
- 'what-is-an-etf':'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=700&q=80',
- 'diversification-before-stock-picking':'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=700&q=80',
- 'dollar-cost-averaging':'https://images.unsplash.com/photo-1554224154-26032ffc0d07?auto=format&fit=crop&w=700&q=80',
- 'compounding-needs-time':'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&w=700&q=80',
- 'rent-vs-buy':'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=700&q=80',
- 'employer-match-retirement':'https://images.unsplash.com/photo-1554224155-1696413565d3?auto=format&fit=crop&w=700&q=80',
- 'interest-rates-and-your-money':'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=700&q=80',
- 'how-to-read-market-headlines':'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=700&q=80'
-};
-const fallback = ['https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=700&q=80','https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&w=700&q=80'];
-const img=(entry,i=0) => images[entry.id] ?? fallback[i%fallback.length];
+const img=(entry,i=0)=>articleThumbnail(entry);
 const slideIds=['compounding-needs-time','financial-order-of-operations','diversification-before-stock-picking'];
 const slideImages=[
  'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&w=1600&q=82',
