@@ -23,24 +23,24 @@ const encodedEmailBody = encodeURIComponent(`I thought you might find this usefu
     <span class="article-share-label">Share</span>
   </summary>
 
-  <div class="article-share-menu" role="menu" aria-label="Share options">
-    <a role="menuitem" href={`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`} target="_blank" rel="noopener noreferrer">
+  <div class="article-share-menu" aria-label="Share options"><button type="button" data-share-native hidden><span class="share-brand" aria-hidden="true">↗</span><span>Share with an app</span></button>
+    <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`} target="_blank" rel="noopener noreferrer">
       <span class="share-brand share-brand-facebook" aria-hidden="true">f</span>
       <span>Facebook</span>
     </a>
-    <a role="menuitem" href={`https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`} target="_blank" rel="noopener noreferrer">
+    <a href={`https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`} target="_blank" rel="noopener noreferrer">
       <span class="share-brand" aria-hidden="true">X</span>
       <span>X (Twitter)</span>
     </a>
-    <a role="menuitem" href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`} target="_blank" rel="noopener noreferrer">
+    <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`} target="_blank" rel="noopener noreferrer">
       <span class="share-brand share-brand-linkedin" aria-hidden="true">in</span>
       <span>LinkedIn</span>
     </a>
-    <a role="menuitem" href={`mailto:?subject=${encodedTitle}&body=${encodedEmailBody}`}>
+    <a href={`mailto:?subject=${encodedTitle}&body=${encodedEmailBody}`}>
       <span class="share-brand" aria-hidden="true">✉</span>
       <span>Email</span>
     </a>
-    <button type="button" role="menuitem" data-share-copy data-share-url={url}>
+    <button type="button" data-share-copy data-share-url={url}>
       <span class="share-brand" aria-hidden="true">⧉</span>
       <span data-share-copy-label>Copy link</span>
     </button>
@@ -50,6 +50,14 @@ const encodedEmailBody = encodeURIComponent(`I thought you might find this usefu
 <script is:inline>
   document.querySelectorAll('.article-share').forEach((share) => {
     const copyButton = share.querySelector('[data-share-copy]');
+    const nativeButton = share.querySelector('[data-share-native]');
+    if (nativeButton && typeof navigator.share === 'function') {
+      nativeButton.hidden = false;
+      nativeButton.addEventListener('click', async () => {
+        try { await navigator.share({title: document.title, url: window.location.href}); share.removeAttribute('open'); }
+        catch (error) { if (error?.name !== 'AbortError') console.warn('Share unavailable', error); }
+      });
+    }
 
     if (copyButton) {
       copyButton.addEventListener('click', async () => {
@@ -67,8 +75,9 @@ const encodedEmailBody = encodeURIComponent(`I thought you might find this usefu
           textarea.style.opacity = '0';
           document.body.appendChild(textarea);
           textarea.select();
-          document.execCommand('copy');
+          const copied = document.execCommand('copy');
           textarea.remove();
+          if (!copied) { label.textContent = 'Could not copy'; return; }
         }
 
         const original = label.textContent;
