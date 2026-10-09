@@ -19,6 +19,6 @@ const categoryFallbacks: Record<string,string> = {
  'real-estate':'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=900&q=80',
  'crypto':'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80'
 };
-export function articleThumbnail(entry:{id:string,data:{category:string}}): string {
- return articleImages[entry.id] ?? categoryFallbacks[entry.data.category] ?? categoryFallbacks['personal-finance'];
+export function articleThumbnail(entry:{id:string,data:{category:string,thumbnailImage?:string}}): string {
+ return entry.data.thumbnailImage || articleImages[entry.id] || categoryFallbacks[entry.data.category] ?? categoryFallbacks['personal-finance'];
 }
