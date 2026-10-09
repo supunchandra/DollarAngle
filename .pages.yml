@@ -1,0 +1,123 @@
+# DollarAngle content editor. Connect at https://app.pagescms.org using GitHub.
+media:
+  input: public/article-assets
+  output: /article-assets
+  rename: safe
+  categories: [image]
+
+content:
+  - name: articles
+    label: Edit articles
+    type: collection
+    path: src/data/articles
+    format: yaml-frontmatter
+    subfolders: false
+    operations:
+      create: false
+      rename: false
+      delete: false
+    view:
+      fields: [title, category, draft, pubDate]
+      primary: title
+      sort: [pubDate, title]
+      default:
+        sort: pubDate
+        order: desc
+    fields:
+      - name: title
+        label: Article title
+        type: string
+        required: true
+      - name: description
+        label: Article summary
+        type: text
+        required: true
+      - name: thumbnailImage
+        label: Card thumbnail image
+        type: image
+        description: Shown in homepage and category cards. Use an attractive relevant photo.
+      - name: thumbnailAlt
+        label: Thumbnail description
+        type: string
+        description: Short accessible description of the image.
+      - name: seoTitle
+        label: SEO title
+        type: string
+      - name: seoDescription
+        label: SEO description
+        type: text
+      - name: socialImage
+        label: Social share image
+        type: image
+      - name: category
+        label: Category
+        type: select
+        required: true
+        options:
+          values: [personal-finance, investing, markets, economy, real-estate, crypto]
+      - name: franchise
+        label: Article format
+        type: select
+        options:
+          values: [Daily, Guides, Explained, Signals]
+      - name: authorId
+        label: Author ID
+        type: string
+      - name: author
+        label: Author label
+        type: string
+      - name: pubDate
+        label: Published date
+        type: date
+      - name: updatedDate
+        label: Last updated
+        type: date
+      - name: readTime
+        label: Reading time
+        type: string
+      - name: featured
+        label: Featured article
+        type: boolean
+      - name: draft
+        label: Draft
+        type: boolean
+        readonly: true
+        description: Article publishing requires explicit editorial approval outside this editor.
+      - name: tags
+        label: Tags
+        type: string
+        list: true
+      - name: keyTakeaway
+        label: Key takeaway
+        type: text
+      - name: body
+        label: Article content
+        type: rich-text
+        description: Keep financial claims sourced. Avoid em dashes. Existing infographics are embedded in the article content.
+
+  - name: homepage
+    label: Homepage featured stories
+    type: file
+    path: src/data/homepage.json
+    format: json
+    operations:
+      delete: false
+      rename: false
+    fields:
+      - name: slides
+        label: Rotating featured stories
+        type: object
+        list: true
+        fields:
+          - name: articleId
+            label: Article slug
+            type: string
+            required: true
+            description: Must match the article's filename without .md; unpublished drafts are never displayed.
+          - name: image
+            label: Large background photo
+            type: image
+            required: true
+          - name: imageAlt
+            label: Photo description
+            type: string

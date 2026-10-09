@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getVisibleArticles } from '../lib/content';
 import { articleThumbnail } from '../lib/articleImages';
+import homepageConfig from '../data/homepage.json';
 
 const entries = (await getVisibleArticles()).filter(a => !a.data.draft);
 const hero = entries.find(e => e.id === 'compounding-needs-time') ?? entries[0];
@@ -11,13 +12,7 @@ for (const entry of entries) if(side.length<3 && entry.id!==hero?.id && !side.so
 const latest = entries.filter(e => e.id!==hero?.id).slice(0,5);
 const recent = entries.filter(e=>e.id!==hero?.id).slice(5,8);
 const img=(entry,i=0)=>articleThumbnail(entry);
-const slideIds=['compounding-needs-time','financial-order-of-operations','diversification-before-stock-picking'];
-const slideImages=[
- 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&w=1600&q=82',
- 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1600&q=82',
- 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=82'
-];
-const slides=slideIds.map((id,i)=>({entry:entries.find(e=>e.id===id),image:slideImages[i]})).filter(s=>s.entry);
+const slides = (homepageConfig.slides ?? []).slice(0,5).map(({articleId,image,imageAlt})=>({entry:entries.find(e=>e.id===articleId),image,imageAlt})).filter(s=>s.entry && s.image);
 const topics = [
  {name:'Personal Finance',url:'/topics/personal-finance',number:'01',theme:'mint',description:'Budgets, saving, debt and everyday money decisions.',icon:'wallet'},
  {name:'Investing',url:'/topics/investing',number:'02',theme:'blue',description:'Stocks, ETFs, retirement and long-term wealth.',icon:'chart'},
@@ -31,7 +26,7 @@ const topics = [
  <section class="da-shell container" aria-label="Featured coverage">
    <div class="da-lead" data-hero-carousel aria-roledescription="carousel" aria-label="Featured DollarAngle stories">
      {slides.map((slide,i)=><article class:list={['da-slide',{'is-active':i===0}]} data-hero-slide aria-hidden={i===0?'false':'true'}>
-       <img class="da-lead-image" src={slide.image} alt="" width="1600" height="960" loading={i===0?'eager':'lazy'} fetchpriority={i===0?'high':'auto'} />
+       <img class="da-lead-image" src={slide.image} alt={slide.imageAlt || ""} width="1600" height="960" loading={i===0?'eager':'lazy'} fetchpriority={i===0?'high':'auto'} />
        <div class="da-lead-shade"></div>
        <div class="da-lead-body">
          <span class="da-chip">Featured story · {slide.entry.data.category.replaceAll('-',' ')}</span>

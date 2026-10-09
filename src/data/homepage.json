@@ -1,0 +1,19 @@
+{
+  "slides": [
+    {
+      "articleId": "compounding-needs-time",
+      "image": "/article-assets/micheile-henderson-zvprbbmt8qa-unsplash.jpg",
+      "imageAlt": "Money and personal finance planning"
+    },
+    {
+      "articleId": "financial-order-of-operations",
+      "image": "/article-assets/towfiqu-barbhuiya-jpqyfk7gb4w-unsplash.jpg",
+      "imageAlt": "Financial planning paperwork"
+    },
+    {
+      "articleId": "diversification-before-stock-picking",
+      "image": "/article-assets/jakub-zerdzicki-28z82j607p4-unsplash.jpg",
+      "imageAlt": "Investment research on a laptop"
+    }
+  ]
+}
