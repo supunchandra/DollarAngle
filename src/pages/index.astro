@@ -31,12 +31,12 @@ const slideImages=[
 ];
 const slides=slideIds.map((id,i)=>({entry:entries.find(e=>e.id===id),image:slideImages[i]})).filter(s=>s.entry);
 const topics = [
- ['Personal Finance','/topics/personal-finance','01'],
- ['Investing','/topics/investing','02'],
- ['Markets','/topics/markets','03'],
- ['Economy','/topics/economy','04'],
- ['Real Estate','/topics/real-estate','05'],
- ['Crypto','/topics/crypto','06']
+ {name:'Personal Finance',url:'/topics/personal-finance',number:'01',theme:'mint',description:'Budgets, saving, debt and everyday money decisions.',icon:'wallet'},
+ {name:'Investing',url:'/topics/investing',number:'02',theme:'blue',description:'Stocks, ETFs, retirement and long-term wealth.',icon:'chart'},
+ {name:'Markets',url:'/topics/markets',number:'03',theme:'amber',description:'Headlines, volatility and what really matters.',icon:'markets'},
+ {name:'Economy',url:'/topics/economy',number:'04',theme:'lavender',description:'Inflation, interest rates and policy.',icon:'bank'},
+ {name:'Real Estate',url:'/topics/real-estate',number:'05',theme:'coral',description:'Housing, mortgages, renting and ownership.',icon:'home'},
+ {name:'Crypto',url:'/topics/crypto',number:'06',theme:'teal',description:'Digital assets, risk and regulation.',icon:'coin'}
 ];
 ---
 <BaseLayout title="DollarAngle | A smarter angle on your money" description="Clear, independent personal finance reporting, investing guides and economic context for everyday decisions.">
@@ -71,7 +71,20 @@ const topics = [
  </section>
  <section class="container da-section da-topic-section">
    <div class="da-heading"><h2>Explore DollarAngle</h2><a href="/explore">All coverage →</a></div>
-   <div class="da-topics">{topics.map(([name,url,n])=><a href={url}><span>{n}</span><strong>{name}</strong><span aria-hidden="true">↗</span></a>)}</div>
+   <div class="da-topics">{topics.map(topic=><a class={`da-topic-card da-topic-${topic.theme}`} href={topic.url} aria-label={`Explore ${topic.name}`}>
+      <span class="da-topic-number">{topic.number}</span>
+      <span class="da-topic-illustration" aria-hidden="true">
+        {topic.icon==='wallet' && <svg viewBox="0 0 80 80" fill="none"><rect x="12" y="22" width="54" height="42" rx="9" fill="#177d6d"/><path d="M16 29V20a7 7 0 0 1 7-7h32" stroke="#0c594c" stroke-width="5"/><rect x="44" y="36" width="27" height="18" rx="6" fill="#74c7b2"/><circle cx="55" cy="45" r="3" fill="#fff"/></svg>}
+        {topic.icon==='chart' && <svg viewBox="0 0 80 80" fill="none"><rect x="12" y="49" width="11" height="20" rx="2" fill="#a6c4ef"/><rect x="29" y="39" width="11" height="30" rx="2" fill="#72a4e1"/><rect x="46" y="28" width="11" height="41" rx="2" fill="#397bc6"/><path d="m11 40 20-13 13 2 19-22" stroke="#2368ae" stroke-width="5" stroke-linecap="round"/><path d="m52 7 12-1-1 13" stroke="#2368ae" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>}
+        {topic.icon==='markets' && <svg viewBox="0 0 80 80" fill="none" stroke="#c28620" stroke-width="3.5" stroke-linecap="round"><path d="M17 23v42M29 9v45M41 28v38M53 12v44M65 3v46"/><rect x="11" y="35" width="12" height="17" rx="2" fill="#f5c36d"/><rect x="23" y="21" width="12" height="18" rx="2" fill="#eeb04c"/><rect x="35" y="39" width="12" height="17" rx="2" fill="#f2c776"/><rect x="47" y="23" width="12" height="18" rx="2" fill="#e9a83f"/><rect x="59" y="14" width="12" height="20" rx="2" fill="#d7942c"/></svg>}
+        {topic.icon==='bank' && <svg viewBox="0 0 80 80" fill="none"><path d="M9 27 40 10l31 17v8H9z" fill="#b9b0e1" stroke="#8174b7" stroke-width="3"/><path d="M15 38v24m15-24v24m20-24v24m15-24v24" stroke="#9588c5" stroke-width="9"/><path d="M9 65h62v7H9z" fill="#8174b7"/><circle cx="40" cy="24" r="4" fill="#fff"/></svg>}
+        {topic.icon==='home' && <svg viewBox="0 0 80 80" fill="none"><path d="M9 39 40 11l31 28v31H9z" fill="#f8d4bd"/><path d="m6 39 34-31 34 31" stroke="#bc654d" stroke-width="7" stroke-linejoin="round"/><rect x="34" y="44" width="15" height="26" rx="2" fill="#b95c46"/><rect x="17" y="43" width="13" height="13" fill="#fff8e9"/><rect x="53" y="43" width="12" height="13" fill="#fff8e9"/></svg>}
+        {topic.icon==='coin' && <svg viewBox="0 0 80 80" fill="none"><circle cx="41" cy="40" r="31" fill="#0d736a" stroke="#87c6bd" stroke-width="5"/><circle cx="41" cy="40" r="24" stroke="#c6e8df" stroke-width="2"/><text x="41" y="54" text-anchor="middle" font-size="40" font-family="Georgia,serif" fill="#e0fff2">₿</text></svg>}
+      </span>
+      <h3>{topic.name}</h3>
+      <p>{topic.description}</p>
+      <span class="da-topic-action">Browse topic <span aria-hidden="true">→</span></span>
+    </a>)}</div>
  </section>
  <section class="container da-newsletter" id="newsletter">
   <div class="da-newsletter-intro"><span class="da-envelope" aria-hidden="true">✉</span><div><h2>Better money stories in your inbox.</h2><p>Our best guides and most useful financial stories, delivered once a week on Sunday.</p></div></div>
@@ -107,7 +120,7 @@ const topics = [
    .da-article{border:1px solid #e8eceb;border-radius:7px;overflow:hidden;background:#fff}
    .da-article-img{aspect-ratio:1.45;overflow:hidden;background:#e5f2ef}.da-article-img img{width:100%;height:100%;object-fit:cover;display:block}
    .da-article-text{padding:14px;display:flex;flex-direction:column;gap:8px;min-height:158px}.da-article h3{font:700 1.02rem/1.28 Georgia,Cambria,serif;letter-spacing:-.02em;margin:0}
-   .da-topics{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:11px}.da-topics>a{background:#fff;border:1px solid #e5ebe7;border-radius:8px;padding:19px 15px;min-height:95px;display:flex;flex-direction:column;justify-content:space-between;gap:9px}.da-topics>a span{color:#108168;font-size:.8rem}.da-topics>a strong{font-size:.85rem;color:#132638}
+   .da-topics{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}.da-topic-card{--accent:#087965;--tint:#f0faf7;display:flex;flex-direction:column;align-items:flex-start;min-width:0;padding:17px 15px 21px;min-height:270px;border-radius:12px;background:var(--tint);border:1px solid color-mix(in srgb,var(--accent) 16%,#fff);transition:transform .2s ease,box-shadow .2s ease}.da-topic-card:hover,.da-topic-card:focus-visible{transform:translateY(-4px);box-shadow:0 14px 28px rgba(21,38,47,.09);outline-offset:3px}.da-topic-card.da-topic-blue{--accent:#1e61ac;--tint:#f2f7fe}.da-topic-card.da-topic-amber{--accent:#ab6a08;--tint:#fffaf2}.da-topic-card.da-topic-lavender{--accent:#61509c;--tint:#f7f6fd}.da-topic-card.da-topic-coral{--accent:#b35339;--tint:#fdf5f2}.da-topic-card.da-topic-teal{--accent:#087970;--tint:#f1faf9}.da-topic-number{font-size:.8rem;font-weight:800;color:var(--accent)}.da-topic-illustration{width:100%;height:92px;display:grid;place-items:center;margin:2px 0 6px}.da-topic-illustration svg{width:76px;height:76px;filter:drop-shadow(0 7px 7px rgba(15,34,48,.11))}.da-topic-card h3{font:700 1.2rem/1.2 Georgia,Cambria,serif;letter-spacing:-.025em;margin:4px 0 9px;color:#102137}.da-topic-card p{font-size:.82rem;line-height:1.5;color:#44596a;margin:0 0 22px}.da-topic-action{margin-top:auto;color:var(--accent);font-size:.82rem;font-weight:800}
    .da-newsletter{margin-top:38px;display:grid;grid-template-columns:1fr .95fr;gap:35px;align-items:center;padding:28px 36px;background:#e7f0e8;border-radius:9px}
    .da-newsletter-intro{display:flex;gap:20px;align-items:center}.da-envelope{height:55px;width:55px;flex-shrink:0;display:grid;place-items:center;background:#d1e5d7;border-radius:50%;color:#00745c;font-size:1.7rem}
    .da-newsletter h2{font-size:1.48rem;margin:0 0 6px}.da-newsletter p{font-size:.88rem;line-height:1.5;color:#53646a;margin:0}
@@ -120,7 +133,7 @@ const topics = [
    .da-video-tease{min-height:115px;border-radius:7px;background:#d9eae5;display:flex;gap:16px;align-items:center;justify-content:center;color:#173b33}.da-video-tease span{background:#0b8066;border-radius:50%;width:45px;height:45px;display:grid;place-items:center;color:white}.da-video-note{color:#687980;line-height:1.5;font-size:.82rem}
    @media(max-width:1050px){.da-shell{grid-template-columns:1.2fr 1fr}.da-latest{grid-template-columns:repeat(3,1fr)}.da-side-card{grid-template-columns:1fr 34%}}
    @media(max-width:780px){.da-shell{grid-template-columns:1fr}.da-side{grid-template-columns:repeat(3,1fr);grid-template-rows:auto}.da-side-card{grid-template-columns:1fr}.da-side-card img{height:120px;order:-1}.da-bottom,.da-newsletter{grid-template-columns:1fr}.da-topics{grid-template-columns:repeat(3,1fr)}.da-latest{grid-template-columns:repeat(2,1fr)}}
-   @media(max-width:530px){.da-lead,.da-lead-body{min-height:410px}.da-lead-body{padding:28px 23px 20px}.da-lead h1,.da-lead h2{font-size:2.15rem}.da-lead-footer{gap:8px}.da-side{grid-template-columns:1fr}.da-side-card{grid-template-columns:1fr 34%}.da-side-card img{height:100%;order:initial}.da-latest{grid-template-columns:1fr 1fr}.da-article h3{font-size:.9rem}.da-article-text{min-height:148px;padding:11px}.da-topics{grid-template-columns:repeat(2,1fr)}.da-newsletter{padding:23px}.da-heading h2{font-size:1.65rem}}
+   @media(max-width:530px){.da-lead,.da-lead-body{min-height:410px}.da-lead-body{padding:28px 23px 20px}.da-lead h1,.da-lead h2{font-size:2.15rem}.da-lead-footer{gap:8px}.da-side{grid-template-columns:1fr}.da-side-card{grid-template-columns:1fr 34%}.da-side-card img{height:100%;order:initial}.da-latest{grid-template-columns:1fr 1fr}.da-article h3{font-size:.9rem}.da-article-text{min-height:148px;padding:11px}.da-topics{grid-template-columns:repeat(2,1fr)}.da-topic-card{min-height:253px;padding:13px 12px}.da-topic-illustration{height:72px}.da-topic-illustration svg{height:65px;width:65px}.da-newsletter{padding:23px}.da-heading h2{font-size:1.65rem}}
 .da-carousel-controls{position:absolute;right:15px;bottom:18px;z-index:4;display:flex;align-items:center;gap:8px;background:rgba(7,30,32,.53);border-radius:24px;padding:5px 7px;backdrop-filter:blur(6px)}.da-carousel-controls button{border:0;color:white;background:transparent;cursor:pointer;min-width:31px;min-height:31px;font-size:1.35rem;border-radius:50%}.da-carousel-controls button:hover,.da-carousel-controls button:focus-visible{background:rgba(255,255,255,.24)}.da-carousel-dots{display:flex;gap:5px}.da-carousel-controls .da-dot{min-width:9px;min-height:9px;width:9px;height:9px;background:#a8c8c0;padding:0}.da-carousel-controls .da-dot.is-active{background:white;width:23px;border-radius:6px}.da-carousel-controls [data-hero-pause]{font-size:.94rem}.da-lead-footer{padding-right:130px}@media(max-width:530px){.da-carousel-controls{right:10px;bottom:8px}.da-lead-footer{padding-right:0;padding-bottom:35px}.da-lead-body>p{font-size:.91rem}}@media(prefers-reduced-motion:reduce){.da-slide{transition:none}}
  </style>
  <script is:inline>
