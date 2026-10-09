@@ -3,7 +3,7 @@ title: Compounding is powerful, but it cannot rescue a weak savings rate by itse
 description: Time and reinvested returns can turn steady contributions into
   substantial wealth, but compounding works best when you give it enough
   capital, enough time and realistic expectations.
-thumbnailImage: /article-assets/geminigeneratedimagezi23lhzi23lhzi23.jpg
+thumbnailImage: /article-assets/micheile-henderson-zvprbbmt8qa-unsplash.jpg
 seoTitle: How Compounding Builds Wealth Over Time, and Why Saving Still Matters
 seoDescription: See how compound growth works, why starting earlier helps, how
   fees reduce long-term returns, and why your savings rate still matters.
