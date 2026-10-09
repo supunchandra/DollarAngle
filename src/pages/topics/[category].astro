@@ -4,7 +4,7 @@ import ArticleCard from '../../components/ArticleCard.astro';
 import { getVisibleArticles, showDrafts } from '../../lib/content';
 
 export function getStaticPaths() {
-  const categories = ['personal-finance','investing','markets','economy','crypto','real-estate'];
+  const categories = ['personal-finance','investing','markets','economy','crypto','real-estate','money-relationships'];
   return categories.map((category) => ({ params: { category } }));
 }
 const { category } = Astro.params;
