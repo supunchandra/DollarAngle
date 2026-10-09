@@ -31,11 +31,7 @@ It is not magic. It is arithmetic plus time.
 
 When an investment earns a return and that return stays invested, future gains can be earned on both the original money and the gains that have already accumulated.
 
-O
-
-![image.png](/article-assets/image.png)
-
-ver long periods, that second layer can become increasingly important.
+Over long periods, that second layer can become increasingly important.
 
 Investor.gov's compound interest calculator is built around a few basic inputs: the amount you start with, how much you add, how long the money remains invested, the estimated rate of return, and how often returns are compounded.
 
