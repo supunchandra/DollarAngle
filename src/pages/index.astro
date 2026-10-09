@@ -10,16 +10,26 @@ for (const entry of entries) if(side.length<3 && entry.id!==hero?.id && !side.so
 const latest = entries.filter(e => e.id!==hero?.id).slice(0,5);
 const recent = entries.filter(e=>e.id!==hero?.id).slice(5,8);
 const images = {
- 'financial-order-of-operations':'/article-assets/compounding-editorial.svg',
- 'emergency-fund-without-putting-life-on-hold':'/article-assets/dca-editorial.svg',
- 'what-is-an-etf':'/article-assets/diversification-layers.svg',
- 'diversification-before-stock-picking':'/article-assets/diversification-hero.svg',
- 'dollar-cost-averaging':'/article-assets/dca-price-shares.svg',
- 'compounding-needs-time':'/article-assets/compounding-time.svg',
- 'rent-vs-buy':'/article-assets/diversification-hero.svg'
+ 'financial-order-of-operations':'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=700&q=80',
+ 'emergency-fund-without-putting-life-on-hold':'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&w=700&q=80',
+ 'what-is-an-etf':'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=700&q=80',
+ 'diversification-before-stock-picking':'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=700&q=80',
+ 'dollar-cost-averaging':'https://images.unsplash.com/photo-1554224154-26032ffc0d07?auto=format&fit=crop&w=700&q=80',
+ 'compounding-needs-time':'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&w=700&q=80',
+ 'rent-vs-buy':'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=700&q=80',
+ 'employer-match-retirement':'https://images.unsplash.com/photo-1554224155-1696413565d3?auto=format&fit=crop&w=700&q=80',
+ 'interest-rates-and-your-money':'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=700&q=80',
+ 'how-to-read-market-headlines':'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=700&q=80'
 };
-const fallback = ['/article-assets/diversification-hero.svg','/article-assets/compounding-editorial.svg','/article-assets/dca-editorial.svg'];
+const fallback = ['https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=700&q=80','https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&w=700&q=80'];
 const img=(entry,i=0) => images[entry.id] ?? fallback[i%fallback.length];
+const slideIds=['compounding-needs-time','financial-order-of-operations','diversification-before-stock-picking'];
+const slideImages=[
+ 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&w=1600&q=82',
+ 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1600&q=82',
+ 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=82'
+];
+const slides=slideIds.map((id,i)=>({entry:entries.find(e=>e.id===id),image:slideImages[i]})).filter(s=>s.entry);
 const topics = [
  ['Personal Finance','/topics/personal-finance','01'],
  ['Investing','/topics/investing','02'],
@@ -31,15 +41,23 @@ const topics = [
 ---
 <BaseLayout title="DollarAngle | A smarter angle on your money" description="Clear, independent personal finance reporting, investing guides and economic context for everyday decisions.">
  <section class="da-shell container" aria-label="Featured coverage">
-   <div class="da-lead">
-     <img class="da-lead-image" src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1500&q=82" alt="Warm evening light over mountains and a lake" width="1500" height="960" fetchpriority="high"/>
-     <div class="da-lead-shade"></div>
-     <div class="da-lead-body">
-       <span class="da-chip">The feature · Investing</span>
-       <h1>{hero?.data.title ?? 'A smarter angle on your money'}</h1>
-       <p>{hero?.data.description ?? 'Thoughtful reporting and practical financial education.'}</p>
-       {hero && <a class="da-lead-button" href={`/articles/${hero.id}`}>Read the story <span>→</span></a>}
-       <div class="da-lead-footer"><span>✓ Evidence before hype</span><span>✓ Clear explanations</span><span>✓ Real-life decisions</span></div>
+   <div class="da-lead" data-hero-carousel aria-roledescription="carousel" aria-label="Featured DollarAngle stories">
+     {slides.map((slide,i)=><article class:list={['da-slide',{'is-active':i===0}]} data-hero-slide aria-hidden={i===0?'false':'true'}>
+       <img class="da-lead-image" src={slide.image} alt="" width="1600" height="960" loading={i===0?'eager':'lazy'} fetchpriority={i===0?'high':'auto'} />
+       <div class="da-lead-shade"></div>
+       <div class="da-lead-body">
+         <span class="da-chip">Featured story · {slide.entry.data.category.replaceAll('-',' ')}</span>
+         {i===0?<h1>{slide.entry.data.title}</h1>:<h2>{slide.entry.data.title}</h2>}
+         <p>{slide.entry.data.description}</p>
+         <a class="da-lead-button" href={`/articles/${slide.entry.id}`} tabindex={i===0?0:-1}>Read the story <span>→</span></a>
+         <div class="da-lead-footer"><span>✓ Evidence before hype</span><span>✓ Clear explanations</span><span>✓ Real-life decisions</span></div>
+       </div>
+     </article>)}
+     <div class="da-carousel-controls" aria-label="Featured story controls">
+       <button type="button" data-hero-prev aria-label="Previous featured story">‹</button>
+       <div class="da-carousel-dots">{slides.map((_,i)=><button type="button" data-hero-dot={i} class:list={['da-dot',{'is-active':i===0}]} aria-label={`Show featured story ${i+1}`} aria-current={i===0?'true':'false'} />)}</div>
+       <button type="button" data-hero-next aria-label="Next featured story">›</button>
+       <button type="button" data-hero-pause aria-label="Pause automatic slide rotation">Ⅱ</button>
      </div>
    </div>
    <div class="da-side">{side.map((entry,i)=><a class="da-side-card" href={`/articles/${entry.id}`}>
@@ -68,12 +86,12 @@ const topics = [
    :global(body){background:#fdfdfc}
    .da-shell{display:grid;grid-template-columns:minmax(0,1.78fr) minmax(290px,1fr);gap:14px;padding-top:22px}
    .da-lead{position:relative;border-radius:8px;overflow:hidden;min-height:450px;background:#0c2630;color:#fff;isolation:isolate}
-   .da-lead-image,.da-lead-shade{position:absolute;inset:0;width:100%;height:100%}
+   .da-slide{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .8s ease;pointer-events:none}.da-slide.is-active{opacity:1;visibility:visible;pointer-events:auto}.da-lead-image,.da-lead-shade{position:absolute;inset:0;width:100%;height:100%}
    .da-lead-image{object-fit:cover}.da-lead-shade{background:linear-gradient(90deg,rgba(6,25,34,.83),rgba(8,26,34,.36) 75%),linear-gradient(0deg,rgba(6,25,34,.75),transparent 45%)}
    .da-lead-body{position:relative;z-index:1;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;height:100%;min-height:450px;padding:38px 42px 24px;max-width:660px}
    .da-chip{font-size:.7rem;letter-spacing:.13em;text-transform:uppercase;color:#b8efdb;font-weight:800}
-   .da-lead h1,.da-heading h2,.da-panel h2,.da-newsletter h2{font-family:Georgia,Cambria,serif;letter-spacing:-.035em}
-   .da-lead h1{font-size:clamp(2.4rem,4.3vw,4.35rem);font-weight:700;line-height:1.04;margin:16px 0;max-width:610px}
+   .da-lead h1,.da-lead h2,.da-heading h2,.da-panel h2,.da-newsletter h2{font-family:Georgia,Cambria,serif;letter-spacing:-.035em}
+   .da-lead h1,.da-lead h2{font-size:clamp(2.15rem,3.5vw,3.35rem);font-weight:700;line-height:1.08;margin:13px 0;max-width:610px}
    .da-lead-body>p{max-width:480px;line-height:1.6;color:#e6eeed;font-size:1.02rem}
    .da-lead-button{background:#00775b;padding:13px 21px;border-radius:6px;font-weight:800;margin-top:15px;display:inline-flex;gap:25px;align-items:center}
    .da-lead-footer{margin-top:auto;padding-top:29px;display:flex;flex-wrap:wrap;gap:15px;color:#f4f6f5;font-size:.7rem}
@@ -102,6 +120,28 @@ const topics = [
    .da-video-tease{min-height:115px;border-radius:7px;background:#d9eae5;display:flex;gap:16px;align-items:center;justify-content:center;color:#173b33}.da-video-tease span{background:#0b8066;border-radius:50%;width:45px;height:45px;display:grid;place-items:center;color:white}.da-video-note{color:#687980;line-height:1.5;font-size:.82rem}
    @media(max-width:1050px){.da-shell{grid-template-columns:1.2fr 1fr}.da-latest{grid-template-columns:repeat(3,1fr)}.da-side-card{grid-template-columns:1fr 34%}}
    @media(max-width:780px){.da-shell{grid-template-columns:1fr}.da-side{grid-template-columns:repeat(3,1fr);grid-template-rows:auto}.da-side-card{grid-template-columns:1fr}.da-side-card img{height:120px;order:-1}.da-bottom,.da-newsletter{grid-template-columns:1fr}.da-topics{grid-template-columns:repeat(3,1fr)}.da-latest{grid-template-columns:repeat(2,1fr)}}
-   @media(max-width:530px){.da-lead,.da-lead-body{min-height:410px}.da-lead-body{padding:28px 23px 20px}.da-lead h1{font-size:2.55rem}.da-lead-footer{gap:8px}.da-side{grid-template-columns:1fr}.da-side-card{grid-template-columns:1fr 34%}.da-side-card img{height:100%;order:initial}.da-latest{grid-template-columns:1fr 1fr}.da-article h3{font-size:.9rem}.da-article-text{min-height:148px;padding:11px}.da-topics{grid-template-columns:repeat(2,1fr)}.da-newsletter{padding:23px}.da-heading h2{font-size:1.65rem}}
+   @media(max-width:530px){.da-lead,.da-lead-body{min-height:410px}.da-lead-body{padding:28px 23px 20px}.da-lead h1,.da-lead h2{font-size:2.15rem}.da-lead-footer{gap:8px}.da-side{grid-template-columns:1fr}.da-side-card{grid-template-columns:1fr 34%}.da-side-card img{height:100%;order:initial}.da-latest{grid-template-columns:1fr 1fr}.da-article h3{font-size:.9rem}.da-article-text{min-height:148px;padding:11px}.da-topics{grid-template-columns:repeat(2,1fr)}.da-newsletter{padding:23px}.da-heading h2{font-size:1.65rem}}
+.da-carousel-controls{position:absolute;right:15px;bottom:18px;z-index:4;display:flex;align-items:center;gap:8px;background:rgba(7,30,32,.53);border-radius:24px;padding:5px 7px;backdrop-filter:blur(6px)}.da-carousel-controls button{border:0;color:white;background:transparent;cursor:pointer;min-width:31px;min-height:31px;font-size:1.35rem;border-radius:50%}.da-carousel-controls button:hover,.da-carousel-controls button:focus-visible{background:rgba(255,255,255,.24)}.da-carousel-dots{display:flex;gap:5px}.da-carousel-controls .da-dot{min-width:9px;min-height:9px;width:9px;height:9px;background:#a8c8c0;padding:0}.da-carousel-controls .da-dot.is-active{background:white;width:23px;border-radius:6px}.da-carousel-controls [data-hero-pause]{font-size:.94rem}.da-lead-footer{padding-right:130px}@media(max-width:530px){.da-carousel-controls{right:10px;bottom:8px}.da-lead-footer{padding-right:0;padding-bottom:35px}.da-lead-body>p{font-size:.91rem}}@media(prefers-reduced-motion:reduce){.da-slide{transition:none}}
  </style>
+ <script is:inline>
+  (() => {
+   const root=document.querySelector('[data-hero-carousel]'); if(!root) return;
+   const slides=[...root.querySelectorAll('[data-hero-slide]')], dots=[...root.querySelectorAll('[data-hero-dot]')];
+   if(slides.length<2) return;
+   let current=0,paused=false,timer=null;
+   const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+   function show(next){current=(next+slides.length)%slides.length;slides.forEach((slide,i)=>{const active=i===current;slide.classList.toggle('is-active',active);slide.setAttribute('aria-hidden',String(!active));slide.querySelectorAll('a').forEach(a=>a.tabIndex=active?0:-1)});dots.forEach((dot,i)=>{dot.classList.toggle('is-active',i===current);dot.setAttribute('aria-current',String(i===current))})}
+   function stop(){if(timer){clearInterval(timer);timer=null}}
+   function start(){stop();if(!paused&&!reduced&&!document.hidden)timer=setInterval(()=>show(current+1),6500)}
+   root.querySelector('[data-hero-next]').addEventListener('click',()=>{show(current+1);start()});
+   root.querySelector('[data-hero-prev]').addEventListener('click',()=>{show(current-1);start()});
+   dots.forEach((dot,i)=>dot.addEventListener('click',()=>{show(i);start()}));
+   const pause=root.querySelector('[data-hero-pause]');pause.addEventListener('click',()=>{paused=!paused;pause.textContent=paused?'▶':'Ⅱ';pause.setAttribute('aria-label',paused?'Resume automatic slide rotation':'Pause automatic slide rotation');start()});
+   root.addEventListener('mouseenter',stop);root.addEventListener('mouseleave',start);
+   root.addEventListener('focusin',stop);root.addEventListener('focusout',start);
+   document.addEventListener('visibilitychange',start);
+   let touchX=null;root.addEventListener('touchstart',e=>{touchX=e.changedTouches[0].screenX},{passive:true});root.addEventListener('touchend',e=>{if(touchX===null)return;const delta=e.changedTouches[0].screenX-touchX;touchX=null;if(Math.abs(delta)>55){show(current+(delta<0?1:-1));start()}},{passive:true});
+   start();
+  })();
+ </script>
 </BaseLayout>
