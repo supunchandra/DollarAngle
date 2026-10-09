@@ -13,7 +13,7 @@ author: DollarAngle Editorial
 pubDate: 2026-10-09
 readTime: "11 min read"
 featured: false
-draft: true
+draft: false
 tags: ["dating and money", "financial red flags", "relationship finances", "money boundaries", "financial compatibility", "romance scams"]
 keyTakeaway: "A person's salary or taste in restaurants tells you less than their honesty, reliability, respect for boundaries and willingness to talk about money."
 ---
