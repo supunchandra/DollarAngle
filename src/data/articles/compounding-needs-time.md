@@ -29,11 +29,7 @@ Compounding is often described as if it were magic.
 
 It is not magic. It is arithmetic plus time.
 
-When 
-
-![image.png](blob:https:/app.pagescms.org/97995fec-33f2-41ea-af35-36e92cfe173b)
-
-an investment earns a return and that return stays invested, future gains can be earned on both the original money and the gains that have already accumulated.
+When an investment earns a return and that return stays invested, future gains can be earned on both the original money and the gains that have already accumulated.
 
 Over long periods, that second layer can become increasingly important.
 
