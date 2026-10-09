@@ -6,7 +6,7 @@ seoDescription: "Seven practical conversations about money for dating, cohabitin
 thumbnailImage: "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=1200&q=80"
 thumbnailAlt: "Couple spending time together during an important life milestone"
 socialImage: "/og-default.png"
-authorId: michael-carter
+authorId: olivia-bennett
 category: money-relationships
 franchise: Guides
 author: DollarAngle Editorial
