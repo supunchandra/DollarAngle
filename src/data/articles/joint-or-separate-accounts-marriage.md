@@ -37,7 +37,9 @@ The argument sounds like a debate about bank accounts. Usually, it is about secu
 
 There is no universal banking arrangement that makes a marriage healthy. There are three common systems, each with tradeoffs.
 
-![Couples making a household spending plan](https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1400&q=85)
+![vitaly-gariev-mYFWPgZqz0E-unsplash.jpg](/article-assets/vitaly-gariev-myfwpgzqz0e-unsplash-2.jpg)
+
+
 
 ## Option 1: Everything joint
 
