@@ -181,6 +181,8 @@ One more thing: financial privacy and financial secrecy are not identical. Healt
 
 A short monthly check-in works better than waiting for the next argument.
 
+If you're still dating and unsure what financial behavior deserves a closer conversation, see [financial red flags to watch for while dating](/articles/financial-red-flags-dating). If you're planning to share a home, use our [nine money rules for moving in together](/articles/moving-in-together-money-rules) to discuss rent, bills, deposits and an exit plan before signing a lease.
+
 **A realistic conversation**
 
 > "Can we talk about the credit card?"
