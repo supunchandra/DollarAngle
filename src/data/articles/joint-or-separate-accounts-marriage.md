@@ -1,23 +1,32 @@
 ---
-title: "Joint accounts or separate money? How financially healthy marriages actually work"
-description: "A realistic guide to joint, separate and hybrid bank accounts, financial transparency, independence and shared marriage goals."
+title: Joint accounts or separate money? How financially healthy marriages
+  actually work
+description: A realistic guide to joint, separate and hybrid bank accounts,
+  financial transparency, independence and shared marriage goals.
+thumbnailImage: /article-assets/vitaly-gariev-myfwpgzqz0e-unsplash-1.jpg
+thumbnailAlt: Couple planning their household budget at a table
 seoTitle: "Joint vs. Separate Bank Accounts for Married Couples: What Works?"
-seoDescription: "A realistic guide to joint, separate and hybrid bank accounts, financial transparency, independence and shared marriage goals."
-thumbnailImage: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1400&q=85"
-thumbnailAlt: "Couple planning their household budget at a table"
-socialImage: "/og-default.png"
-authorId: olivia-bennett
+seoDescription: A realistic guide to joint, separate and hybrid bank accounts,
+  financial transparency, independence and shared marriage goals.
+socialImage: /article-assets/vitaly-gariev-myfwpgzqz0e-unsplash.jpg
 category: money-relationships
 franchise: Guides
+authorId: olivia-bennett
 author: DollarAngle Editorial
 pubDate: 2026-10-11
-readTime: "9 min read"
+updatedDate: 2026-10-13
+readTime: 9 min read
 featured: false
 draft: false
-tags: ["joint bank accounts", "married couples", "separate accounts", "marriage finance", "couple budgeting"]
-keyTakeaway: "A realistic guide to joint, separate and hybrid bank accounts, financial transparency, independence and shared marriage goals."
+tags:
+  - joint bank accounts
+  - married couples
+  - separate accounts
+  - marriage finance
+  - couple budgeting
+keyTakeaway: A realistic guide to joint, separate and hybrid bank accounts,
+  financial transparency, independence and shared marriage goals.
 ---
-
 She likes knowing exactly what is in her checking account. He thinks it is strange that married people still have "my money" and "your money."
 
 > "Are we really a team if our accounts are separate?"
