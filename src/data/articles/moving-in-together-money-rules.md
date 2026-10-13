@@ -1,23 +1,31 @@
 ---
-title: "Moving in together? The money rules nobody tells you about"
-description: "Before sharing a lease, agree on rent, bills, deposits, debt, furniture and what happens if one of you moves out."
-seoTitle: "Moving In Together? 9 Money Rules Couples Should Agree On"
-seoDescription: "Before sharing a lease, agree on rent, bills, deposits, debt, furniture and what happens if one of you moves out."
-thumbnailImage: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=85"
-thumbnailAlt: "A bright shared living room in a new home"
-socialImage: "/og-default.png"
-authorId: olivia-bennett
+title: Moving in together? The money rules nobody tells you about
+description: Before sharing a lease, agree on rent, bills, deposits, debt,
+  furniture and what happens if one of you moves out.
+thumbnailImage: /article-assets/look-studio-y4cjo5qorsg-unsplash.jpg
+thumbnailAlt: A bright shared living room in a new home
+seoTitle: Moving In Together? 9 Money Rules Couples Should Agree On
+seoDescription: Before sharing a lease, agree on rent, bills, deposits, debt,
+  furniture and what happens if one of you moves out.
+socialImage: /article-assets/look-studio-y4cjo5qorsg-unsplash.jpg
 category: money-relationships
 franchise: Guides
+authorId: olivia-bennett
 author: DollarAngle Editorial
 pubDate: 2026-10-10
-readTime: "9 min read"
+updatedDate: 2026-10-13
+readTime: 9 min read
 featured: false
 draft: false
-tags: ["moving in together", "splitting rent", "unmarried couples", "shared expenses", "cohabitation finances"]
-keyTakeaway: "Before sharing a lease, agree on rent, bills, deposits, debt, furniture and what happens if one of you moves out."
+tags:
+  - moving in together
+  - splitting rent
+  - unmarried couples
+  - shared expenses
+  - cohabitation finances
+keyTakeaway: Before sharing a lease, agree on rent, bills, deposits, debt,
+  furniture and what happens if one of you moves out.
 ---
-
 A set of keys on the counter. Two toothbrushes in the bathroom. Half the closet somehow becoming three-quarters of the closet.
 
 Moving in together can feel like an exciting relationship milestone. It is also a financial agreement, even if you never call it one.
@@ -28,7 +36,7 @@ Moving in together can feel like an exciting relationship milestone. It is also 
 >
 > "Then what counts as fair?"
 
-That is a better conversation to have *before* signing a lease than six months later, when someone feels taken advantage of.
+That is a better conversation to have **before** signing a lease than six months later, when someone feels taken advantage of.
 
 ![A welcoming living room in a shared home](https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=85)
 
