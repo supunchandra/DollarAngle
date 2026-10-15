@@ -4,16 +4,15 @@ description: Before sharing a lease, agree on rent, bills, deposits, debt,
   furniture and what happens if one of you moves out.
 thumbnailImage: /article-assets/look-studio-y4cjo5qorsg-unsplash.jpg
 thumbnailAlt: A bright shared living room in a new home
-seoTitle: Moving In Together? 9 Money Rules Couples Should Agree On
-seoDescription: Before sharing a lease, agree on rent, bills, deposits, debt,
-  furniture and what happens if one of you moves out.
+seoTitle: How to Split Rent Fairly When Moving In Together
+seoDescription: Moving in together? Compare 50/50 and income-based rent splits, build a shared budget, and agree on money rules before signing a lease.
 socialImage: /article-assets/look-studio-y4cjo5qorsg-unsplash.jpg
 category: money-relationships
 franchise: Guides
 authorId: olivia-bennett
 author: DollarAngle Editorial
 pubDate: 2026-10-10
-updatedDate: 2026-10-13
+updatedDate: 2026-10-15
 readTime: 9 min read
 featured: false
 draft: false
@@ -45,6 +44,31 @@ That is a better conversation to have **before** signing a lease than six months
 Imagine one partner takes home $6,000 monthly and the other brings home $3,000. Their combined take-home pay is $9,000. With $2,400 in rent, splitting equally means $1,200 each. That's 20% of the higher earner's income but 40% of the lower earner's.
 
 A proportional split would be roughly $1,600 and $800. Neither arrangement is automatically correct. What matters is choosing consciously rather than pretending that equal dollars always mean equal strain.
+
+### How should couples split rent when they earn different amounts?
+
+Equal contributions are simple, but they don't always place the same strain on both partners' budgets. Imagine Maya brings home $6,000 a month after taxes and Daniel brings home $3,000.
+
+> **Daniel:** "We should split everything down the middle. That seems fair."
+>
+> **Maya:** "But that leaves you with less money to save. Should we compare another way?"
+>
+> **Daniel:** "I don't want you to feel like you're paying for me."
+>
+> **Maya:** "Let's see what each method costs before we decide."
+
+With $2,400 in rent, here's how the methods compare:
+
+| Monthly rent contributions | Maya ($6,000 take-home) | Daniel ($3,000 take-home) |
+| --- | ---: | ---: |
+| Equal 50/50 split | $1,200 (20% of income) | $1,200 (40% of income) |
+| Proportional income split | $1,600 (26.7% of income) | $800 (26.7% of income) |
+
+**How the proportional split works:** Divide each partner's monthly take-home pay by the combined take-home pay, then multiply the total shared expense by their share. Here, Maya earns two-thirds of the combined income, while Daniel earns one-third.
+
+Neither option is automatically right. Equal payments might make sense when both people can comfortably afford them; income-based payments may be easier to sustain when earnings differ. Also consider student loans, caregiving, individual savings needs and who chose the price of the home.
+
+**Try it with your own numbers:** Use our free [couples' bill-splitting calculator](/tools/couples-bill-split) to compare an equal split with an income-based approach. Then [download our printable first shared-budget worksheet](/worksheets/our-first-shared-budget.pdf) to discuss the broader household costs together.
 
 ![Diagram comparing 50-50 and income-proportional monthly rent splits](/article-assets/couple-rent-split.svg)
 
