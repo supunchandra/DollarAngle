@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Couples Bill Split Calculator | DollarAngle" description="Compare equal and income-proportional splits for shared rent and household bills. Free couples budgeting calculator.">
+<section class="section"><div class="container" style="max-width:850px">
+<p><a href="/articles/moving-in-together-money-rules">← Back to the moving-in guide</a></p>
+<h1>Couples' bill-splitting calculator</h1>
+<p>Compare an equal split with a split based on each person's monthly take-home income. Neither approach automatically determines what is fair.</p>
+<div class="split-tool">
+<label>Partner A monthly take-home income ($)<input id="income-a" type="number" min="0" step="0.01" value="6000"/></label>
+<label>Partner B monthly take-home income ($)<input id="income-b" type="number" min="0" step="0.01" value="3000"/></label>
+<label>Total shared monthly expenses ($)<input id="shared" type="number" min="0" step="0.01" value="2400"/></label>
+<div id="split-output" aria-live="polite"></div>
+</div>
+<p>Use take-home pay rather than gross salary. Consider personal debts, caregiving, savings, and housing affordability before agreeing on a system.</p>
+<p><a href="/worksheets/our-first-shared-budget.pdf" download>Download the free shared-budget worksheet (PDF)</a></p>
+<p><small>Educational illustration only. This calculator does not account for taxes, legal liabilities or other financial circumstances.</small></p>
+</div></section>
+<style>
+.split-tool{display:grid;gap:1rem;background:#f4f7f7;padding:1.5rem;border-radius:14px;margin:1.5rem 0}.split-tool label{display:grid;gap:.3rem;font-weight:600}.split-tool input{font:inherit;padding:.7rem;border:1px solid #aab6b6;border-radius:6px;width:100%;max-width:360px;background:white}.split-tool table{width:100%;border-collapse:collapse;background:white}.split-tool th,.split-tool td{padding:.8rem;border-bottom:1px solid #ddd;text-align:left}.split-tool td:not(:first-child),.split-tool th:not(:first-child){text-align:right}.split-tool .note{font-weight:600;color:#8a3c20}
+</style>
+<script>
+const ids=['income-a','income-b','shared'];
+const money=(x:number)=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(x);
+const safe=(id:string)=>Math.max(0,Number((document.getElementById(id) as HTMLInputElement)?.value)||0);
+function calculate(){
+ const a=safe('income-a'),b=safe('income-b'),expense=safe('shared'),total=a+b;
+ const output=document.getElementById('split-output'); if(!output)return;
+ if(!total){output.textContent='Enter a positive monthly income to calculate the income-based split.';return;}
+ const percentageA=a/total,percentageB=b/total;
+ output.innerHTML=`<table><thead><tr><th>Partner</th><th>Equal 50/50</th><th>Income-based</th></tr></thead><tbody><tr><td>A</td><td>${money(expense/2)}</td><td>${money(expense*percentageA)}</td></tr><tr><td>B</td><td>${money(expense/2)}</td><td>${money(expense*percentageB)}</td></tr></tbody></table><p>Income shares: A ${(percentageA*100).toFixed(1)}%; B ${(percentageB*100).toFixed(1)}%.</p>${expense>total?'<p class="note">Warning: Shared expenses exceed combined take-home income.</p>':''}`;
+}
+ids.forEach(id=>document.getElementById(id)?.addEventListener('input',calculate));calculate();
+</script>
