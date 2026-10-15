@@ -68,7 +68,7 @@ With $2,400 in rent, here's how the methods compare:
 
 Neither option is automatically right. Equal payments might make sense when both people can comfortably afford them; income-based payments may be easier to sustain when earnings differ. Also consider student loans, caregiving, individual savings needs and who chose the price of the home.
 
-**Try it with your own numbers:** Use our free [couples' bill-splitting calculator](/tools/couples-bill-split) to compare an equal split with an income-based approach. Then [download our printable first shared-budget worksheet](/worksheets/our-first-shared-budget.pdf) to discuss the broader household costs together.
+**Try it with your own numbers:** Use our free [couples' bill-splitting calculator](/tools/couples-bill-split) to compare an equal split with an income-based approach. Then [download our printable first shared-budget worksheet](/worksheets/our-first-shared-budget) to discuss the broader household costs together.
 
 ![Diagram comparing 50-50 and income-proportional monthly rent splits](/article-assets/couple-rent-split.svg)
 
