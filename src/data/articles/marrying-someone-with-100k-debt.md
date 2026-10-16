@@ -1,23 +1,32 @@
 ---
-title: "Would You Marry Someone With $100,000 in Debt? The Questions Love Can't Answer"
-description: "You love them. You trust them. Then you discover they're carrying $100,000 in debt. What should a couple ask before getting married?"
+title: Would You Marry Someone With $100,000 in Debt? The Questions Love Can't Answer
+description: You love them. You trust them. Then you discover they're carrying
+  $100,000 in debt. What should a couple ask before getting married?
+thumbnailImage: /article-assets/pexels-photo-2959192.avif
+thumbnailAlt: Couple spending a thoughtful moment together
 seoTitle: "Marrying Someone With $100K in Debt: What to Know"
-seoDescription: "Would you marry someone with $100,000 in debt? Explore financial red flags, legal responsibilities, repayment plans and what couples should discuss first."
-thumbnailImage: "https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=1400&q=85"
-thumbnailAlt: "Couple spending a thoughtful moment together"
-socialImage: "/og-default.png"
-authorId: olivia-bennett
+seoDescription: Would you marry someone with $100,000 in debt? Explore financial
+  red flags, legal responsibilities, repayment plans and what couples should
+  discuss first.
+socialImage: /article-assets/pexels-photo-2959192.avif
 category: money-relationships
 franchise: Guides
+authorId: olivia-bennett
 author: DollarAngle Editorial
 pubDate: 2026-10-16
-readTime: "9 min read"
+updatedDate: 2026-10-16
+readTime: 9 min read
 featured: false
 draft: false
-tags: ["marrying someone with debt", "marriage and debt", "partner has debt", "financial compatibility", "spouse debt responsibility"]
-keyTakeaway: "The real question isn't just how much debt your partner has. It's whether you can face what it means together."
+tags:
+  - marrying someone with debt
+  - marriage and debt
+  - partner has debt
+  - financial compatibility
+  - spouse debt responsibility
+keyTakeaway: The real question isn't just how much debt your partner has. It's
+  whether you can face what it means together.
 ---
-
 *You love them. You trust them. You've imagined the wedding, the house, perhaps even children. Then, one evening, you discover they're carrying $100,000 in debt. Is it a reason to walk away,or the beginning of a conversation every serious couple should have?*
 
 ![Couple at a wedding, illustrating the commitment and financial conversations before marriage](https://images.pexels.com/photos/2959192/pexels-photo-2959192.jpeg?auto=compress&cs=tinysrgb&w=1400)
@@ -58,8 +67,6 @@ The real problem wasn't necessarily the $100,000.
 
 It was what that number meant,and why they had never discussed it.
 
-*The characters Sophie and James are fictional. Their dialogue illustrates financial questions that can arise in serious relationships.*
-
 There is no universal answer to whether you should marry someone with substantial debt. But before making that commitment, there are several things you absolutely deserve to understand.
 
 ![Budget notebook, calculator and wedding planning on a table](https://images.pexels.com/photos/4386431/pexels-photo-4386431.jpeg?auto=compress&cs=tinysrgb&w=1400)
@@ -80,18 +87,20 @@ Debt needs context.
 
 Consider the following hypothetical examples:
 
+
 | Debt type | Balance | Interest rate |
-| --- | ---: | ---: |
+| --------------- | ------------ | ------------- |
 | Education loans | $80,000 | 5.5% |
 | Credit cards | $15,000 | 24% |
 | Car loan | $5,000 | 7% |
-| **Total** | **$100,000** | |
+| **Total** | **$100,000** |  |
+
 
 The $15,000 credit card balance deserves particular attention because its high interest rate makes it relatively expensive to carry.
 
 A person with this combination of debts may need to prioritize repayment differently from someone holding only lower-interest education loans.
 
-This is why the first question shouldn't simply be, *"How much do you owe?"*
+This is why the first question shouldn't simply be, **"How much do you owe?"**
 
 It should be:
 
@@ -167,13 +176,15 @@ What matters immediately is the combination of required monthly payments, availa
 
 For example:
 
+
 | Monthly financial picture | Amount |
-| --- | ---: |
+| --------------------------- | ------ |
 | Gross monthly income | $6,250 |
 | Education loan payment | $650 |
 | Car loan payment | $300 |
 | Credit card minimum payment | $450 |
 | Total monthly debt payments | $1,400 |
+
 
 This hypothetical person already has $1,400 in monthly debt payments, before paying rent, groceries, insurance or other living costs.
 
@@ -243,7 +254,7 @@ The exact order depends on interest rates, available income, job stability, and 
 
 For example, high-interest credit card debt can be costly enough that paying it down deserves priority over discretionary investing. Meanwhile, some lower-rate or specially structured education loans may require a different approach.
 
-Couples should also avoid confusing *their combined net worth* with the financial independence of each partner.
+Couples should also avoid confusing their combined net worth with the financial independence of each partner.
 
 You can build a shared financial future while protecting individual savings, retirement accounts, and access to money.
 
@@ -253,12 +264,12 @@ Here's a practical example of what to review:
 
 **The Couple's Debt Reality Check**
 
-- [ ] List every debt, interest rate, minimum payment and remaining balance.
-- [ ] Review both partners' monthly income and essential expenses.
-- [ ] Decide whether to prioritize high-interest debt or another urgent obligation.
-- [ ] Agree on a realistic monthly repayment amount.
-- [ ] Protect access to emergency savings for both partners.
-- [ ] Review the plan together after 30 days.
+- List every debt, interest rate, minimum payment and remaining balance.
+- Review both partners' monthly income and essential expenses.
+- Decide whether to prioritize high-interest debt or another urgent obligation.
+- Agree on a realistic monthly repayment amount.
+- Protect access to emergency savings for both partners.
+- Review the plan together after 30 days.
 
 Debt repayment shouldn't become a punishment that makes everyday life unbearable.
 
