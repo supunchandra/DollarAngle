@@ -1,0 +1,20 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AuthorBox from '../../components/AuthorBox.astro';
+import ShareMenu from '../../components/ShareMenu.astro';
+import { resolveEditor } from '../../data/editors';
+const entries = await getCollection('articles');
+const entry = entries.find(e => e.id === 'marrying-someone-with-100k-debt');
+if (!entry) throw new Error('Article 17 editorial draft was not found');
+const { Content, headings } = await render(entry);
+const d=entry.data;
+const editor=resolveEditor(d.category,d.franchise,d.authorId);
+const published=new Intl.DateTimeFormat('en-US',{year:'numeric',month:'long',day:'numeric'}).format(d.pubDate);
+const canonical=new URL('/articles/marrying-someone-with-100k-debt', Astro.site);
+---
+<BaseLayout title={d.seoTitle + ' | DollarAngle'} description={d.seoDescription} image={d.socialImage ?? '/og-default.png'} type="article" noindex={true}>
+<div class="preview-bar">Editorial draft preview · Article 17 is not approved and is not published on DollarAngle.com</div>
+<section class="article-hero"><div class="container"><span class="eyebrow">DollarAngle {d.franchise}</span><h1>{d.title}</h1><p class="article-deck">{d.description}</p><div class="article-meta"><span>By {editor.name}</span><span class="meta-separator">·</span><span>{published}</span><span class="meta-separator">·</span><span>{d.readTime}</span><span class="meta-separator">·</span><span>Money & Relationships</span></div></div></section>
+<section class="section" style="padding-top:10px"><div class="container article-layout"><ShareMenu url={canonical.href} title={d.title}/><article class="article-body">{d.keyTakeaway && <blockquote><strong>The DollarAngle</strong><br />{d.keyTakeaway}</blockquote>}<Content/><AuthorBox editor={editor}/><div class="disclaimer"><strong>Financial education disclaimer:</strong> DollarAngle provides financial education, news and commentary for informational purposes only. Nothing here constitutes personalized financial, investment, tax or legal advice. Consider your circumstances and consult a qualified professional when appropriate.</div></article><aside class="sidebar"><h2>In this article</h2>{headings.filter(h=>h.depth===2).map(h=><a href={`#${h.slug}`}>{h.text}</a>)}<h2 style="margin-top:26px">Editorial status</h2><p>This is an unpublished draft. Final editorial review is pending.</p></aside></div></section>
+</BaseLayout>
