@@ -18,7 +18,7 @@ tags: ["marrying someone with debt", "marriage and debt", "partner has debt", "f
 keyTakeaway: "The real question isn't just how much debt your partner has. It's whether you can face what it means together."
 ---
 
-*You love them. You trust them. You've imagined the wedding, the house, perhaps even children. Then, one evening, you discover they're carrying $100,000 in debt. Is it a reason to walk away—or the beginning of a conversation every serious couple should have?*
+*You love them. You trust them. You've imagined the wedding, the house, perhaps even children. Then, one evening, you discover they're carrying $100,000 in debt. Is it a reason to walk away,or the beginning of a conversation every serious couple should have?*
 
 ## "You owe HOW much?"
 
@@ -54,11 +54,13 @@ And there it was.
 
 The real problem wasn't necessarily the $100,000.
 
-It was what that number meant—and why they had never discussed it.
+It was what that number meant,and why they had never discussed it.
 
 *The characters Sophie and James are fictional. Their dialogue illustrates financial questions that can arise in serious relationships.*
 
 There is no universal answer to whether you should marry someone with substantial debt. But before making that commitment, there are several things you absolutely deserve to understand.
+
+![Budget notebook, calculator and wedding planning on a table](https://images.pexels.com/photos/4386431/pexels-photo-4386431.jpeg?auto=compress&cs=tinysrgb&w=1400)
 
 ## 1. Not all $100,000 debts tell the same story
 
@@ -151,6 +153,8 @@ Before combining accounts, guaranteeing a loan, or making major joint purchases,
 
 You can be emotionally committed to someone without automatically taking legal responsibility for their borrowing.
 
+![Couple reviewing household financial plans together](https://images.pexels.com/photos/4386366/pexels-photo-4386366.jpeg?auto=compress&cs=tinysrgb&w=1400)
+
 ## 4. Love may be free. Your monthly cash flow isn't.
 
 Suppose your partner earns $75,000 annually and carries $100,000 in outstanding debt.
@@ -231,7 +235,7 @@ And this is where the story can become encouraging.
 
 A large balance doesn't always mean abandoning every other financial goal until it reaches zero.
 
-A practical strategy might involve staying current on required repayments, building a starter emergency buffer, prioritizing expensive revolving debt, and contributing toward retirement when appropriate—particularly where employer contributions are available.
+A practical strategy might involve staying current on required repayments, building a starter emergency buffer, prioritizing expensive revolving debt, and contributing toward retirement when appropriate,particularly where employer contributions are available.
 
 The exact order depends on interest rates, available income, job stability, and loan terms.
 
@@ -247,16 +251,18 @@ Here's a practical example of what to review:
 
 **The Couple's Debt Reality Check**
 
-- List every debt, interest rate, minimum payment and remaining balance.
-- Review both partners' monthly income and essential expenses.
-- Decide whether to prioritize high-interest debt or another urgent obligation.
-- Agree on a realistic monthly repayment amount.
-- Protect access to emergency savings for both partners.
-- Review the plan together after 30 days.
+- [ ] List every debt, interest rate, minimum payment and remaining balance.
+- [ ] Review both partners' monthly income and essential expenses.
+- [ ] Decide whether to prioritize high-interest debt or another urgent obligation.
+- [ ] Agree on a realistic monthly repayment amount.
+- [ ] Protect access to emergency savings for both partners.
+- [ ] Review the plan together after 30 days.
 
 Debt repayment shouldn't become a punishment that makes everyday life unbearable.
 
 The better goal is a plan that both people understand and can maintain.
+
+![Wedding planning and shared financial goals](https://images.pexels.com/photos/2959192/pexels-photo-2959192.jpeg?auto=compress&cs=tinysrgb&w=1400)
 
 ## 7. Five questions to ask before saying "I do"
 
@@ -342,7 +348,7 @@ Marrying someone with $100,000 in debt is not automatically a mistake.
 
 Nor is it automatically wise.
 
-The decision depends on the financial facts, repayment strategy, legal obligations, personal boundaries and—perhaps most importantly—the couple's ability to be honest with each other.
+The decision depends on the financial facts, repayment strategy, legal obligations, personal boundaries and,perhaps most importantly,the couple's ability to be honest with each other.
 
 You cannot build financial freedom together by ignoring financial reality.
 
@@ -354,7 +360,7 @@ But you also shouldn't reduce someone's worth as a partner to a number on a stat
 
 ### The Sunday Question
 
-*If you discovered your fiancé had $100,000 in debt, would you still get married—or postpone the wedding until the debt was under control?*
+*If you discovered your fiancé had $100,000 in debt, would you still get married,or postpone the wedding until the debt was under control?*
 
 Next in Money & Relationships: **The Couples Who Build Wealth Together Do These 7 Things Differently.**
 
