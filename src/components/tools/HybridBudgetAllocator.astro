@@ -1,0 +1,72 @@
+---
+const { compact = false } = Astro.props;
+---
+<section class:list={['budget-tool',{compact}]} data-budget-allocator aria-label="Mine yours ours couple budget calculator">
+  <header class="heading"><div><p class="eyebrow">DOLLARANGLE MONEY TOOLS</p><h2>One budget. Three accounts. Your rules.</h2><p>Choose how much flows into your joint account and how much stays personal.</p></div><label class="currency">Currency<select data-currency><option value="USD">USD $</option><option value="GBP">GBP £</option><option value="EUR">EUR €</option></select></label></header>
+  <div class="columns">
+    <form data-fields class="inputs">
+      <label>Partner A monthly take-home income<input type="number" name="a" min="0" max="1000000000" step="0.01" value="6000" required /></label>
+      <label>Partner B monthly take-home income<input type="number" name="b" min="0" max="1000000000" step="0.01" value="4000" required /></label>
+      <label>Shared monthly expenses<input type="number" name="expenses" min="0" max="1000000000" step="0.01" value="3500" required /></label>
+      <label>Monthly shared savings goal<input type="number" name="savings" min="0" max="1000000000" step="0.01" value="1500" required /></label>
+      <fieldset><legend>How should personal money be allocated?</legend><label class="choice"><input type="radio" name="strategy" value="percent" checked /> Equal percentage of income remaining after joint contributions</label><label class="choice"><input type="radio" name="strategy" value="dollar" /> Equal personal dollar amount</label></fieldset>
+      <p class="hint">Enter every amount in the same currency. Changing the label does not convert exchange rates. Your figures stay in your browser.</p>
+    </form>
+    <div class="output" aria-live="polite" aria-atomic="true">
+      <p class="eyebrow">YOUR MONTHLY TRANSFER PLAN</p>
+      <p class="error" data-error hidden></p>
+      <div data-results>
+        <div class="joint"><small>Ours · Joint account receives</small><strong data-joint></strong><span>Shared bills + shared savings goal</span></div>
+        <div class="accounts"><div><small>Mine · Partner A keeps</small><strong data-personal-a></strong></div><div><small>Yours · Partner B keeps</small><strong data-personal-b></strong></div></div>
+        <h3>Paycheck routing</h3>
+        <div class="route"><span>Partner A</span><div class="track"><span data-transfer-bar-a></span></div><small data-transfer-a></small></div>
+        <div class="route"><span>Partner B</span><div class="track"><span data-transfer-bar-b></span></div><small data-transfer-b></small></div>
+        <div class="summary" data-insight></div>
+        <button class="copy" type="button" data-copy>Copy direct-deposit plan</button><span class="copy-status" data-copy-status role="status"></span>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+.budget-tool{--accent:#087c61;--pale:#eef9f3;font:inherit;font-family:Inter,system-ui,sans-serif;background:white;border:1px solid #d5e9df;border-radius:25px;padding:clamp(18px,4vw,36px);box-shadow:0 18px 50px rgba(13,83,65,.06);color:#18362d;min-width:0}.heading{display:flex;align-items:start;justify-content:space-between;gap:20px;margin-bottom:25px}.eyebrow{font-size:.7rem;letter-spacing:.11em;font-weight:850;color:var(--accent);margin:0}.heading h2{font-size:clamp(1.5rem,3vw,2.15rem);letter-spacing:-.04em;line-height:1.14;margin:9px 0}.heading p:not(.eyebrow){color:#597469;margin:0;line-height:1.6}.currency{font-size:.75rem;flex-shrink:0}.currency select{display:block;margin-top:8px}.columns{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:24px}.inputs{display:grid;gap:15px;align-content:start}.inputs>label{display:grid;gap:7px;font-size:.85rem;font-weight:700}.inputs input[type=number],.currency select{width:100%;padding:12px;border:1px solid #c5dacf;border-radius:11px;background:white;color:#173a30;font:inherit}.inputs fieldset{margin:0;padding:0;border:0;display:grid;gap:9px}.inputs legend{font-weight:700;font-size:.85rem;margin-bottom:10px}.choice{font-size:.84rem;display:flex;gap:9px;align-items:start;line-height:1.45}.choice input{accent-color:var(--accent);margin-top:3px}.hint{font-size:.76rem;color:#688074;line-height:1.55;margin:0}.output{background:#f1faf5;border:1px solid #dceee3;border-radius:20px;padding:22px;min-width:0}.joint{display:grid;gap:6px;background:#0c795e;color:white;border-radius:15px;padding:19px;margin:14px 0}.joint small,.joint span{color:#dcf8e9}.joint strong{font-size:clamp(1.5rem,3vw,2rem);overflow-wrap:anywhere}.accounts{display:grid;grid-template-columns:1fr 1fr;gap:10px}.accounts div{display:grid;gap:8px;background:white;border:1px solid #d8ebdf;border-radius:13px;padding:14px;min-width:0}.accounts small,.joint small{font-size:.73rem}.accounts strong{font-size:clamp(1.15rem,2vw,1.5rem);overflow-wrap:anywhere}.output h3{font-size:.94rem;margin:24px 0 13px}.route{display:grid;grid-template-columns:75px 1fr;column-gap:12px;row-gap:5px;font-size:.81rem;align-items:center;margin:13px 0}.route small{grid-column:2;color:#496d5c}.track{height:12px;background:#d8e9de;border-radius:999px;overflow:hidden}.track span{display:block;height:100%;background:#087c61;border-radius:inherit;transition:width .2s ease}.summary{margin:21px 0;font-size:.8rem;color:#45685a;line-height:1.6}.copy{background:#087c61;border:0;border-radius:11px;color:white;font-weight:800;padding:12px 17px;cursor:pointer}.copy-status{display:inline-block;margin-left:10px;font-size:.76rem}.error{color:#a22c32;font-size:.89rem}.budget-tool input:focus-visible,.budget-tool select:focus-visible,.copy:focus-visible{outline:3px solid #75c9a5;outline-offset:2px}.budget-tool [hidden]{display:none!important}@media(max-width:750px){.columns{grid-template-columns:1fr}.heading{flex-direction:column}.currency select{max-width:190px}.currency{width:100%}.output{padding:16px}.accounts div{padding:10px}}
+@media(prefers-reduced-motion:reduce){.track span{transition:none}}
+</style>
+<script>
+function initBudget(root: Element) {
+ if(root.hasAttribute('data-budget-ready'))return;
+ root.setAttribute('data-budget-ready','true');
+ const form=root.querySelector<HTMLFormElement>('[data-fields]')!;
+ const currency=root.querySelector<HTMLSelectElement>('[data-currency]')!;
+ const input=(name:string)=>form.elements.namedItem(name) as HTMLInputElement;
+ const elem=(key:string)=>root.querySelector<HTMLElement>('[data-'+key+']')!;
+ let copyText='';
+ function update(){
+  const a=input('a').valueAsNumber,b=input('b').valueAsNumber,expenses=input('expenses').valueAsNumber,savings=input('savings').valueAsNumber;
+  const joint=expenses+savings,total=a+b;
+  const mode=(form.elements.namedItem('strategy') as RadioNodeList).value;
+  const valid=[a,b,expenses,savings].every(n=>Number.isFinite(n)&&n>=0&&n<=1e9)&&total>0&&Number.isFinite(joint);
+  const money=(n:number)=>new Intl.NumberFormat('en-US',{style:'currency',currency:currency.value,maximumFractionDigits:2}).format(n);
+  let transferA=0,transferB=0;
+  if(valid){
+   if(mode==='dollar'){const allowance=(total-joint)/2;transferA=a-allowance;transferB=b-allowance;}
+   else {transferA=joint*a/total;transferB=joint-transferA;}
+  }
+  const affordable=valid&&joint<=total&&transferA>=-0.00001&&transferB>=-0.00001;
+  elem('error').hidden=affordable;elem('results').hidden=!affordable;
+  if(!affordable){elem('error').textContent=!valid?'Enter valid nonnegative amounts and at least one positive income.':joint>total?'Joint expenses and savings exceed combined income. Reduce the goal or increase income.':'Equal personal allowances would require one partner to contribute more than their income. Try the percentage strategy or adjust goals.';return;}
+  const personalA=a-transferA,personalB=b-transferB;
+  const pctA=a===0?0:100*transferA/a,pctB=b===0?0:100*transferB/b;
+  elem('joint').textContent=money(joint);elem('personal-a').textContent=money(personalA);elem('personal-b').textContent=money(personalB);
+  elem('transfer-a').textContent=money(transferA)+' to joint ('+pctA.toFixed(1)+'% of income)';
+  elem('transfer-b').textContent=money(transferB)+' to joint ('+pctB.toFixed(1)+'% of income)';
+  elem('transfer-bar-a').style.width=pctA+'%';elem('transfer-bar-b').style.width=pctB+'%';
+  elem('insight').textContent=mode==='dollar'?'Both partners keep the same personal amount; their joint contributions may be very different percentages of their pay.':'Joint expenses and savings are covered proportionally to income; both partners keep the same percentage of their pay.';
+  copyText='DollarAngle Mine, Yours, Ours monthly plan ('+currency.value+')\nPartner A → Joint: '+money(transferA)+' ('+pctA.toFixed(1)+'% of pay); personal: '+money(personalA)+'\nPartner B → Joint: '+money(transferB)+' ('+pctB.toFixed(1)+'% of pay); personal: '+money(personalB)+'\nJoint total: '+money(joint)+' (bills '+money(expenses)+' + savings '+money(savings)+')\nSee: dollarangle.com/tools/mine-yours-ours-budget-calculator';
+ }
+ form.addEventListener('input',update);form.addEventListener('change',update);currency.addEventListener('change',update);
+ root.querySelector<HTMLButtonElement>('[data-copy]')!.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(copyText);elem('copy-status').textContent='Copied!';}catch{elem('copy-status').textContent='Copy unavailable in this browser.';}});
+ update();
+}
+document.querySelectorAll('[data-budget-allocator]').forEach(initBudget);
+document.addEventListener('astro:page-load',()=>document.querySelectorAll('[data-budget-allocator]').forEach(initBudget));
+</script>
