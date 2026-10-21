@@ -1,0 +1,77 @@
+---
+interface Props { compact?: boolean }
+const { compact = false } = Astro.props;
+---
+<section class:list={['split-tool', { compact }]} data-rent-splitter aria-label="Proportional rent and bill splitter">
+  <div class="tool-head"><div><span class="eyebrow-tool">DOLLARANGLE · MONEY TOOLS</span><h2>Find a split that works for both of you.</h2><p>Compare an equal split with contributions based on take-home income.</p></div><label class="currency">Display currency <select data-currency aria-label="Display currency"><option value="USD">USD $</option><option value="GBP">GBP £</option><option value="EUR">EUR €</option></select></label></div>
+  <div class="tool-grid">
+    <form class="tool-inputs" data-inputs>
+      <label>Partner A monthly take-home income <input name="a" type="number" min="0" max="1000000000" step="0.01" value="6000" required inputmode="decimal"/></label>
+      <label>Partner B monthly take-home income <input name="b" type="number" min="0" max="1000000000" step="0.01" value="4000" required inputmode="decimal"/></label>
+      <label>Shared monthly rent and bills <input name="expenses" type="number" min="0" max="1000000000" step="0.01" value="2500" required inputmode="decimal"/></label>
+      <fieldset><legend>How should the bills be split?</legend><label class="radio"><input type="radio" name="mode" value="proportional" checked/> Proportional to income</label><label class="radio"><input type="radio" name="mode" value="hybrid"/> Hybrid: partly equal, partly proportional</label></fieldset>
+      <label data-hybrid hidden>Percentage split equally <input type="range" name="equal" min="0" max="100" step="5" value="50"/><span data-equal-label>50% equal · 50% proportional</span></label>
+      <p class="input-note">Amounts stay in your browser. Switching the currency label does not convert exchange rates.</p>
+    </form>
+    <div class="results" aria-live="polite" aria-atomic="true">
+      <div class="result-kicker">YOUR MONTHLY PLAN</div>
+      <p class="error" data-error hidden>Enter valid nonnegative amounts and a combined income above zero.</p>
+      <div data-valid>
+        <div class="result-cards"><div><small>Partner A pays</small><strong data-share-a></strong><span data-pct-a></span></div><div><small>Partner B pays</small><strong data-share-b></strong><span data-pct-b></span></div></div>
+        <div class="compare"><h3>Compare the two approaches</h3><div class="bar-caption"><span>50/50 split</span><span data-half></span></div><div class="stack"><span style="width:50%"></span><span style="width:50%"></span></div><div class="bar-caption"><span>Your selected split</span><span data-selected></span></div><div class="stack"><span data-bar-a></span><span data-bar-b></span></div><div class="legend"><span>● Partner A</span><span>● Partner B</span></div></div>
+        <div class="remaining"><h3>Money left after shared bills</h3><div><span>Partner A: <b data-left-a></b></span><span>Partner B: <b data-left-b></b></span></div><p data-note></p></div>
+        <button type="button" class="copy" data-copy>Copy our split</button><span class="copy-status" data-copy-status role="status"></span>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+.split-tool{--wine:#782a49;--rose:#f9e9ef;--ink:#29212a;background:#fff;border:1px solid #eedfe5;border-radius:28px;box-shadow:0 15px 50px #6013320d;padding:clamp(20px,4vw,40px);color:var(--ink);font-family:Inter,system-ui,sans-serif}.tool-head{display:flex;gap:20px;justify-content:space-between;align-items:start;margin-bottom:28px}.eyebrow-tool,.result-kicker{color:var(--wine);font-weight:800;letter-spacing:.12em;font-size:.7rem}.tool-head h2{font-size:clamp(1.6rem,3vw,2.3rem);line-height:1.16;letter-spacing:-.045em;margin:8px 0}.tool-head p{color:#72636d;margin:0;line-height:1.6}.currency{flex-shrink:0;font-size:.75rem;color:#65565e}.currency select{display:block;margin-top:7px}.tool-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:26px}.tool-inputs{display:grid;gap:17px;align-content:start}.tool-inputs>label:not(.radio){display:grid;gap:7px;font-size:.87rem;font-weight:700}.tool-inputs input[type=number],.currency select{width:100%;border:1px solid #d9ccd2;background:#fff;border-radius:12px;padding:12px;font:inherit;color:#2b2229}.tool-inputs input:focus-visible,.currency select:focus-visible,.copy:focus-visible{outline:3px solid #e7a2bd;outline-offset:2px}.tool-inputs fieldset{border:0;padding:0;margin:0;display:grid;gap:10px}.tool-inputs legend{font-size:.87rem;font-weight:700;margin-bottom:10px}.radio{display:flex;align-items:center;gap:9px;font-size:.87rem}.radio input,.tool-inputs input[type=range]{accent-color:var(--wine)}.input-note{font-size:.74rem;line-height:1.5;color:#746970}.results{background:#fdf7f9;border:1px solid #f1e4e9;border-radius:22px;padding:24px;min-width:0}.result-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:17px 0 23px}.result-cards>div{background:#fff;border-radius:15px;padding:16px 12px;border:1px solid #f1e0e6;min-width:0}.result-cards small,.result-cards strong,.result-cards span{display:block}.result-cards small{font-size:.75rem;color:#75646c}.result-cards strong{font-size:clamp(1.35rem,2.6vw,2rem);letter-spacing:-.04em;margin:8px 0;overflow-wrap:anywhere}.result-cards span{font-size:.75rem;color:var(--wine);font-weight:700}.compare h3,.remaining h3{font-size:.9rem;margin:0 0 14px}.bar-caption{display:flex;justify-content:space-between;gap:8px;font-size:.73rem;margin:10px 0 7px;color:#67545d}.stack{height:13px;background:#eee;border-radius:999px;display:flex;overflow:hidden}.stack span:first-child{background:var(--wine)}.stack span:last-child{background:#e5a3bd}.legend{display:flex;gap:20px;font-size:.75rem;margin-top:10px}.legend span:first-child{color:var(--wine)}.legend span:last-child{color:#bb6485}.remaining{border-top:1px solid #ead8de;margin-top:20px;padding-top:20px}.remaining>div{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:.83rem}.remaining p{font-size:.77rem;line-height:1.55;color:#76656f}.copy{background:var(--wine);color:white;border:0;border-radius:12px;padding:12px 19px;font-weight:800;cursor:pointer}.copy-status{font-size:.76rem;margin-left:10px;color:var(--wine)}.error{color:#9e214d;font-size:.9rem}[hidden]{display:none!important}@media(max-width:760px){.tool-grid{grid-template-columns:1fr}.tool-head{flex-direction:column}.currency{width:100%}.currency select{max-width:200px}.results{padding:17px}.result-cards{gap:8px}.result-cards>div{padding:12px 9px}}
+@media(prefers-reduced-motion:no-preference){.stack span{transition:width .2s ease}}
+</style>
+<script>
+function initializeSplitter(root: Element) {
+  if (root.hasAttribute('data-ready')) return;
+  root.setAttribute('data-ready', 'true');
+  const form = root.querySelector<HTMLFormElement>('[data-inputs]')!;
+  const get = (name: string) => form.elements.namedItem(name) as HTMLInputElement;
+  const find = (name: string) => root.querySelector<HTMLElement>('[data-' + name + ']')!;
+  const currency = root.querySelector<HTMLSelectElement>('[data-currency]')!;
+  let clipboardText = '';
+  function render() {
+    const a = get('a').valueAsNumber, b = get('b').valueAsNumber, expenses = get('expenses').valueAsNumber;
+    const hybrid = get('mode').value === 'hybrid';
+    // RadioNodeList.value, not the first input's value.
+    const mode = (form.elements.namedItem('mode') as RadioNodeList).value;
+    const isHybrid = mode === 'hybrid';
+    find('hybrid').hidden = !isHybrid;
+    const equal = isHybrid ? Number(get('equal').value)/100 : 0;
+    find('equal-label').textContent = Math.round(equal * 100) + '% equal · ' + Math.round((1-equal)*100) + '% proportional';
+    const valid = [a,b,expenses].every(v => Number.isFinite(v) && v >= 0 && v <= 1e9) && a+b>0;
+    find('error').hidden = valid;
+    find('valid').hidden = !valid;
+    if (!valid) return;
+    const money = (v: number) => new Intl.NumberFormat('en-US',{style:'currency',currency:currency.value,maximumFractionDigits:2}).format(v);
+    const shareA = expenses * (equal*.5+(1-equal)*a/(a+b));
+    const shareB = expenses-shareA;
+    const pctA = expenses===0 ? 0 : 100*shareA/expenses;
+    find('share-a').textContent = money(shareA); find('share-b').textContent = money(shareB);
+    find('pct-a').textContent = pctA.toFixed(1)+'% of shared costs'; find('pct-b').textContent = (100-pctA).toFixed(1)+'% of shared costs';
+    find('half').textContent = money(expenses/2)+' each';
+    find('selected').textContent = pctA.toFixed(1)+'% / '+(100-pctA).toFixed(1)+'%';
+    find('bar-a').style.width = pctA+'%';find('bar-b').style.width = (100-pctA)+'%';
+    find('left-a').textContent = money(a-shareA);find('left-b').textContent = money(b-shareB);
+    find('note').textContent = (shareA>a || shareB>b) ? 'Caution: this plan leaves at least one partner short of their share from monthly take-home pay.' : 'Compare what remains after these shared expenses, then account for each person’s other obligations.';
+    clipboardText = 'DollarAngle shared bill plan ('+currency.value+')\nPartner A: '+money(shareA)+' ('+pctA.toFixed(1)+'%)\nPartner B: '+money(shareB)+' ('+(100-pctA).toFixed(1)+'%)\nShared bills: '+money(expenses)+'\nAmounts are illustrative. dollarangle.com/tools/rent-split-calculator';
+  }
+  form.addEventListener('input',render);form.addEventListener('change',render);currency.addEventListener('change',render);
+  root.querySelector<HTMLButtonElement>('[data-copy]')!.addEventListener('click',async()=>{
+    const status=find('copy-status');
+    try {await navigator.clipboard.writeText(clipboardText);status.textContent='Copied!';}
+    catch {status.textContent='Copy unavailable in this browser.';}
+  });
+  render();
+}
+document.querySelectorAll('[data-rent-splitter]').forEach(initializeSplitter);
+document.addEventListener('astro:page-load',()=>document.querySelectorAll('[data-rent-splitter]').forEach(initializeSplitter));
+</script>
