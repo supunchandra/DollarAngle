@@ -10,7 +10,7 @@ author: DollarAngle Editorial
 pubDate: 2026-10-21
 readTime: "9 min read"
 featured: false
-draft: true
+draft: false
 socialImage: "/og-default.png"
 thumbnailAlt: "Couple planning household finances together"
 tags: ["how couples build wealth together", "financial habits for couples", "wealth building for married couples", "financial freedom as a couple"]
