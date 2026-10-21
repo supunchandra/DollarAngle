@@ -1,0 +1,58 @@
+---
+const { compact=false }=Astro.props;
+---
+<section class:list={['parent-tool',{compact}]} data-parent-tool aria-label="Stay at home parent childcare cost calculator">
+<header><div><p class="eyebrow">DOLLARANGLE · MONEY TOOLS</p><h2>Would working or staying home make more financial sense?</h2><p>Explore the monthly take-home difference, work costs, and retirement contributions. Your family's best choice isn't only about money.</p></div><label class="currency">Currency<select data-currency><option value="USD">USD $</option><option value="GBP">GBP £</option><option value="EUR">EUR €</option></select></label></header>
+<div class="layout"><form data-form class="fields">
+<label>Parent's annual gross pay<input name="salary" type="number" min="0" max="1000000000" step=".01" value="60000" required /></label>
+<label>Estimated effective tax and payroll deduction rate (%)<input name="tax" type="number" min="0" max="90" step=".1" value="22" required /></label>
+<label>Monthly daycare or childcare cost<input name="childcare" type="number" min="0" max="1000000000" step=".01" value="1400" required /></label>
+<label>Monthly work-related costs (commute, meals, clothing)<input name="work" type="number" min="0" max="1000000000" step=".01" value="350" required /></label>
+<label>Annual employer retirement match lost if leaving<input name="match" type="number" min="0" max="1000000000" step=".01" value="2400" required /></label>
+<label>Weekly paid work hours including commute<input name="hours" type="number" min=".5" max="168" step=".5" value="45" required /></label>
+<label>US filing situation (context only)<select name="filing"><option value="joint">Married filing jointly</option><option value="separate">Married filing separately</option><option value="other">Other / outside the US</option></select></label>
+<p class="hint">This is a comparison of one parent's job with staying home, holding the other parent's finances constant. You supply an estimated effective deduction rate; filing status does not automatically calculate taxes. Changing currency only changes the display label, not exchange rates or local tax assumptions.</p>
+</form><section class="results" aria-live="polite" aria-atomic="true">
+<p class="eyebrow">YOUR HOUSEHOLD COMPARISON</p><p class="error" data-error hidden></p><div data-result>
+<div class="cards"><div><small>Parent works · net cash added each month</small><strong data-net></strong></div><div><small>Parent stays home · work-related cash added</small><strong data-home>0</strong></div></div>
+<div class="hero"><small>Effective cash contribution per hour</small><strong data-hour></strong><span>After estimated deductions, childcare and work costs</span></div>
+<h3>Monthly breakdown</h3><div class="detail"><span>Estimated take-home pay</span><strong data-takehome></strong></div><div class="detail"><span>Childcare and work costs</span><strong data-cost></strong></div><div class="detail"><span>Employer retirement match value per month</span><strong data-retirement></strong></div>
+<p class="insight" data-insight></p><button type="button" class="copy" data-copy>Copy comparison</button><span data-copy-status class="hint" role="status"></span>
+</div></section></div></section>
+<style>
+.parent-tool{font-family:Inter,system-ui,sans-serif;color:#18382d;background:white;border:1px solid #d9eade;border-radius:26px;padding:clamp(17px,3vw,34px);box-shadow:0 15px 40px #0c594c0b}.parent-tool header{display:flex;justify-content:space-between;gap:18px;margin-bottom:24px}.parent-tool header h2{font-size:clamp(1.5rem,3vw,2.1rem);line-height:1.15;letter-spacing:-.04em;margin:9px 0}.parent-tool header p:not(.eyebrow){line-height:1.6;color:#5d7669;margin:0}.parent-tool .eyebrow{color:#087c61;font-size:.7rem;letter-spacing:.1em;font-weight:850;margin:0}.parent-tool .currency{font-size:.78rem;flex-shrink:0}.parent-tool select,.parent-tool input{width:100%;padding:11px;border:1px solid #c8dece;border-radius:10px;font:inherit;color:#17382c;background:#fff}.parent-tool .currency select{margin-top:8px}.parent-tool .layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.06fr);gap:24px}.parent-tool .fields{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-content:start}.parent-tool .fields label{display:grid;gap:7px;font-size:.79rem;font-weight:730;min-width:0}.parent-tool .hint{grid-column:1/-1;font-size:.76rem;color:#647d6f;line-height:1.6}.parent-tool .results{min-width:0;padding:20px;border-radius:20px;background:#f1faf5;border:1px solid #d9eae0}.parent-tool .cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}.parent-tool .cards>div{display:grid;gap:10px;padding:14px;background:white;border:1px solid #dbeade;border-radius:13px;min-width:0}.parent-tool small{color:#5d766a;font-size:.75rem}.parent-tool .cards strong{font-size:clamp(1.12rem,2.2vw,1.6rem);overflow-wrap:anywhere}.parent-tool .hero{display:grid;gap:6px;padding:18px;background:#087c61;color:white;border-radius:13px}.parent-tool .hero small,.parent-tool .hero span{color:#ddf6e7}.parent-tool .hero strong{font-size:clamp(1.45rem,2.6vw,2rem)}.parent-tool .hero span{font-size:.72rem}.parent-tool h3{font-size:.95rem;margin:23px 0 14px}.parent-tool .detail{display:flex;justify-content:space-between;gap:12px;font-size:.81rem;padding:11px 0;border-bottom:1px solid #d7eadd}.parent-tool .insight{color:#476b58;font-size:.8rem;line-height:1.7}.parent-tool .copy{background:#087c61;color:white;border:0;border-radius:11px;padding:12px 16px;font-weight:800;cursor:pointer}.parent-tool .error{color:#a32e3d;font-size:.9rem}.parent-tool [hidden]{display:none!important}.parent-tool :focus-visible{outline:3px solid #8cd9af;outline-offset:2px}@media(max-width:790px){.parent-tool .layout{grid-template-columns:1fr}.parent-tool header{flex-direction:column}.parent-tool .currency{width:170px}}@media(max-width:440px){.parent-tool .fields{grid-template-columns:1fr}.parent-tool .results{padding:15px}}
+</style>
+<script>
+function setupParentTool(root:Element){
+ if(root.hasAttribute('data-parent-ready'))return;root.setAttribute('data-parent-ready','true');
+ const form=root.querySelector<HTMLFormElement>('[data-form]')!;
+ const curr=root.querySelector<HTMLSelectElement>('[data-currency]')!;
+ const input=(name:string)=>form.elements.namedItem(name) as HTMLInputElement;
+ const node=(key:string)=>root.querySelector<HTMLElement>('[data-'+key+']')!;
+ let copied='';
+ function render(){
+  const names=['salary','tax','childcare','work','match','hours'];
+  const [salary,tax,childcare,work,match,hours]=names.map(x=>input(x).valueAsNumber);
+  const valid=names.every((_,i)=>Number.isFinite([salary,tax,childcare,work,match,hours][i]))&&salary>=0&&salary<=1e9&&tax>=0&&tax<=90&&childcare>=0&&childcare<=1e9&&work>=0&&work<=1e9&&match>=0&&match<=1e9&&hours>=.5&&hours<=168;
+  node('error').hidden=valid;node('result').hidden=!valid;
+  if(!valid){node('error').textContent='Enter valid nonnegative amounts, a 0–90% deduction rate, and 0.5–168 weekly hours.';return;}
+  const money=(n:number)=>new Intl.NumberFormat('en-US',{style:'currency',currency:curr.value,maximumFractionDigits:2}).format(n);
+  const takehome=salary*(1-tax/100)/12;
+  const expenses=childcare+work;
+  const net=takehome-expenses;
+  const hourly=net/(hours*52/12);
+  node('net').textContent=money(net);node('home').textContent=money(0);
+  node('hour').textContent=money(hourly)+'/hr';
+  node('takehome').textContent=money(takehome);
+  node('cost').textContent=money(expenses);
+  node('retirement').textContent=money(match/12);
+  node('insight').textContent=net>=0?'Working contributes '+money(net)+' more monthly cash under these assumptions, plus about '+money(match/12)+' monthly in employer retirement match. This is not a complete measure of career or family wellbeing.':'Under these assumptions, working costs '+money(-net)+' more monthly than it adds in cash. Leaving work would also forgo about '+money(match/12)+' per month in employer retirement match. Consider career progression and benefits.';
+  copied='DollarAngle stay-at-home parent comparison ('+curr.value+')\nMonthly net cash from working: '+money(net)+'\nEffective hourly contribution: '+money(hourly)+'\nEmployer retirement match monthly value: '+money(match/12)+'\nEstimated deductions: '+tax+'%\nEducational estimate: dollarangle.com/tools/stay-at-home-parent-calculator';
+ }
+ form.addEventListener('input',render);form.addEventListener('change',render);curr.addEventListener('change',render);
+ root.querySelector<HTMLButtonElement>('[data-copy]')!.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(copied);node('copy-status').textContent='Copied!';}catch{node('copy-status').textContent='Copy unavailable in this browser.';}});
+ render();
+}
+document.querySelectorAll('[data-parent-tool]').forEach(setupParentTool);
+document.addEventListener('astro:page-load',()=>document.querySelectorAll('[data-parent-tool]').forEach(setupParentTool));
+</script>
