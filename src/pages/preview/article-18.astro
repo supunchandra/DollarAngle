@@ -1,0 +1,31 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AuthorBox from '../../components/AuthorBox.astro';
+import ShareMenu from '../../components/ShareMenu.astro';
+import { resolveEditor } from '../../data/editors';
+const entries = await getCollection('articles');
+const entry = entries.find(e => e.id === '7-habits-couples-build-wealth');
+if (!entry) throw new Error('Article 18 editorial draft was not found');
+const { Content, headings } = await render(entry);
+const d=entry.data;
+const editor=resolveEditor(d.category,d.franchise,d.authorId);
+const published=new Intl.DateTimeFormat('en-US',{year:'numeric',month:'long',day:'numeric'}).format(d.pubDate);
+const canonical=new URL('/articles/7-habits-couples-build-wealth', Astro.site);
+---
+<BaseLayout title={d.seoTitle + ' | DollarAngle'} description={d.seoDescription} image={d.socialImage ?? '/og-default.png'} type="article" noindex={true}>
+<div class="preview-bar">Editorial draft preview · Article 18 is not approved and is not published on DollarAngle.com</div>
+<section class="article-hero"><div class="container"><span class="eyebrow">DollarAngle {d.franchise}</span><h1>{d.title}</h1><p class="article-deck">{d.description}</p><div class="article-meta"><span>By {editor.name}</span><span class="meta-separator">·</span><span>{published}</span><span class="meta-separator">·</span><span>{d.readTime}</span><span class="meta-separator">·</span><span>Money & Relationships</span></div></div></section>
+<div class="container"><img src="https://images.pexels.com/photos/4386366/pexels-photo-4386366.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Couple working on their money goals together" style="width:100%;max-height:490px;object-fit:cover;border-radius:12px;margin:12px 0 0" loading="eager" /></div>
+<section class="section" style="padding-top:10px"><div class="container article-layout"><ShareMenu url={canonical.href} title={d.title}/><article class="article-body">{d.keyTakeaway && <blockquote><strong>The DollarAngle</strong><br />{d.keyTakeaway}</blockquote>}<Content/><AuthorBox editor={editor}/><div class="disclaimer"><strong>Financial education disclaimer:</strong> DollarAngle provides financial education, news and commentary for informational purposes only. Nothing here constitutes personalized financial, investment, tax or legal advice. Consider your circumstances and consult a qualified professional when appropriate.</div></article><aside class="sidebar"><h2>In this article</h2>{headings.filter(h=>h.depth===2).map(h=><a href={`#${h.slug}`}>{h.text}</a>)}<h2 style="margin-top:26px">Editorial status</h2><p>This is an unpublished draft. Final editorial review is pending.</p></aside></div></section>
+<script is:inline>
+document.addEventListener('DOMContentLoaded', () => {
+ const boxes = document.querySelectorAll('.article-body input[type="checkbox"]');
+ boxes.forEach((box,index) => {
+   box.disabled=false;
+   box.removeAttribute('disabled');
+   box.setAttribute('aria-label', 'Wealth-building date item ' + (index+1));
+ });
+});
+</script>
+</BaseLayout>
