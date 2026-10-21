@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HybridBudgetAllocator from '../../components/tools/HybridBudgetAllocator.astro';
+const faqs=[
+['How does a Mine, Yours, Ours budget work?','Each partner has personal money for individual spending and a shared account funds agreed household bills and goals. Set transfer amounts based on your chosen fairness approach.'],
+['What is the difference between equal percentages and equal allowances?','Equal percentage mode shares the joint requirement in proportion to take-home income. Equal allowance mode gives each partner the same amount of remaining personal money, which can require different proportions of pay to be transferred.'],
+['Can we use gross income?','Use monthly take-home income consistently for both partners so the plan reflects money actually available to spend.'],
+['Does the calculator connect to our bank?','No. It calculates a proposed transfer plan locally in your browser. It does not move money or access financial accounts.']
+];
+const schema={'@context':'https://schema.org','@type':'WebApplication',name:'Mine Yours Ours Couples Budget Calculator',url:'https://dollarangle.com/tools/mine-yours-ours-budget-calculator',operatingSystem:'Any',applicationCategory:'FinanceApplication',isAccessibleForFree:true,description:'Free couples budget planner for dividing income between two personal accounts and one joint account.'};
+---
+<BaseLayout title="Mine, Yours, Ours Budget Calculator for Couples | DollarAngle" description="Plan a three-account couples budget. Calculate personal allowances, joint bill transfers and shared savings with free Mine, Yours, Ours budgeting tools.">
+<script type="application/ld+json" set:html={JSON.stringify(schema)}/>
+<div class="container tool-page">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> › <a href="/tools">Money Tools</a> › Mine, Yours, Ours Budget</nav>
+<header class="intro"><p class="kicker">FREE COUPLES BUDGET CALCULATOR</p><h1>Mine, Yours, Ours: <span>Build a Budget Together</span></h1><p>Keep financial independence while making shared bills and savings a team effort. See exactly what each partner would transfer into a joint account.</p></header>
+<HybridBudgetAllocator/>
+<article class="explainer">
+<h2>How does the Mine, Yours, Ours method work?</h2><p>The three-account approach separates individual spending from shared responsibilities. Each partner receives income into a personal account and transfers an agreed contribution to the joint account. The joint account covers household expenses and shared goals.</p>
+<h2>Equal percentages or equal spending money?</h2><p><strong>Equal percentage of income remaining:</strong> both contribute toward joint expenses and savings in proportion to take-home pay. Each keeps the same percentage of their income.</p><p><strong>Equal personal dollar allowance:</strong> after meeting joint requirements, both keep the same personal amount. This can ask the higher earner to contribute much more to the joint account; if one earner cannot fund the resulting transfer, the calculator flags the plan as infeasible.</p>
+<h2>Worked example</h2><p>Partner A brings home $6,000 per month, Partner B $4,000, and the couple needs $5,000 for joint bills and savings. Proportional contributions are $3,000 and $2,000, leaving $3,000 and $2,000 for personal accounts. If they prefer equal personal allowances, each keeps $2,500 and contributes $3,500 and $1,500 respectively.</p>
+<h2>Frequently asked questions</h2>{faqs.map(([q,a])=><details><summary>{q}</summary><p>{a}</p></details>)}
+<p class="disclaimer">Educational illustration only. This tool does not connect to banks, recommend particular accounts or provide individualized financial advice. Agree on personal obligations, emergency reserves and any other expenses outside the joint budget.</p>
+</article></div>
+</BaseLayout>
+<style>.tool-page{padding:28px 0 70px}.crumbs{font-size:.8rem;color:#62766c}.crumbs a{text-decoration:underline;text-underline-offset:3px}.intro{max-width:820px;padding:35px 0 26px}.intro .kicker{color:#087c61}.intro h1{font-size:clamp(2.2rem,5vw,4rem);line-height:1.1;letter-spacing:-.05em;color:#172b25;margin:11px 0}.intro h1 span{color:#087c61}.intro>p:last-child{font-size:1.04rem;line-height:1.7;color:#5c7166}.explainer{max-width:780px;margin:48px auto 0;line-height:1.8;color:#304038}.explainer h2{font-size:clamp(1.5rem,2.5vw,2rem);letter-spacing:-.03em;line-height:1.3;margin:35px 0 13px}.explainer details{border-top:1px solid #d9e9df;padding:16px 0}.explainer details:last-of-type{border-bottom:1px solid #d9e9df}.explainer summary{font-weight:750;cursor:pointer}.disclaimer{font-size:.83rem;color:#61776c;background:#f3f8f5;padding:17px;border-radius:12px;margin-top:30px}</style>
