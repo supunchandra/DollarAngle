@@ -1,0 +1,83 @@
+---
+const { compact = false } = Astro.props;
+---
+<section class:list={['debt-tool',{compact}]} data-debt-tool aria-label="Couples debt payoff calculator">
+ <header class="tool-title"><div><p class="eyebrow">DOLLARANGLE MONEY TOOLS</p><h2>Your debt-free date starts with a plan.</h2><p>Combine balances, compare avalanche versus snowball, and see how extra payments change your timeline.</p></div><label>Currency<select data-currency aria-label="Currency"><option value="USD">USD $</option><option value="GBP">GBP £</option><option value="EUR">EUR €</option></select></label></header>
+ <div class="tool-body"><div class="inputs"><div class="debt-heading"><h3>Enter both partners' debts</h3><button type="button" data-add>Add a debt +</button></div><div data-rows></div><label class="extra">Extra combined monthly payment<input data-extra type="number" min="0" max="10000000" step=".01" value="250" /></label><fieldset><legend>Payoff strategy</legend><label><input type="radio" name="debt-strategy" value="avalanche" checked /> Avalanche · highest APR first</label><label><input type="radio" name="debt-strategy" value="snowball" /> Snowball · smallest balance first</label></fieldset><p class="hint">Use the same currency for all amounts. No bank connection or login. Figures stay in your browser.</p></div>
+ <div class="output" aria-live="polite" aria-atomic="true"><p class="eyebrow">YOUR DEBT-FREE ROADMAP</p><p data-error class="error" hidden></p><div data-results><div class="headline"><span>Projected debt-free by</span><strong data-date></strong><small data-months></small></div><div class="cards"><div><small>Combined balance</small><strong data-balance></strong></div><div><small>Total interest</small><strong data-interest></strong></div><div><small>Interest saved vs. minimum-only</small><strong data-saved></strong></div><div><small>Monthly payment budget</small><strong data-payment></strong></div></div><h3>Balance reduction over time</h3><div class="chart" data-chart role="img" aria-label="Projected remaining debt balance chart"></div><p class="small" data-baseline></p><h3>Payoff order</h3><ol data-order></ol><button class="copy" type="button" data-copy>Copy debt payoff plan</button><span data-copy-status class="small" role="status"></span></div></div></div>
+ <template data-row-template><div class="debt-row"><label>Partner<select data-owner><option value="A">Partner A</option><option value="B">Partner B</option></select></label><label>Debt name<input data-name type="text" maxlength="50" value="Credit card" aria-label="Debt name"/></label><label>Balance<input data-balance-input type="number" min="0" max="1000000000" step=".01" value="5000"/></label><label>APR (%)<input data-apr type="number" min="0" max="100" step=".01" value="20"/></label><label>Minimum monthly payment<input data-minimum type="number" min="0" max="10000000" step=".01" value="150"/></label><button data-remove type="button" aria-label="Remove debt">Remove</button></div></template>
+</section>
+<style>
+.debt-tool{--accent:#087c61;color:#18372c;font:inherit;font-family:Inter,system-ui,sans-serif;background:white;border:1px solid #d7eadd;border-radius:25px;padding:clamp(17px,3vw,32px);box-shadow:0 12px 42px #0c594c0a}.tool-title{display:flex;justify-content:space-between;gap:18px;align-items:start;margin-bottom:25px}.tool-title h2{font-size:clamp(1.5rem,3vw,2.2rem);line-height:1.16;letter-spacing:-.04em;margin:8px 0}.tool-title p:not(.eyebrow){color:#627b6d;line-height:1.6;margin:0}.eyebrow{color:#087c61;font-size:.7rem;font-weight:850;letter-spacing:.1em;margin:0}.tool-title>label{font-size:.8rem;flex-shrink:0}.tool-title select{display:block;margin-top:7px}.tool-body{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:24px}.inputs,.output{min-width:0}.debt-heading{display:flex;align-items:center;justify-content:space-between;gap:10px}.debt-heading h3,.output h3{font-size:.96rem}.debt-heading button{background:#e5f6ed;border:1px solid #c7e7d3;border-radius:10px;padding:10px 12px;color:#087c61;font-weight:800;cursor:pointer}.debt-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;background:#f6fbf8;border:1px solid #d9eee1;border-radius:14px;padding:12px;margin:12px 0}.debt-row label,.extra{display:grid;gap:6px;font-size:.76rem;font-weight:700;min-width:0}.debt-row label:nth-child(5){grid-column:1/-1}.debt-row button{justify-self:start;border:0;background:transparent;color:#8f3440;text-decoration:underline;cursor:pointer}.debt-tool input[type=number],.debt-tool input[type=text],.debt-tool select{width:100%;min-width:0;padding:10px;border:1px solid #c3d9cb;border-radius:9px;background:white;color:#19392c;font:inherit}.extra{margin:18px 0}.debt-tool fieldset{border:0;padding:0;display:grid;gap:9px;margin:15px 0}.debt-tool legend{font-size:.84rem;font-weight:800;margin-bottom:9px}.debt-tool fieldset label{font-size:.83rem;display:flex;align-items:center;gap:9px}.debt-tool input[type=radio]{accent-color:#087c61}.hint,.small{font-size:.76rem;line-height:1.55;color:#617b6a}.output{background:#f0faf4;border:1px solid #d7eadf;border-radius:20px;padding:20px}.headline{display:grid;gap:5px;background:#087c61;color:white;border-radius:14px;padding:20px;margin:14px 0}.headline strong{font-size:clamp(1.5rem,3vw,2rem)}.headline small{color:#daf9e7}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.cards>div{display:grid;gap:6px;background:white;border:1px solid #d9eadd;border-radius:12px;padding:13px;min-width:0}.cards small{color:#5c7567;font-size:.73rem}.cards strong{font-size:clamp(1rem,2vw,1.4rem);overflow-wrap:anywhere}.chart{height:120px;display:flex;gap:3px;align-items:end;border-bottom:1px solid #a9cbbb;padding-top:10px}.chart>span{flex:1;min-width:1px;background:#57b697;border-radius:2px 2px 0 0}.output ol{margin:0 0 20px;padding-left:22px;font-size:.82rem;line-height:1.8}.copy{background:#087c61;border:0;color:white;padding:12px 17px;border-radius:11px;font-weight:800;cursor:pointer}.error{color:#a72f3d;font-size:.86rem}.debt-tool [hidden]{display:none!important}.debt-tool :focus-visible{outline:3px solid #8cdbb5;outline-offset:2px}@media(max-width:800px){.tool-body{grid-template-columns:1fr}.tool-title{flex-direction:column}.tool-title>label{width:150px}}@media(max-width:440px){.debt-row{grid-template-columns:1fr}.debt-row label:nth-child(5){grid-column:auto}.output{padding:15px}}
+</style>
+<script>
+type Debt={name:string;owner:string;balance:number;apr:number;minimum:number};
+function simulate(debts:Debt[],extra:number,strategy:'avalanche'|'snowball',minimumOnly=false){
+ const rows=debts.map((d,i)=>({...d,id:i,remaining:d.balance}));
+ let interest=0;const history=[rows.reduce((s,d)=>s+d.remaining,0)];const order:number[]=[];
+ // Payments are fixed at initial sum of minimums plus extra, freed-up payments roll to the next debt.
+ const budget=debts.reduce((s,d)=>s+d.minimum,0)+(minimumOnly?0:extra);
+ for(let month=1;month<=600;month++){
+  let available=budget;
+  for(const d of rows){if(d.remaining<=.005)continue;const charge=d.remaining*d.apr/1200;d.remaining+=charge;interest+=charge;}
+  for(const d of rows){if(d.remaining<=.005)continue;const p=Math.min(available,d.minimum,d.remaining);d.remaining-=p;available-=p;if(d.remaining<=.005&&!order.includes(d.id))order.push(d.id);}
+  const sorted=rows.filter(d=>d.remaining>.005).sort((a,b)=>strategy==='avalanche'?(b.apr-a.apr||a.remaining-b.remaining):(a.remaining-b.remaining||b.apr-a.apr));
+  for(const d of sorted){if(available<=.005)break;const p=Math.min(available,d.remaining);d.remaining-=p;available-=p;if(d.remaining<=.005&&!order.includes(d.id))order.push(d.id);}
+  const remaining=rows.reduce((s,d)=>s+Math.max(0,d.remaining),0);history.push(remaining);
+  if(remaining<=.01)return {months:month,interest,history,order};
+  if(month>1&&history[month]>=history[month-1]-.01)return null;
+ }
+ return null;
+}
+function initDebt(root:Element){
+ if(root.hasAttribute('data-initialized'))return;root.setAttribute('data-initialized','true');
+ const rows=root.querySelector<HTMLElement>('[data-rows]')!;
+ const tpl=root.querySelector<HTMLTemplateElement>('[data-row-template]')!;
+ const currency=root.querySelector<HTMLSelectElement>('[data-currency]')!;
+ const out=(s:string)=>root.querySelector<HTMLElement>('[data-'+s+']')!;
+ let copy='';
+ function add(owner:string,name:string,balance:number,apr:number,minimum:number){
+  const row=tpl.content.firstElementChild!.cloneNode(true) as HTMLElement;
+  (row.querySelector('[data-owner]') as HTMLSelectElement).value=owner;
+  (row.querySelector('[data-name]') as HTMLInputElement).value=name;
+  (row.querySelector('[data-balance-input]') as HTMLInputElement).value=String(balance);
+  (row.querySelector('[data-apr]') as HTMLInputElement).value=String(apr);
+  (row.querySelector('[data-minimum]') as HTMLInputElement).value=String(minimum);
+  row.querySelector('[data-remove]')!.addEventListener('click',()=>{row.remove();update();});rows.append(row);update();
+ }
+ function update(){
+  const debts=[...rows.querySelectorAll<HTMLElement>('.debt-row')].map(row=>{const v=(selector:string)=>(row.querySelector(selector) as HTMLInputElement).valueAsNumber;return {owner:(row.querySelector('[data-owner]') as HTMLSelectElement).value,name:(row.querySelector('[data-name]') as HTMLInputElement).value.trim()||'Unnamed debt',balance:v('[data-balance-input]'),apr:v('[data-apr]'),minimum:v('[data-minimum]')};});
+  const extra=(root.querySelector('[data-extra]') as HTMLInputElement).valueAsNumber;
+  const mode=(root.querySelector('input[name="debt-strategy"]:checked') as HTMLInputElement).value as 'avalanche'|'snowball';
+  const money=(n:number)=>new Intl.NumberFormat('en-US',{style:'currency',currency:currency.value,maximumFractionDigits:0}).format(n);
+  let error='';
+  if(!debts.length)error='Add at least one debt.';
+  else if(!Number.isFinite(extra)||extra<0||extra>1e7)error='Enter a valid extra monthly payment.';
+  else if(debts.some(d=>![d.balance,d.apr,d.minimum].every(Number.isFinite)||d.balance<0||d.balance>1e9||d.apr<0||d.apr>100||d.minimum<0||d.minimum>1e7))error='Check balances, interest rates and minimum payments.';
+  else if(!debts.some(d=>d.balance>.005))error='Enter at least one positive balance.';
+  else if(debts.some(d=>d.balance>.005&&d.minimum<d.balance*d.apr/1200))error='At least one minimum payment does not cover monthly interest. Increase the payment first.';
+  else if(debts.reduce((s,d)=>s+d.minimum,0)+extra<=0)error='Enter a positive monthly payment budget.';
+  let result:ReturnType<typeof simulate>=null;
+  if(!error){result=simulate(debts,extra,mode);if(!result)error='This plan does not pay off all debts within 50 years. Increase your monthly payment.';}
+  out('error').hidden=!error;out('results').hidden=!!error;out('error').textContent=error;
+  if(!result)return;
+  const baseline=simulate(debts,0,mode,true);
+  const balance=debts.reduce((s,d)=>s+d.balance,0),monthly=debts.reduce((s,d)=>s+d.minimum,0)+extra;
+  const date=new Date();date.setMonth(date.getMonth()+result.months);
+  out('date').textContent=new Intl.DateTimeFormat('en-US',{month:'long',year:'numeric'}).format(date);
+  out('months').textContent=result.months+' months of payments';
+  out('balance').textContent=money(balance);out('interest').textContent=money(result.interest);out('payment').textContent=money(monthly);
+  out('saved').textContent=baseline?money(Math.max(0,baseline.interest-result.interest)):'Not available';
+  out('baseline').textContent=baseline?'Compared with paying the listed minimums and rolling those payments forward, without the extra monthly amount.':'Minimum-only scenario did not repay all debts within 50 years; savings comparison is unavailable.';
+  const chart=out('chart');chart.replaceChildren();const values=result.history.filter((_,i)=>i===0||i===result!.history.length-1||i%Math.max(1,Math.ceil(result!.months/32))===0);for(const value of values){const bar=document.createElement('span');bar.style.height=Math.max(1,100*value/balance)+'%';chart.append(bar);}
+  const list=out('order');list.replaceChildren();for(const i of result.order){const d=debts[i];const li=document.createElement('li');li.textContent='Partner '+d.owner+': '+d.name+' ('+money(d.balance)+', '+d.apr.toFixed(2)+'% APR)';list.append(li);}
+  copy='DollarAngle debt payoff plan\nStrategy: '+mode+'\nMonthly budget: '+money(monthly)+'\nDebt-free: '+out('date').textContent+'\nProjected interest: '+money(result.interest)+'\nTool: dollarangle.com/tools/couples-debt-payoff-calculator';
+ }
+ root.querySelector('[data-add]')!.addEventListener('click',()=>add('A','New debt',1000,12,50));
+ root.addEventListener('input',update);root.addEventListener('change',update);currency.addEventListener('change',update);
+ root.querySelector('[data-copy]')!.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(copy);out('copy-status').textContent='Copied!';}catch{out('copy-status').textContent='Copy unavailable in this browser.';}});
+ add('A','Credit card',5000,20,150);add('B','Student loan',18000,6,230);
+}
+document.querySelectorAll('[data-debt-tool]').forEach(initDebt);
+document.addEventListener('astro:page-load',()=>document.querySelectorAll('[data-debt-tool]').forEach(initDebt));
+</script>
