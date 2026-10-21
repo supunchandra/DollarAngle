@@ -48,6 +48,13 @@ const topics = [
       <img src={img(entry,i)} width="350" height="210" alt="" loading="lazy"/>
    </a>)}</div>
  </section>
+ <section class="container da-section" aria-labelledby="money-tools-heading">
+   <div class="da-heading"><h2 id="money-tools-heading">Money Tools for real-life decisions</h2><a href="/tools">Explore Money Tools →</a></div>
+   <a href="/tools/rent-split-calculator" style="display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:26px 30px;border-radius:20px;border:1px solid #eddce3;background:linear-gradient(115deg,#fff8fa,#fbeaf0);">
+     <span style="display:grid;gap:8px"><span style="font-size:.72rem;letter-spacing:.1em;font-weight:800;color:#883653">FREE INTERACTIVE CALCULATOR</span><strong style="font-size:clamp(1.4rem,2.5vw,2rem);letter-spacing:-.04em;color:#372430">Split rent and bills fairly</strong><span style="color:#6f5e69;line-height:1.5">Compare 50/50, income-based, and hybrid splits in seconds. No signup.</span></span>
+     <span style="color:#863554;font-weight:800">Try the calculator →</span>
+   </a>
+ </section>
  <section class="container da-section">
    <div class="da-heading"><h2>Latest articles</h2><a href="/explore">View all articles →</a></div>
    <div class="da-latest">{latest.map((entry,i)=><a class="da-article" href={`/articles/${entry.id}`}><div class="da-article-img"><img src={img(entry,i)} width="460" height="290" alt="" loading="lazy" decoding="async" /></div><div class="da-article-text"><span class="da-tag">{entry.data.category.replaceAll('-',' ')}</span><h3>{entry.data.title}</h3><small>{entry.data.readTime}</small></div></a>)}</div>
