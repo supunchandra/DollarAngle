@@ -1,0 +1,73 @@
+---
+const { compact = false } = Astro.props;
+---
+<section class:list={['wedding-tool',{compact}]} data-wedding-tool aria-label="Wedding savings timeline calculator">
+<header class="tool-heading"><div><p class="eyebrow">DOLLARANGLE · MONEY TOOLS</p><h2>Plan the wedding, not the debt.</h2><p>See the monthly savings needed to reach your wedding budget by your date.</p></div><label>Currency<select data-currency aria-label="Currency"><option value="USD">USD $</option><option value="GBP">GBP £</option><option value="EUR">EUR €</option></select></label></header>
+<div class="tool-layout"><form data-inputs class="tool-fields">
+<label>Wedding date<input type="date" name="date" required /></label>
+<label>Total wedding budget<input type="number" name="budget" min="0" max="1000000000" step="0.01" value="25000" required /></label>
+<label>Current wedding savings<input type="number" name="saved" min="0" max="1000000000" step="0.01" value="5000" required /></label>
+<label>Partner A monthly contribution<input type="number" name="a" min="0" max="1000000000" step="0.01" value="700" required /></label>
+<label>Partner B monthly contribution<input type="number" name="b" min="0" max="1000000000" step="0.01" value="500" required /></label>
+<label>Expected family contributions<input type="number" name="family" min="0" max="1000000000" step="0.01" value="2000" required /></label>
+<p class="hint">Assumes savings contributions arrive monthly, no investment returns, and family contributions arrive before the wedding. Currency selection changes formatting only; it does not perform exchange conversion.</p>
+</form><div class="results" aria-live="polite" aria-atomic="true">
+<p class="eyebrow">YOUR WEDDING SAVINGS PLAN</p><p data-error class="error" hidden></p>
+<div data-output><div class="status" data-status></div><div class="metrics"><div><small>Needed per month</small><strong data-needed></strong></div><div><small>Current monthly plan</small><strong data-current></strong></div></div><div class="metrics"><div><small>Projected by wedding</small><strong data-projected></strong></div><div><small>Shortfall or surplus</small><strong data-gap></strong></div></div><h3>Progress toward your target</h3><div class="progress"><span data-progress></span></div><p class="progress-label" data-progress-label></p><div class="details"><p data-date-summary></p><p data-advice></p></div><button type="button" data-copy class="copy">Copy savings plan</button><span class="copy-status" data-copy-status role="status"></span></div>
+</div></div></section>
+<style>
+.wedding-tool{--accent:#087c61;background:#fff;color:#19352b;border:1px solid #d6e9df;border-radius:27px;padding:clamp(19px,3vw,36px);box-shadow:0 15px 40px #0c594c0b;font:inherit;font-family:Inter,system-ui,sans-serif}.tool-heading{display:flex;justify-content:space-between;align-items:start;gap:22px;margin-bottom:27px}.eyebrow{color:var(--accent);font-size:.7rem;font-weight:850;letter-spacing:.1em;margin:0}.tool-heading h2{font-size:clamp(1.6rem,3vw,2.15rem);line-height:1.15;letter-spacing:-.04em;margin:9px 0}.tool-heading p:not(.eyebrow){margin:0;color:#597267;line-height:1.6}.tool-heading>label{flex-shrink:0;font-size:.76rem}.tool-heading select,.tool-fields input{width:100%;border:1px solid #c8dcd0;border-radius:11px;padding:11px 12px;background:white;color:#19352b;font:inherit}.tool-heading select{display:block;margin-top:7px}.tool-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.07fr);gap:24px}.tool-fields{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-content:start}.tool-fields label{display:grid;gap:7px;font-size:.83rem;font-weight:720;min-width:0}.hint{grid-column:1/-1;color:#637b6d;font-size:.77rem;line-height:1.55}.results{min-width:0;background:#f2faf5;border:1px solid #daeae0;border-radius:20px;padding:21px}.status{font-weight:850;color:#087c61;background:#e0f5e9;border-radius:11px;padding:12px;margin:16px 0}.status.warning{color:#895d0b;background:#fff4d4}.status.risk{color:#9f3441;background:#fce8eb}.metrics{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}.metrics>div{background:white;border:1px solid #dbece1;border-radius:13px;padding:13px;display:grid;gap:8px;min-width:0}.metrics small{font-size:.75rem;color:#597467}.metrics strong{font-size:clamp(1.15rem,2.3vw,1.55rem);letter-spacing:-.03em;overflow-wrap:anywhere}.results h3{font-size:.9rem;margin:22px 0 12px}.progress{height:15px;border-radius:999px;background:#d5e7db;overflow:hidden}.progress span{display:block;background:#087c61;height:100%;transition:width .25s ease}.progress-label,.details{font-size:.8rem;color:#536e5e;line-height:1.6}.details{margin:15px 0}.copy{background:#087c61;color:#fff;font-weight:800;border:0;border-radius:12px;padding:12px 18px;cursor:pointer}.copy-status{font-size:.77rem;margin-left:9px}.error{color:#a82b3b;font-size:.9rem}.wedding-tool input:focus-visible,.wedding-tool select:focus-visible,.copy:focus-visible{outline:3px solid #78c9a6;outline-offset:2px}.wedding-tool [hidden]{display:none!important}@media(max-width:780px){.tool-layout{grid-template-columns:1fr}.tool-heading{flex-direction:column}.tool-heading>label{width:160px}}@media(max-width:440px){.tool-fields{grid-template-columns:1fr}.results{padding:15px}}@media(prefers-reduced-motion:reduce){.progress span{transition:none}}
+</style>
+<script>
+function initializeWedding(root:Element) {
+ if(root.hasAttribute('data-wedding-ready'))return;
+ root.setAttribute('data-wedding-ready','true');
+ const form=root.querySelector<HTMLFormElement>('[data-inputs]')!;
+ const currency=root.querySelector<HTMLSelectElement>('[data-currency]')!;
+ const field=(name:string)=>form.elements.namedItem(name) as HTMLInputElement;
+ const out=(key:string)=>root.querySelector<HTMLElement>('[data-'+key+']')!;
+ const today=new Date();const currentMonth=new Date(today.getFullYear(),today.getMonth(),1);
+ const defaultDate=new Date(today.getFullYear()+1,today.getMonth(),15);
+ field('date').value=defaultDate.getFullYear()+'-'+String(defaultDate.getMonth()+1).padStart(2,'0')+'-'+String(defaultDate.getDate()).padStart(2,'0');
+ let copyText='';
+ function render(){
+  const nums=['budget','saved','a','b','family'].map(n=>field(n).valueAsNumber);
+  const [budget,saved,a,b,family]=nums;
+  const dateStr=field('date').value;
+  const parts=dateStr.split('-').map(Number);
+  const dateValid=parts.length===3&&parts.every(Number.isInteger);
+  const target=dateValid?new Date(parts[0],parts[1]-1,parts[2]):new Date(NaN);
+  const validDate=dateValid&&target.getFullYear()===parts[0]&&target.getMonth()===parts[1]-1&&target.getDate()===parts[2]&&target>today;
+  const validAmounts=nums.every(n=>Number.isFinite(n)&&n>=0&&n<=1e9);
+  const months=validDate ? (parts[0]-today.getFullYear())*12+(parts[1]-today.getMonth())-(parts[2]<=today.getDate()?1:0) : 0;
+  const valid=validAmounts&&validDate;
+  out('error').hidden=valid;out('output').hidden=!valid;
+  if(!valid){out('error').textContent=!validDate?'Choose a valid future wedding date.':'Enter nonnegative amounts for every field.';return;}
+  const money=(n:number)=>new Intl.NumberFormat('en-US',{style:'currency',currency:currency.value,maximumFractionDigits:2}).format(n);
+  const goal=Math.max(0,budget-saved-family);
+  const monthly=a+b;
+  const required=months>0?goal/months:goal;
+  const projected=saved+family+monthly*months;
+  const gap=projected-budget;
+  const ratio=budget===0?1:Math.min(1,projected/budget);
+  const status=out('status');status.className='status';
+  if(gap>=-0.005)status.textContent='On track for your target';
+  else if(months>0&&gap>=-monthly*2){status.textContent='Small adjustment needed';status.classList.add('warning');}
+  else{status.textContent='Savings gap: adjust before taking on debt';status.classList.add('risk');}
+  out('needed').textContent=money(required);
+  out('current').textContent=money(monthly);
+  out('projected').textContent=money(projected);
+  out('gap').textContent=(gap>=0?'+':'−')+money(Math.abs(gap));
+  out('progress').style.width=(ratio*100)+'%';
+  out('progress-label').textContent=(ratio*100).toFixed(1)+'% of wedding budget projected from savings and contributions';
+  out('date-summary').textContent=months+' full monthly contribution'+(months===1?'':'s')+' assumed before the wedding on '+new Intl.DateTimeFormat('en-US',{dateStyle:'long'}).format(target)+'.';
+  out('advice').textContent=months===0?'The date is too close for a full monthly contribution cycle. You would need to cover any remaining goal before the event.':gap>=0?'Your projected savings meet the budget under these assumptions. Keep a buffer for unexpected expenses.':'To close the gap, save about '+money(Math.max(0,required-monthly))+' more per month, reduce the wedding budget, or consider a later date.';
+  copyText='DollarAngle wedding savings plan ('+currency.value+')\nWedding date: '+dateStr+'\nWedding budget: '+money(budget)+'\nSaved: '+money(saved)+'\nFamily contributions: '+money(family)+'\nMonthly savings: '+money(monthly)+'\nNeeded monthly: '+money(required)+'\nProjected by date: '+money(projected)+'\nGap: '+money(gap)+'\nCalculator: dollarangle.com/tools/wedding-savings-calculator';
+ }
+ form.addEventListener('input',render);form.addEventListener('change',render);currency.addEventListener('change',render);
+ root.querySelector<HTMLButtonElement>('[data-copy]')!.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(copyText);out('copy-status').textContent='Copied!';}catch{out('copy-status').textContent='Copy unavailable in this browser.';}});
+ render();
+}
+document.querySelectorAll('[data-wedding-tool]').forEach(initializeWedding);
+document.addEventListener('astro:page-load',()=>document.querySelectorAll('[data-wedding-tool]').forEach(initializeWedding));
+</script>
