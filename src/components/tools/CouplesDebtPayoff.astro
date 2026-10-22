@@ -16,7 +16,7 @@ function simulate(debts:Debt[],extra:number,strategy:'avalanche'|'snowball',mini
  const rows=debts.map((d,i)=>({...d,id:i,remaining:d.balance}));
  let interest=0;const history=[rows.reduce((s,d)=>s+d.remaining,0)];const order:number[]=[];
  // Payments are fixed at initial sum of minimums plus extra, freed-up payments roll to the next debt.
- const budget=debts.reduce((s,d)=>s+d.minimum,0)+(minimumOnly?0:extra);
+ const budget=debts.reduce((s,d)=>s+(d.balance>.005?d.minimum:0),0)+(minimumOnly?0:extra);
  for(let month=1;month<=600;month++){
   let available=budget;
   for(const d of rows){if(d.remaining<=.005)continue;const charge=d.remaining*d.apr/1200;d.remaining+=charge;interest+=charge;}
@@ -55,7 +55,6 @@ function initDebt(root:Element){
   else if(!Number.isFinite(extra)||extra<0||extra>1e7)error='Enter a valid extra monthly payment.';
   else if(debts.some(d=>![d.balance,d.apr,d.minimum].every(Number.isFinite)||d.balance<0||d.balance>1e9||d.apr<0||d.apr>100||d.minimum<0||d.minimum>1e7))error='Check balances, interest rates and minimum payments.';
   else if(!debts.some(d=>d.balance>.005))error='Enter at least one positive balance.';
-  else if(debts.some(d=>d.balance>.005&&d.minimum<d.balance*d.apr/1200))error='At least one minimum payment does not cover monthly interest. Increase the payment first.';
   else if(debts.reduce((s,d)=>s+d.minimum,0)+extra<=0)error='Enter a positive monthly payment budget.';
   let result:ReturnType<typeof simulate>=null;
   if(!error){result=simulate(debts,extra,mode);if(!result)error='This plan does not pay off all debts within 50 years. Increase your monthly payment.';}
