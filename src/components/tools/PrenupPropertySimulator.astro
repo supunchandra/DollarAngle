@@ -1,0 +1,59 @@
+---
+const { compact=false }=Astro.props;
+---
+<section class:list={['prenup-tool',{compact}]} data-prenup-tool>
+<header><p class="eyebrow">DOLLARANGLE MONEY TOOLS · EDUCATIONAL SCENARIOS</p><h2>Prenup vs. default property rules</h2><p>Explore hypothetical ways assets and debts could be allocated. This is not a legal outcome prediction.</p></header>
+<div class="layout"><form data-form class="inputs">
+<label>Jurisdiction<select data-jurisdiction><option value="ca">California, US</option><option value="ny">New York, US</option><option value="ew">England and Wales</option></select></label>
+<label>Currency<select data-currency><option value="USD">USD $</option><option value="GBP">GBP £</option><option value="EUR">EUR €</option></select></label>
+<label>Partner A separate assets<input data-a type="number" min="0" max="1000000000" value="120000"/></label>
+<label>Partner B separate assets<input data-b type="number" min="0" max="1000000000" value="30000"/></label>
+<label>Marital/shared assets<input data-shared type="number" min="0" max="1000000000" value="240000"/></label>
+<label>Marital/shared debts<input data-debt type="number" min="0" max="1000000000" value="40000"/></label>
+<label>Illustrative default share to Partner A (%)<input data-default type="number" min="0" max="100" value="50" step="1"/></label>
+<label>Illustrative agreed prenup share to Partner A (%)<input data-prenup type="number" min="0" max="100" value="65" step="1"/></label>
+<p class="note">Assumptions: the entered separate assets stay with their named owner in both illustrations, and only the net shared pool is divided. A signed prenup may not be enforceable as written. Property classification, debt responsibility, children, financial needs, local law and court orders can change outcomes.</p>
+</form><section class="results" aria-live="polite"><p class="eyebrow">SIDE-BY-SIDE ILLUSTRATION</p><p data-error hidden class="error"></p><div data-output><div class="hero"><small>Net shared pool (assets minus shared debt)</small><strong data-pool></strong></div>
+<div class="cards"><div><small>Without a prenup · assumed split</small><strong data-default-label></strong><p data-default-a></p><p data-default-b></p></div><div><small>With a prenup · assumed agreement</small><strong data-prenup-label></strong><p data-prenup-a></p><p data-prenup-b></p></div></div>
+<h3>Difference to Partner A in this hypothetical scenario</h3><div class="delta" data-delta></div>
+<p class="law" data-law></p><a data-source target="_blank" rel="noopener noreferrer" href="https://www.selfhelp.courts.ca.gov/pa/node/108">Read official jurisdiction guidance →</a>
+<p class="note">The default percentage is an editable illustration, not a court forecast. Prenups are not guaranteed to control the result. No prediction of support or property distribution is made.</p><button type="button" data-copy class="copy">Copy scenario</button><span data-copy-status class="note" role="status"></span></div></section></div>
+</section>
+<style>.prenup-tool{font-family:Inter,system-ui,sans-serif;color:#19392e;background:white;border:1px solid #d8e9df;border-radius:25px;padding:clamp(18px,3vw,34px)}.prenup-tool .eyebrow{font-size:.69rem;color:#087c61;font-weight:850;letter-spacing:.1em;margin:0}.prenup-tool h2{font-size:clamp(1.6rem,3vw,2.2rem);letter-spacing:-.04em;margin:10px 0}.prenup-tool header>p:last-child{color:#60776a;line-height:1.6}.prenup-tool .layout{display:grid;grid-template-columns:1fr 1fr;gap:24px}.prenup-tool .inputs{display:grid;grid-template-columns:1fr 1fr;gap:13px;align-content:start}.prenup-tool .inputs label{font-size:.78rem;font-weight:740;display:grid;gap:7px;min-width:0}.prenup-tool input,.prenup-tool select{padding:11px;border:1px solid #c7dece;border-radius:10px;font:inherit;min-width:0;width:100%;background:white;color:#19392e}.prenup-tool .note{grid-column:1/-1;color:#627a6b;font-size:.77rem;line-height:1.6}.prenup-tool .results{min-width:0;border-radius:18px;border:1px solid #d7e8df;background:#f1faf5;padding:20px}.prenup-tool .hero{display:grid;gap:8px;background:#087c61;color:white;border-radius:14px;padding:18px;margin:14px 0}.prenup-tool .hero small{color:#ddf4e6}.prenup-tool .hero strong{font-size:clamp(1.4rem,2.5vw,2rem)}.prenup-tool .cards{display:grid;grid-template-columns:1fr 1fr;gap:9px}.prenup-tool .cards>div{background:white;border:1px solid #d8eadd;border-radius:12px;padding:13px;min-width:0}.prenup-tool .cards small{color:#587463;font-size:.73rem}.prenup-tool .cards strong{display:block;font-size:1.3rem;margin:10px 0}.prenup-tool .cards p{font-size:.8rem;overflow-wrap:anywhere}.prenup-tool h3{font-size:.92rem;margin-top:24px}.prenup-tool .delta{font-size:1.5rem;font-weight:800;color:#087c61}.prenup-tool .law{font-size:.82rem;line-height:1.7;color:#49685a}.prenup-tool a{color:#087c61;text-decoration:underline;font-size:.82rem}.prenup-tool .copy{background:#087c61;color:white;border:0;border-radius:11px;padding:12px 17px;font-weight:800;cursor:pointer}.prenup-tool .error{color:#aa3041}.prenup-tool [hidden]{display:none!important}.prenup-tool :focus-visible{outline:3px solid #95d9b5;outline-offset:2px}@media(max-width:800px){.prenup-tool .layout{grid-template-columns:1fr}}@media(max-width:440px){.prenup-tool .inputs,.prenup-tool .cards{grid-template-columns:1fr}.prenup-tool .results{padding:15px}}
+</style>
+<script>
+function setupPrenup(root:Element){
+ if(root.hasAttribute('data-ready'))return;root.setAttribute('data-ready','true');
+ const get=(n:string)=>root.querySelector<HTMLInputElement>('[data-'+n+']')!;
+ const out=(n:string)=>root.querySelector<HTMLElement>('[data-'+n+']')!;
+ const info:Record<string,{pct:number;description:string;url:string}>={
+ ca:{pct:50,description:'California generally treats qualifying community property as equally divisible while separate property is retained. Classification and tracing can be complex.',url:'https://www.selfhelp.courts.ca.gov/pa/node/108'},
+ ny:{pct:50,description:'New York uses equitable distribution: marital property is divided fairly, not necessarily equally. Fifty-fifty here is only an example.',url:'https://www.nycourts.gov/node/60026'},
+ ew:{pct:50,description:'In England and Wales, financial arrangements depend on individual circumstances and needs. Prenups may be considered but are not automatically enforceable. Fifty-fifty is not a statutory promise.',url:'https://www.gov.uk/money-property-when-relationship-ends'}
+ };
+ let text='';
+ function render(){
+  const jurisdiction=get('jurisdiction').value,values=['a','b','shared','debt','default','prenup'].map(k=>get(k).valueAsNumber);
+  const [a,b,shared,debt,defaultPct,prenupPct]=values;
+  const valid=values.every(Number.isFinite)&&[a,b,shared,debt].every(v=>v>=0&&v<=1e9)&&defaultPct>=0&&defaultPct<=100&&prenupPct>=0&&prenupPct<=100;
+  out('error').hidden=valid;out('output').hidden=!valid;
+  if(!valid){out('error').textContent='Enter valid nonnegative amounts and percentages from 0 to 100.';return;}
+  const money=(x:number)=>new Intl.NumberFormat('en-US',{style:'currency',currency:get('currency').value,maximumFractionDigits:0}).format(x);
+  const pool=shared-debt;
+  const dA=a+pool*defaultPct/100,dB=b+pool*(1-defaultPct/100),pA=a+pool*prenupPct/100,pB=b+pool*(1-prenupPct/100);
+  out('pool').textContent=money(pool);out('default-label').textContent=defaultPct+'% / '+(100-defaultPct)+'%';out('prenup-label').textContent=prenupPct+'% / '+(100-prenupPct)+'%';
+  out('default-a').textContent='Partner A: '+money(dA);out('default-b').textContent='Partner B: '+money(dB);
+  out('prenup-a').textContent='Partner A: '+money(pA);out('prenup-b').textContent='Partner B: '+money(pB);
+  out('delta').textContent=(pA>=dA?'+':'')+money(pA-dA);
+  out('law').textContent=info[jurisdiction].description;
+  (out('source') as HTMLAnchorElement).href=info[jurisdiction].url;
+  text='DollarAngle hypothetical prenup comparison\nDefault scenario: A '+money(dA)+', B '+money(dB)+'\nAgreed scenario: A '+money(pA)+', B '+money(pB)+'\nNot a legal prediction. dollarangle.com/tools/prenup-vs-property-law-simulator';
+ }
+ get('jurisdiction').addEventListener('change',()=>{get('default').value=String(info[get('jurisdiction').value].pct);render();});
+ root.addEventListener('input',render);root.addEventListener('change',render);
+ root.querySelector('[data-copy]')!.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(text);out('copy-status').textContent='Copied!';}catch{out('copy-status').textContent='Copy unavailable.';}});
+ render();
+}
+document.querySelectorAll('[data-prenup-tool]').forEach(setupPrenup);
+document.addEventListener('astro:page-load',()=>document.querySelectorAll('[data-prenup-tool]').forEach(setupPrenup));
+</script>
