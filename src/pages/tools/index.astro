@@ -1,7 +1,152 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+const tools = [
+  {
+    "kicker": "Fair bill splitting",
+    "name": "Proportional Rent & Bill Splitter",
+    "description": "Compare 50/50, income-based and hybrid splits, and see what each partner pays.",
+    "url": "/tools/rent-split-calculator",
+    "category": "everyday",
+    "symbol": "↗",
+    "label": "Everyday money",
+    "detail": "3 ways to split"
+  },
+  {
+    "kicker": "Build a shared budget",
+    "name": "Mine, Yours, Ours Budget Allocator",
+    "description": "Design a joint account plan with space for personal spending and shared goals.",
+    "url": "/tools/mine-yours-ours-budget-calculator",
+    "category": "everyday",
+    "symbol": "◎",
+    "label": "Everyday money",
+    "detail": "3-account plan"
+  },
+  {
+    "kicker": "Plan your big day",
+    "name": "Wedding Cost & Savings Timeline",
+    "description": "Turn your wedding date, budget and monthly saving into a realistic plan.",
+    "url": "/tools/wedding-savings-calculator",
+    "category": "planning",
+    "symbol": "♡",
+    "label": "Life planning",
+    "detail": "Savings timeline"
+  },
+  {
+    "kicker": "Become debt-free together",
+    "name": "Couples Debt Payoff Timeline",
+    "description": "Compare avalanche and snowball repayments and find a projected payoff date.",
+    "url": "/tools/couples-debt-payoff-calculator",
+    "category": "everyday",
+    "symbol": "↘",
+    "label": "Everyday money",
+    "detail": "Payoff comparison"
+  },
+  {
+    "kicker": "Working or staying home?",
+    "name": "Should One Parent Stay Home?",
+    "description": "Compare pay after tax assumptions with childcare, commute and lost retirement match.",
+    "url": "/tools/stay-at-home-parent-calculator",
+    "category": "family",
+    "symbol": "⌂",
+    "label": "Family & career",
+    "detail": "Monthly comparison"
+  },
+  {
+    "kicker": "Budget for the next 18 years",
+    "name": "Cost of Raising a Child",
+    "description": "Explore childcare, schooling, everyday costs and inflation through age 18.",
+    "url": "/tools/cost-of-raising-a-child-calculator",
+    "category": "family",
+    "symbol": "✳",
+    "label": "Family & career",
+    "detail": "18-year projection"
+  },
+  {
+    "kicker": "What happens to your taxes?",
+    "name": "Marriage Tax Penalty or Bonus",
+    "description": "Compare two single returns against married filing jointly using 2026 US tax brackets.",
+    "url": "/tools/marriage-tax-calculator",
+    "category": "planning",
+    "symbol": "%",
+    "label": "Life planning",
+    "detail": "2026 US federal"
+  },
+  {
+    "kicker": "Explore your legal options",
+    "name": "Prenup vs Property Law Simulator",
+    "description": "Compare hypothetical asset allocations and learn why local rules matter.",
+    "url": "/tools/prenup-vs-property-law-simulator",
+    "category": "planning",
+    "symbol": "⚖",
+    "label": "Life planning",
+    "detail": "Educational scenario"
+  },
+  {
+    "kicker": "Understand time away from work",
+    "name": "Career Break & Maternity Leave",
+    "description": "Estimate lost pay, paid leave and missed retirement contributions.",
+    "url": "/tools/career-break-maternity-leave-calculator",
+    "category": "family",
+    "symbol": "↶",
+    "label": "Family & career",
+    "detail": "Career impact"
+  },
+  {
+    "kicker": "Plan financial freedom",
+    "name": "Couples’ FIRE Roadmap",
+    "description": "Estimate your financial independence target, savings rate and timeline.",
+    "url": "/tools/couples-fire-calculator",
+    "category": "wealth",
+    "symbol": "⌁",
+    "label": "Wealth building",
+    "detail": "FIRE roadmap"
+  }
+];
 ---
-<BaseLayout title="Free Money Calculators for Couples | DollarAngle Money Tools" description="Explore DollarAngle's free money tools for couples. Calculate income-based rent splits and build a Mine, Yours, Ours joint budget. No account or email required.">
-  <div class="container tools-hub"><p class="kicker">DOLLARANGLE MONEY TOOLS</p><h1>Money decisions, made clearer.</h1><p class="deck">Practical, interactive tools for couples and families. Calculate together, compare scenarios, and make a plan you both understand.</p><div class="tool-list"><a class="tile" href="/tools/rent-split-calculator"><span class="symbol" aria-hidden="true">↗</span><span class="eyebrow">AVAILABLE · FREE</span><h2>Proportional Rent & Bill Splitter</h2><p>See how 50/50, income-based and hybrid cost sharing change what each partner pays.</p><span class="action">Open calculator →</span></a><a class="tile" href="/tools/mine-yours-ours-budget-calculator"><span class="symbol" aria-hidden="true">◎</span><span class="eyebrow">AVAILABLE · FREE</span><h2>Mine, Yours, Ours Budget Allocator</h2><p>Design a fair three-account plan for shared bills, savings and personal spending.</p><span class="action">Open calculator →</span></a><a class="tile" href="/tools/wedding-savings-calculator"><span class="symbol" aria-hidden="true">♡</span><span class="eyebrow">AVAILABLE · FREE</span><h2>Wedding Cost & Savings Timeline</h2><p>Set a budget and wedding date, forecast savings, and identify any shortfall.</p><span class="action">Open calculator →</span></a><a class="tile" href="/tools/couples-debt-payoff-calculator"><span class="symbol" aria-hidden="true">↘</span><span class="eyebrow">AVAILABLE · FREE</span><h2>Couples Debt Payoff Timeline</h2><p>Compare avalanche and snowball methods, payoff dates, and projected interest.</p><span class="action">Open calculator →</span></a><a class="tile" href="/tools/stay-at-home-parent-calculator"><span class="symbol" aria-hidden="true">⌂</span><span class="eyebrow">AVAILABLE · FREE</span><h2>Should One Parent Stay Home?</h2><p>Compare salary after deductions with childcare, commuting and lost retirement match.</p><span class="action">Open calculator →</span></a><a class="tile" href="/tools/cost-of-raising-a-child-calculator"><span class="symbol" aria-hidden="true">♧</span><span class="eyebrow">AVAILABLE · FREE</span><h2>Cost of Raising a Child</h2><p>Estimate expenses through age 18 with adjustable childcare, schooling and inflation.</p><span class="action">Open calculator →</span></a><a class="tile" href="/tools/marriage-tax-calculator"><span class="symbol" aria-hidden="true">%</span><span class="eyebrow">AVAILABLE · US 2026</span><h2>Marriage Tax Penalty or Bonus</h2><p>Compare two single returns with married filing jointly under verified 2026 federal tax brackets.</p><span class="action">Open calculator →</span></a><a class="tile" href="/tools/prenup-vs-property-law-simulator"><span class="symbol" aria-hidden="true">⚖</span><span class="eyebrow">AVAILABLE · FREE</span><h2>Prenup vs Property Law Simulator</h2><p>Explore illustrative asset allocations across different legal frameworks.</p><span class="action">Open simulator →</span></a><a class="tile" href="/tools/career-break-maternity-leave-calculator"><span class="symbol" aria-hidden="true">↶</span><span class="eyebrow">AVAILABLE · FREE</span><h2>Career Break & Maternity Leave</h2><p>Estimate paid leave, forgone take-home pay and potential retirement impact.</p><span class="action">Open calculator →</span></a><a class="tile" href="/tools/couples-fire-calculator"><span class="symbol" aria-hidden="true">⌁</span><span class="eyebrow">AVAILABLE · FREE</span><h2>Couples’ FIRE Roadmap</h2><p>Model your financial independence target and an illustrative investment timeline.</p><span class="action">Open calculator →</span></a></div><p class="foot">More DollarAngle Money Tools are being developed. No login or email is required to use the available calculators.</p></div>
+<BaseLayout title="10 Free Money Calculators for Couples & Families | DollarAngle" description="Explore 10 free DollarAngle calculators for couples, debt, weddings, childcare, taxes, career breaks and financial independence. No signup or email required.">
+ <div class="tools-page">
+  <section class="tools-hero">
+   <div class="container hero-grid-tools">
+    <div class="hero-copy"><span class="hero-kicker"><span class="dot"></span> DOLLARANGLE MONEY TOOLS</span>
+     <h1>Better money decisions, <em>made together.</em></h1>
+     <p>From the first shared bill to financial independence, turn difficult money conversations into plans you can actually see.</p>
+     <div class="hero-buttons"><a class="hero-primary" href="#browse-tools">Explore all 10 tools <span aria-hidden="true">↗</span></a><a class="hero-secondary" href="/tools/rent-split-calculator">Try the bill splitter <span aria-hidden="true">→</span></a></div>
+     <div class="hero-proof"><span>✓ Free to use</span><span>✓ No account needed</span><span>✓ Results in seconds</span></div>
+    </div>
+    <div class="hero-art" aria-label="Preview of financial planning dashboard"><div class="orb orb-one"></div><div class="orb orb-two"></div><div class="floating-label">YOUR MONEY, CLEARER <span>✦</span></div><div class="demo-card"><div class="demo-top"><span class="demo-dot"></span><span>SHARED FINANCIAL GOAL</span><span class="demo-line"></span></div><div class="demo-amount">$25,000 <small>saved together</small></div><div class="demo-progress"><span></span></div><div class="demo-stats"><div><small>MONTHLY GOAL</small><strong>$1,250</strong></div><div><small>PROGRESS</small><strong>72%</strong></div></div></div><div class="float-pill pill-one">↗ &nbsp; Grow together</div><div class="float-pill pill-two">♥ &nbsp; Plan with clarity</div></div>
+   </div>
+  </section>
+  <section class="container browse" id="browse-tools" aria-labelledby="browse-title">
+   <div class="browse-head"><div><span class="section-kicker">A TOOL FOR EVERY MILESTONE</span><h2 id="browse-title">Explore the toolkit</h2><p>Simple, practical calculators for the decisions that shape your financial life.</p></div><div class="count"><strong>10</strong><span>FREE TOOLS</span></div></div>
+   <div class="filter-row" role="group" aria-label="Filter tools by category">
+    <button type="button" class="filter active" data-tool-filter="all" aria-pressed="true">All tools <span>10</span></button>
+    <button type="button" class="filter" data-tool-filter="everyday" aria-pressed="false">Everyday money</button>
+    <button type="button" class="filter" data-tool-filter="family" aria-pressed="false">Family & career</button>
+    <button type="button" class="filter" data-tool-filter="planning" aria-pressed="false">Life planning</button>
+    <button type="button" class="filter" data-tool-filter="wealth" aria-pressed="false">Wealth building</button>
+   </div>
+   <div class="tools-grid" data-tools-grid>
+    {tools.map((tool,index)=><a class:list={['tool-card', {'is-featured':index===0}]} data-tool-card data-category={tool.category} href={tool.url}>
+     <div class="card-upper"><span class="tool-icon" aria-hidden="true">{tool.symbol}</span><span class="card-index">{String(index+1).padStart(2,'0')} / 10</span></div>
+     <span class="card-category">{tool.label}</span>
+     <h3>{tool.name}</h3><p>{tool.description}</p>
+     <div class="card-bottom"><span class="detail">{tool.detail}</span><span class="card-go" aria-hidden="true">↗</span></div>
+    </a>)}
+   </div>
+   <p class="empty" data-tools-empty hidden>No tools match this category.</p>
+  </section>
+  <section class="container why"><div class="why-inner"><div><span class="section-kicker">WHY DOLLARANGLE?</span><h2>Less guessing.<br/>More living.</h2><p>Useful financial tools should be straightforward, transparent about assumptions and available without an email gate.</p></div><div class="why-points"><div><span>01</span><div><strong>Useful right away</strong><p>Change the numbers and see your plan take shape.</p></div></div><div><span>02</span><div><strong>Made for real conversations</strong><p>Explore decisions together with your partner or family.</p></div></div><div><span>03</span><div><strong>No signup required</strong><p>All 10 calculators are free to explore.</p></div></div></div></div></section>
+ </div>
 </BaseLayout>
-<style>.tools-hub{padding-top:64px;padding-bottom:100px}.tools-hub>.kicker{color:#087c61}.tools-hub h1{font-size:clamp(2.5rem,6vw,4.8rem);letter-spacing:-.055em;line-height:1.1;margin:10px 0}.deck{max-width:720px;font-size:1.12rem;line-height:1.7;color:#6e6671}.tool-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:18px;margin-top:38px}.tile{position:relative;display:flex;flex-direction:column;align-items:start;padding:30px;border:1px solid #d7e9df;border-radius:25px;background:linear-gradient(135deg,#fff,#f2faf5);min-height:290px;box-shadow:0 12px 35px #0c594c0b;transition:transform .2s ease}.tile:hover{transform:translateY(-3px)}.symbol{display:grid;place-items:center;width:48px;height:48px;border-radius:14px;background:#e0f3ea;color:#087c61;font-size:26px}.eyebrow{font-weight:850;font-size:.7rem;letter-spacing:.1em;color:#087c61;margin-top:22px}.tile h2{font-size:1.6rem;letter-spacing:-.035em;line-height:1.2;margin:10px 0}.tile p{line-height:1.6;color:#60766e}.action{margin-top:auto;color:#087c61;font-weight:800}.foot{font-size:.86rem;color:#766d74;margin-top:30px}@media(max-width:650px){.tools-hub{padding-top:35px}}</style>
+<style>
+.tools-page{color:#18382c}.tools-hero{background:radial-gradient(circle at 78% 18%,#d5f3e1 0%,transparent 34%),linear-gradient(135deg,#f4fcf7 0%,#eaf7ef 55%,#f8fdf9 100%);border-bottom:1px solid #d9ebdf;overflow:hidden}.hero-grid-tools{display:grid;grid-template-columns:1.03fr .97fr;gap:34px;align-items:center;min-height:580px;padding-top:56px;padding-bottom:62px}.hero-kicker,.section-kicker{font-size:.74rem;letter-spacing:.15em;color:#087c61;font-weight:850}.hero-kicker{display:inline-flex;align-items:center;gap:10px}.dot{height:9px;width:9px;background:#10b981;border-radius:50%;box-shadow:0 0 0 5px #d6f3e3}.hero-copy h1{max-width:680px;font-size:clamp(3rem,5vw,5.2rem);letter-spacing:-.065em;line-height:1.03;margin:19px 0 24px}.hero-copy h1 em{display:block;font-style:normal;color:#087c61}.hero-copy>p{max-width:540px;color:#547063;font-size:1.13rem;line-height:1.75}.hero-buttons{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}.hero-primary,.hero-secondary{display:inline-flex;align-items:center;gap:20px;justify-content:space-between;padding:15px 19px;border-radius:13px;font-size:.9rem;font-weight:800}.hero-primary{background:#087c61;color:white;box-shadow:0 10px 22px #087c612e}.hero-secondary{border:1px solid #b9d8c6;background:#fff;color:#087c61}.hero-primary:hover{background:#056c55}.hero-proof{display:flex;gap:20px;flex-wrap:wrap;font-size:.78rem;font-weight:750;color:#537163;margin-top:29px}.hero-art{position:relative;min-height:380px;display:grid;place-items:center;isolation:isolate}.orb{position:absolute;border-radius:50%;z-index:-1}.orb-one{width:340px;height:340px;background:linear-gradient(135deg,#a1dfbf,#e4f9e9);right:1%;top:3%}.orb-two{width:180px;height:180px;background:#c5e9d2;bottom:-20px;left:0;opacity:.7}.floating-label{position:absolute;top:8px;left:10%;display:flex;justify-content:space-between;width:260px;font-size:.67rem;letter-spacing:.16em;color:#087c61;font-weight:850}.floating-label span{font-size:1.2rem}.demo-card{width:min(90%,380px);background:#fff;border:1px solid #d0e9d7;border-radius:26px;padding:27px;box-shadow:0 30px 55px #18583a25;transform:rotate(-2deg)}.demo-top{display:flex;align-items:center;gap:9px;color:#729082;font-size:.62rem;letter-spacing:.1em;font-weight:850}.demo-dot{height:9px;width:9px;border-radius:50%;background:#10b981}.demo-line{height:1px;flex:1;background:#d7e8de}.demo-amount{font-size:clamp(2.3rem,4vw,3rem);font-weight:900;letter-spacing:-.05em;margin:34px 0 20px}.demo-amount small{display:block;font-size:.78rem;color:#738e7e;letter-spacing:0;font-weight:650;margin-top:4px}.demo-progress{height:12px;background:#e5f5eb;border-radius:20px;overflow:hidden}.demo-progress span{display:block;width:72%;height:100%;border-radius:20px;background:linear-gradient(90deg,#087c61,#46c993)}.demo-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:25px}.demo-stats div{border-radius:13px;background:#f3faf5;padding:14px}.demo-stats small{font-size:.58rem;letter-spacing:.08em;color:#6a8877}.demo-stats strong{display:block;font-size:1.18rem;margin-top:7px}.float-pill{position:absolute;background:#fff;border:1px solid #dbecdd;box-shadow:0 12px 24px #0a58401a;border-radius:999px;padding:13px 18px;font-size:.79rem;font-weight:850;color:#087c61}.pill-one{right:0;top:28%}.pill-two{bottom:8%;left:2%}.browse{padding-top:72px;padding-bottom:88px}.browse-head{display:flex;justify-content:space-between;align-items:end;gap:20px}.browse-head h2{font-size:clamp(2.2rem,4vw,3.45rem);letter-spacing:-.055em;line-height:1.1;margin:12px 0}.browse-head p{color:#657a6d;line-height:1.6;margin:0}.count{display:flex;align-items:center;gap:10px;color:#087c61;white-space:nowrap}.count strong{font-size:3.1rem;letter-spacing:-.07em}.count span{font-size:.64rem;line-height:1.3;letter-spacing:.1em;font-weight:850;max-width:40px}.filter-row{display:flex;gap:9px;flex-wrap:wrap;margin:35px 0 22px}.filter{font:inherit;border:1px solid #d7e6dc;background:#fff;border-radius:999px;padding:11px 16px;cursor:pointer;font-size:.82rem;font-weight:750;color:#536e5e}.filter span{opacity:.7;margin-left:5px}.filter.active{color:#fff;background:#087c61;border-color:#087c61}.tools-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.tool-card{min-width:0;min-height:300px;border-radius:22px;background:#fff;border:1px solid #dce8df;padding:25px;display:flex;flex-direction:column;align-items:start;transition:transform .2s,box-shadow .2s,border-color .2s;box-shadow:0 8px 25px #23432d07}.tool-card:hover{transform:translateY(-5px);border-color:#8bcab0;box-shadow:0 18px 40px #104f3320}.tool-card:focus-visible,.filter:focus-visible{outline:3px solid #79ceab;outline-offset:3px}.card-upper{display:flex;width:100%;justify-content:space-between;align-items:start}.tool-icon{width:57px;height:57px;display:grid;place-items:center;border-radius:17px;background:#e5f6eb;color:#087c61;font-size:29px;font-weight:700}.card-index{font-size:.68rem;font-weight:850;letter-spacing:.1em;color:#9aafa0}.card-category{color:#087c61;font-size:.69rem;letter-spacing:.1em;text-transform:uppercase;font-weight:850;margin-top:22px}.tool-card h3{font-size:clamp(1.3rem,2vw,1.55rem);line-height:1.22;letter-spacing:-.035em;margin:9px 0 10px}.tool-card>p{line-height:1.65;font-size:.88rem;color:#637b6a;margin:0 0 27px}.card-bottom{display:flex;align-items:center;justify-content:space-between;width:100%;margin-top:auto;gap:12px}.detail{font-size:.73rem;font-weight:800;color:#678878;background:#f0f8f2;border-radius:99px;padding:8px 11px}.card-go{height:38px;width:38px;border-radius:50%;background:#087c61;color:#fff;display:grid;place-items:center;font-size:1.25rem}.tool-card:hover .card-go{background:#075b49}.tool-card.is-featured{background:linear-gradient(145deg,#e8f8ef,#fff 72%)}.tool-card[hidden],.empty[hidden]{display:none!important}.why{padding-bottom:90px}.why-inner{background:#0c3025;color:white;border-radius:27px;display:grid;grid-template-columns:1fr 1fr;gap:42px;padding:clamp(24px,5vw,55px)}.why-inner h2{font-size:clamp(2.2rem,4vw,3.5rem);letter-spacing:-.05em;line-height:1.12;margin:13px 0}.why-inner>div>p{color:#b9d4c5;line-height:1.7}.why-points{display:grid;gap:18px}.why-points>div{display:flex;gap:17px;border-bottom:1px solid #31574a;padding-bottom:15px}.why-points>div>span{font-weight:900;color:#78cba6;font-size:.79rem}.why-points strong{font-size:.95rem}.why-points p{font-size:.82rem;color:#b4cfbf;line-height:1.6;margin:7px 0 0}@media(max-width:1000px){.tools-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero-grid-tools{grid-template-columns:1fr 1fr}.hero-copy h1{font-size:clamp(2.6rem,5vw,4rem)}.float-pill{display:none}}@media(max-width:720px){.hero-grid-tools{grid-template-columns:1fr;min-height:unset;padding-top:40px;padding-bottom:44px}.hero-art{min-height:265px}.demo-card{width:min(84%,335px);padding:22px}.orb-one{height:245px;width:245px;top:0;right:12%}.orb-two{width:100px;height:100px;bottom:0}.floating-label{top:0}.hero-copy h1{font-size:clamp(2.6rem,9vw,4rem)}.browse{padding-top:50px}.why-inner{grid-template-columns:1fr}.browse-head{align-items:start}.count strong{font-size:2.25rem}}@media(max-width:530px){.tools-grid{grid-template-columns:1fr}.tool-card{min-height:265px}.browse-head{align-items:start}.count{display:none}.hero-proof{gap:10px;font-size:.73rem}.hero-buttons>a{width:100%}.floating-label{left:4%}.why{padding-bottom:48px}}@media(prefers-reduced-motion:reduce){.tool-card{transition:none}}
+</style>
+<script>
+ const filters=document.querySelectorAll<HTMLButtonElement>('[data-tool-filter]');
+ const cards=document.querySelectorAll<HTMLElement>('[data-tool-card]');
+ filters.forEach(button=>button.addEventListener('click',()=>{
+  const value=button.dataset.toolFilter;
+  filters.forEach(item=>{const selected=item===button;item.classList.toggle('active',selected);item.setAttribute('aria-pressed',String(selected));});
+  cards.forEach(card=>{card.hidden=value!=='all'&&card.dataset.category!==value;});
+ }));
+</script>
