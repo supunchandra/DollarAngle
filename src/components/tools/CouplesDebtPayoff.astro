@@ -55,13 +55,13 @@ function initDebt(root:Element){
   else if(!Number.isFinite(extra)||extra<0||extra>1e7)error='Enter a valid extra monthly payment.';
   else if(debts.some(d=>![d.balance,d.apr,d.minimum].every(Number.isFinite)||d.balance<0||d.balance>1e9||d.apr<0||d.apr>100||d.minimum<0||d.minimum>1e7))error='Check balances, interest rates and minimum payments.';
   else if(!debts.some(d=>d.balance>.005))error='Enter at least one positive balance.';
-  else if(debts.reduce((s,d)=>s+d.minimum,0)+extra<=0)error='Enter a positive monthly payment budget.';
+  else if(debts.reduce((s,d)=>s+(d.balance>.005?d.minimum:0),0)+extra<=0)error='Enter a positive monthly payment budget.';
   let result:ReturnType<typeof simulate>=null;
   if(!error){result=simulate(debts,extra,mode);if(!result)error='This plan does not pay off all debts within 50 years. Increase your monthly payment.';}
   out('error').hidden=!error;out('results').hidden=!!error;out('error').textContent=error;
   if(!result)return;
   const baseline=simulate(debts,0,mode,true);
-  const balance=debts.reduce((s,d)=>s+d.balance,0),monthly=debts.reduce((s,d)=>s+d.minimum,0)+extra;
+  const balance=debts.reduce((s,d)=>s+d.balance,0),monthly=debts.reduce((s,d)=>s+(d.balance>.005?d.minimum:0),0)+extra;
   const date=new Date();date.setMonth(date.getMonth()+result.months);
   out('date').textContent=new Intl.DateTimeFormat('en-US',{month:'long',year:'numeric'}).format(date);
   out('months').textContent=result.months+' months of payments';
