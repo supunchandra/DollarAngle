@@ -6,14 +6,15 @@ const nav = [
   ['Markets', '/topics/markets'],
   ['Economy', '/topics/economy'],
   ['Real Estate', '/topics/real-estate'],
-  ['Money & Relationships', '/topics/money-relationships']
+  ['Money & Relationships', '/topics/money-relationships'],
+  ['Money Tools', '/tools']
 ];
 ---
 <header class="header">
   <div class="container nav">
     <a class="brand" href="/" aria-label="DollarAngle home"><i class="brand-mark"></i><span>DOLLAR</span><span>ANGLE</span></a>
     <nav class="nav-links" data-nav-links>
-      {nav.map(([label, href]) => <a href={href}>{label}</a>)}
+      {nav.map(([label, href]) => <a class:list={[{'nav-tools':href==='/tools'}]} href={href} aria-current={Astro.url.pathname===href?'page':undefined}>{label}</a>)}
     </nav>
     <div class="nav-actions">
       <a class="btn btn-primary" href="/#newsletter">Subscribe</a>
@@ -21,3 +22,5 @@ const nav = [
     </div>
   </div>
 </header>
+
+<style>.nav-links .nav-tools{background:#e4f6ec;color:#087c61;border:1px solid #c4e8d3;border-radius:999px;padding:8px 13px;margin:-8px -6px;font-weight:850;white-space:nowrap}.nav-links .nav-tools:hover,.nav-links .nav-tools[aria-current="page"]{background:#087c61;color:white}@media(max-width:900px){.nav-links .nav-tools{margin:3px 0;display:block;padding:12px 14px}}@media(min-width:901px) and (max-width:1240px){.nav-links{gap:11px;font-size:.81rem}.nav{gap:15px}.nav-links .nav-tools{padding:8px 10px;margin:-8px 0}}@media(max-width:1120px) and (min-width:901px){.nav-actions .btn{padding:9px 12px;font-size:.8rem}}</style>
