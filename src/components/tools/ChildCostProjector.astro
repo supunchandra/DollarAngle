@@ -1,0 +1,64 @@
+---
+const {compact=false}=Astro.props;
+---
+<section class:list={['child-tool',{compact}]} data-child-tool aria-label="Cost of raising a child calculator">
+<header><div><p class="eyebrow">DOLLARANGLE MONEY TOOLS</p><h2>What could raising a child cost?</h2><p>Build a personalized birth-to-18 projection with adjustable assumptions, not a one-size-fits-all prediction.</p></div><label>Currency<select data-currency><option value="USD">USD $</option><option value="GBP">GBP £</option><option value="EUR">EUR €</option></select></label></header>
+<div class="layout"><form data-inputs class="inputs">
+<label>Region<select name="region"><option value="us-suburban">US · suburban</option><option value="us-urban">US · urban</option><option value="uk">United Kingdom</option><option value="eu">Europe · illustrative</option><option value="au">Australia · illustrative</option></select></label>
+<label>Number of children<input name="children" type="number" min="1" max="10" step="1" value="1"/></label>
+<label>Schooling<select name="school"><option value="public">Public / state</option><option value="private">Private</option><option value="international">International</option></select></label>
+<label>Childcare<select name="care"><option value="daycare">Full-time daycare (ages 0–5)</option><option value="part">Part-time / family support</option><option value="nanny">Nanny care (ages 0–5)</option></select></label>
+<label>Annual housing increment per child<input name="housing" type="number" min="0" max="10000000" value="4200" step="100"/></label>
+<label>Annual food and clothing per child<input name="food" type="number" min="0" max="10000000" value="3600" step="100"/></label>
+<label>Annual healthcare and miscellaneous per child<input name="health" type="number" min="0" max="10000000" value="3000" step="100"/></label>
+<label>Annual full-time childcare per child, ages 0–5<input name="childcare" type="number" min="0" max="10000000" value="12000" step="100"/></label>
+<label>Annual private-school tuition per child, ages 6–17<input name="schoolcost" type="number" min="0" max="10000000" value="12000" step="100"/></label>
+<label>Annual cost inflation (%)<input name="inflation" type="number" min="0" max="15" step=".5" value="2.5"/></label>
+<p class="hint">All costs are illustrative starting assumptions, not official regional averages. Choosing a region sets editable example inputs. Enter all amounts in the selected currency; switching currency does not exchange-convert amounts. Public education tuition is modeled as zero, but related expenses remain in other categories.</p>
+</form><div class="results" aria-live="polite" aria-atomic="true"><p class="eyebrow">YOUR FAMILY COST PROJECTION</p><p data-error class="error" hidden></p><div data-results><div class="hero"><small>Estimated cumulative cost through age 18</small><strong data-total></strong></div><div class="cards"><div><small>Average monthly cost (18 years)</small><strong data-monthly></strong></div><div><small>First-year estimate</small><strong data-first></strong></div></div><h3>Annual cost by child age</h3><div data-bars class="bars" role="img" aria-label="Projected annual spending from birth to age 17"></div><div class="axis"><span>Birth</span><span>Age 9</span><span>Age 17</span></div><h3>Estimated 18-year cost categories</h3><div data-categories class="categories"></div><p class="hint">The projection assumes children are the same age, applies a simple annual inflation rate, and excludes college, lost parental earnings and tax benefits.</p><button type="button" class="copy" data-copy>Copy projection</button><span data-copy-status class="hint" role="status"></span></div></div></div>
+</section>
+<style>
+.child-tool{font-family:Inter,system-ui,sans-serif;color:#193a2d;border:1px solid #d8eadf;background:white;border-radius:25px;padding:clamp(18px,3vw,34px);box-shadow:0 15px 42px #0b594c0a}.child-tool header{display:flex;align-items:start;justify-content:space-between;gap:20px;margin-bottom:25px}.child-tool .eyebrow{font-size:.7rem;letter-spacing:.1em;color:#087c61;font-weight:850;margin:0}.child-tool h2{font-size:clamp(1.5rem,3vw,2.1rem);line-height:1.15;letter-spacing:-.04em;margin:10px 0}.child-tool header p:not(.eyebrow){margin:0;color:#587468;line-height:1.6}.child-tool header>label{flex-shrink:0;font-size:.78rem}.child-tool header select{display:block;margin-top:8px}.child-tool .layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px}.child-tool .inputs{display:grid;grid-template-columns:1fr 1fr;gap:13px;align-content:start}.child-tool .inputs label{display:grid;gap:6px;font-size:.77rem;font-weight:720;min-width:0}.child-tool input,.child-tool select{width:100%;min-width:0;padding:11px;border:1px solid #c6dbcf;background:white;color:#1d3c2e;border-radius:10px;font:inherit}.child-tool .hint{grid-column:1/-1;font-size:.76rem;line-height:1.6;color:#627b6d}.child-tool .results{background:#f1faf5;border:1px solid #d7eadf;border-radius:20px;padding:20px;min-width:0}.child-tool .hero{display:grid;gap:9px;background:#087c61;color:white;padding:20px;border-radius:14px;margin:15px 0}.child-tool .hero small{color:#e2f8e8}.child-tool .hero strong{font-size:clamp(1.5rem,3vw,2rem);overflow-wrap:anywhere}.child-tool .cards{display:grid;grid-template-columns:1fr 1fr;gap:10px}.child-tool .cards div{background:white;border:1px solid #d9eade;border-radius:12px;padding:13px;display:grid;gap:9px;min-width:0}.child-tool .cards small{color:#62796c;font-size:.73rem}.child-tool .cards strong{font-size:clamp(1rem,2vw,1.4rem);overflow-wrap:anywhere}.child-tool h3{font-size:.94rem;margin:23px 0 12px}.child-tool .bars{height:115px;display:flex;align-items:end;gap:3px;border-bottom:1px solid #afd0bb}.child-tool .bars span{flex:1;background:#63b99b;min-width:1px;border-radius:2px 2px 0 0}.child-tool .axis{display:flex;justify-content:space-between;color:#688172;font-size:.72rem;margin-top:6px}.child-tool .categories{display:grid;gap:9px}.child-tool .categories div{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid #d8eadf;padding:7px 0;font-size:.8rem}.child-tool .copy{background:#087c61;color:white;padding:12px 17px;border:0;border-radius:11px;font-weight:800;cursor:pointer}.child-tool .error{color:#a22e40}.child-tool [hidden]{display:none!important}.child-tool :focus-visible{outline:3px solid #92d9b4;outline-offset:2px}@media(max-width:800px){.child-tool .layout{grid-template-columns:1fr}.child-tool header{flex-direction:column}.child-tool header>label{width:170px}}@media(max-width:440px){.child-tool .inputs{grid-template-columns:1fr}.child-tool .results{padding:15px}}
+</style>
+<script>
+function initChild(root:Element){
+ if(root.hasAttribute('data-child-ready'))return;root.setAttribute('data-child-ready','true');
+ const form=root.querySelector<HTMLFormElement>('[data-inputs]')!;
+ const currency=root.querySelector<HTMLSelectElement>('[data-currency]')!;
+ const f=(n:string)=>form.elements.namedItem(n) as HTMLInputElement;
+ const node=(n:string)=>root.querySelector<HTMLElement>('[data-'+n+']')!;
+ const presets:Record<string,number[]>={'us-suburban':[4200,3600,3000,12000,12000],'us-urban':[7000,4200,3500,16500,16000],'uk':[3200,3000,2400,10500,15000],'eu':[3200,2900,2600,9000,13000],'au':[4800,3600,3200,13500,15000]};
+ let copy='';
+ function render(){
+  const names=['children','housing','food','health','childcare','schoolcost','inflation'];
+  const vals=names.map(n=>f(n).valueAsNumber);
+  const [children,housing,food,health,childcare,schoolcost,inflation]=vals;
+  const valid=vals.every(Number.isFinite)&&Number.isInteger(children)&&children>=1&&children<=10&&[housing,food,health,childcare,schoolcost].every(v=>v>=0&&v<=1e7)&&inflation>=0&&inflation<=15;
+  node('error').hidden=valid;node('results').hidden=!valid;
+  if(!valid){node('error').textContent='Check the inputs: 1–10 children, nonnegative costs and inflation from 0–15%.';return;}
+  const cash=(v:number)=>new Intl.NumberFormat('en-US',{style:'currency',currency:currency.value,maximumFractionDigits:0}).format(v);
+  const care=f('care').value,school=f('school').value;
+  const careRatio=care==='daycare'?1:care==='part'?.4:1.8;
+  const schoolRatio=school==='public'?0:school==='private'?1:1.6;
+  const categories=[0,0,0,0,0],values:number[]=[];
+  for(let age=0;age<18;age++){
+   const factor=Math.pow(1+inflation/100,age)*children;
+   const ageMultiplier=age<3?1.08:age<12?1:1.15;
+   const amounts=[housing*factor,food*factor*ageMultiplier,health*factor*ageMultiplier,age<6?childcare*factor*careRatio:0,age>=6?schoolcost*factor*schoolRatio:0];
+   amounts.forEach((n,i)=>categories[i]+=n);values.push(amounts.reduce((a,b)=>a+b,0));
+  }
+  const total=categories.reduce((a,b)=>a+b,0);
+  node('total').textContent=cash(total);node('monthly').textContent=cash(total/216);node('first').textContent=cash(values[0]);
+  const chart=node('bars');chart.replaceChildren();const max=Math.max(...values,1);
+  values.forEach((v,i)=>{const el=document.createElement('span');el.style.height=Math.max(1,100*v/max)+'%';el.title='Age '+i+': '+cash(v);chart.append(el);});
+  const labels=['Housing','Food and clothing','Healthcare and other','Childcare (ages 0–5)','School tuition (ages 6–17)'];const cats=node('categories');cats.replaceChildren();labels.forEach((label,i)=>{const row=document.createElement('div'),title=document.createElement('span'),price=document.createElement('strong');title.textContent=label;price.textContent=cash(categories[i]);row.append(title,price);cats.append(row);});
+  copy='DollarAngle child cost projection ('+currency.value+')\nChildren: '+children+'\n18-year projected cost: '+cash(total)+'\nAverage monthly: '+cash(total/216)+'\nIllustrative inputs, inflation '+inflation+'%, not an official region-specific estimate.\ndollarangle.com/tools/cost-of-raising-a-child-calculator';
+ }
+ form.addEventListener('input',render);form.addEventListener('change',render);currency.addEventListener('change',render);
+ f('region').addEventListener('change',()=>{const arr=presets[f('region').value];['housing','food','health','childcare','schoolcost'].forEach((n,i)=>{f(n).value=String(arr[i]);});render();});
+ root.querySelector<HTMLButtonElement>('[data-copy]')!.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(copy);node('copy-status').textContent='Copied!';}catch{node('copy-status').textContent='Copy unavailable in this browser.';}});
+ render();
+}
+document.querySelectorAll('[data-child-tool]').forEach(initChild);
+document.addEventListener('astro:page-load',()=>document.querySelectorAll('[data-child-tool]').forEach(initChild));
+</script>
