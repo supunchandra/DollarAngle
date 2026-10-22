@@ -13,12 +13,12 @@ const nav = [
 <header class="header">
   <div class="container nav">
     <a class="brand" href="/" aria-label="DollarAngle home"><i class="brand-mark"></i><span>DOLLAR</span><span>ANGLE</span></a>
-    <nav class="nav-links" data-nav-links>
+    <nav class="nav-links" id="primary-navigation" aria-label="Main navigation" data-nav-links>
       {nav.map(([label, href]) => <a class:list={[{'nav-tools':href==='/tools'}]} href={href} aria-current={Astro.url.pathname===href?'page':undefined}>{label}</a>)}
     </nav>
     <div class="nav-actions">
       <a class="btn btn-primary" href="/#newsletter">Subscribe</a>
-      <button class="mobile-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-mobile-toggle>☰</button>
+      <button class="mobile-toggle" type="button" aria-label="Open navigation" aria-controls="primary-navigation" aria-expanded="false" data-mobile-toggle>☰</button>
     </div>
   </div>
 </header>
