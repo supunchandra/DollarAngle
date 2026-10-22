@@ -92,6 +92,22 @@ const siteSchema = {
           const open = nav.dataset.open === 'true';
           nav.dataset.open = String(!open);
           toggle.setAttribute('aria-expanded', String(!open));
+          toggle.setAttribute('aria-label', open ? 'Open navigation' : 'Close navigation');
+        });
+        nav.addEventListener('click', (event) => {
+          if (event.target.closest('a')) {
+            nav.dataset.open = 'false';
+            toggle.setAttribute('aria-expanded', 'false');
+            toggle.setAttribute('aria-label', 'Open navigation');
+          }
+        });
+        document.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape' && nav.dataset.open === 'true') {
+            nav.dataset.open = 'false';
+            toggle.setAttribute('aria-expanded', 'false');
+            toggle.setAttribute('aria-label', 'Open navigation');
+            toggle.focus();
+          }
         });
       }
       const newsletterForm = document.querySelector('[data-newsletter-form]');
