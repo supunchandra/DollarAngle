@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import RentSplitter from '../../components/tools/RentSplitter.astro';
+const faq = [
+ { q:'How do you split rent proportionally?', a:'Divide each partner’s monthly take-home pay by the combined take-home pay. Multiply each income percentage by the total shared bills.' },
+ { q:'Is 50/50 always fair for couples?', a:'Not necessarily. An equal dollar split can place a larger percentage burden on the lower earner. Discuss personal obligations and what feels sustainable.' },
+ { q:'What is a hybrid split?', a:'A hybrid method splits part of the bills equally and the rest in proportion to income. You can change the equal share using the slider.' },
+ { q:'Does choosing pounds or euros convert our money?', a:'No. Currency selection only changes the displayed symbol and formatting. Enter all incomes and expenses in the same currency.' }
+];
+const schema = {'@context':'https://schema.org','@type':'WebApplication',name:'Proportional Rent and Bill Split Calculator',url:'https://dollarangle.com/tools/rent-split-calculator',applicationCategory:'FinanceApplication',operatingSystem:'Any',isAccessibleForFree:true,description:'Compare 50/50 and income-proportional splits of rent and shared household expenses for couples.'};
+---
+<BaseLayout title="Rent Split Calculator for Couples | 50/50 vs Income-Based | DollarAngle" description="Free rent split calculator: compare 50/50 and income-based shares for couples. Calculate who pays what, money left over, and a hybrid split with no signup.">
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  <div class="container tool-page">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">›</span><a href="/tools">Money Tools</a><span aria-hidden="true">›</span>Rent Split Calculator</nav>
+    <header class="intro"><p class="kicker">FREE COUPLES FINANCE CALCULATOR</p><h1>Rent Split Calculator: <span>50/50 or Based on Income?</span></h1><p>When one partner earns more, splitting every bill down the middle may not feel equal. Compare fairer possibilities with real numbers, right here.</p></header>
+    <RentSplitter />
+    <section class="explainer" aria-label="How to split shared expenses">
+      <h2>How to calculate a proportional rent split</h2>
+      <p>Add both partners’ monthly <strong>take-home incomes</strong>. Divide each partner’s income by the combined total, then multiply the percentage by the shared monthly rent and bills.</p>
+      <div class="example"><h3>Example: $6,000 and $4,000 take-home pay</h3><p>With $2,500 in shared monthly bills, Partner A earns 60% of household take-home income and contributes <strong>$1,500</strong>. Partner B earns 40% and contributes <strong>$1,000</strong>. Under 50/50, each would contribute $1,250.</p></div>
+      <h2>Should you choose 50/50, proportional, or hybrid?</h2>
+      <p>There is no universal definition of fair. A 50/50 split is straightforward, but its cost can be heavier for a lower-earning partner. Income-proportional sharing matches the percentage of take-home income contributed, while a hybrid model balances the two. Consider debt repayments, childcare, caregiving, irregular earnings, and the savings each person needs before agreeing.</p>
+      <h2>What should count as shared bills?</h2>
+      <p>Often this includes rent, utilities, internet, groceries, renter’s insurance and agreed joint subscriptions. Personal debts, discretionary spending and expenses for dependents should be discussed separately rather than assumed to be shared.</p>
+      <h2>Frequently asked questions</h2>
+      <div class="faq">{faq.map(item=><details><summary>{item.q}</summary><p>{item.a}</p></details>)}</div>
+      <h2>Related reading</h2>
+      <div class="related"><a href="/articles/moving-in-together-money-rules">Moving in together? Nine money rules to agree on →</a><a href="/articles/love-is-not-a-financial-plan">Seven money conversations every couple should have →</a></div>
+      <p class="caution">DollarAngle provides educational calculations, not individualized financial advice. Values are illustrative, calculated locally in your browser, and do not account for every personal expense.</p>
+    </section>
+  </div>
+</BaseLayout>
+<style>
+.tool-page{padding-top:26px;padding-bottom:55px}.crumbs{display:flex;align-items:center;gap:9px;font-size:.78rem;color:#756673;flex-wrap:wrap}.crumbs a{text-decoration:underline;text-underline-offset:3px}.intro{max-width:810px;padding:40px 0 28px}.intro .kicker{color:#087c61}.intro h1{font-size:clamp(2.2rem,5vw,4.25rem);line-height:1.07;letter-spacing:-.05em;margin:12px 0 15px;color:#172c27}.intro h1 span{color:#087c61}.intro>p:last-child{font-size:1.06rem;line-height:1.7;color:#60766e}.explainer{max-width:790px;margin:54px auto 0;font:1rem/1.82 system-ui,sans-serif;color:#24372e}.explainer h2{font-size:clamp(1.45rem,2.6vw,2rem);letter-spacing:-.04em;line-height:1.25;margin:35px 0 12px}.explainer h3{margin-top:0}.example{background:#effaf4;border-left:4px solid #087c61;padding:22px 24px;border-radius:14px}.example p{margin-bottom:0}.faq{border-top:1px solid #d8eadf}.faq details{border-bottom:1px solid #d8eadf;padding:15px 0}.faq summary{cursor:pointer;font-weight:750}.faq p{margin-bottom:0}.related{display:grid;gap:10px}.related a{color:#087c61;font-weight:750;text-decoration:underline;text-underline-offset:3px}.caution{font-size:.78rem;color:#60766e;background:#f4f8f5;padding:18px;border-radius:12px;margin-top:32px}@media(max-width:600px){.intro{padding:27px 0 21px}.tool-page{padding-top:16px}}
+</style>

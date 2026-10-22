@@ -14,7 +14,18 @@ const staticPaths = [
   '/topics/markets',
   '/topics/economy',
   '/topics/real-estate',
-  '/topics/crypto'
+  '/topics/crypto',
+  '/tools',
+  '/tools/rent-split-calculator',
+  '/tools/mine-yours-ours-budget-calculator',
+  '/tools/wedding-savings-calculator',
+  '/tools/couples-debt-payoff-calculator',
+  '/tools/stay-at-home-parent-calculator',
+  '/tools/cost-of-raising-a-child-calculator',
+  '/tools/marriage-tax-calculator',
+  '/tools/prenup-vs-property-law-simulator',
+  '/tools/career-break-maternity-leave-calculator',
+  '/tools/couples-fire-calculator'
 ];
 
 function escapeXml(value: string) {

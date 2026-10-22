@@ -3,6 +3,9 @@ import { render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import AuthorBox from '../../components/AuthorBox.astro';
 import ShareMenu from '../../components/ShareMenu.astro';
+import RentSplitter from '../../components/tools/RentSplitter.astro';
+import HybridBudgetAllocator from '../../components/tools/HybridBudgetAllocator.astro';
+import CouplesDebtPayoff from '../../components/tools/CouplesDebtPayoff.astro';
 import { getVisibleArticles, showDrafts } from '../../lib/content';
 import { resolveEditor } from '../../data/editors';
 
@@ -13,6 +16,10 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content, headings } = await render(entry);
 const d = entry.data;
+const rentToolArticles = new Set(['moving-in-together-money-rules','love-is-not-a-financial-plan']);
+const showRentTool = rentToolArticles.has(entry.id);
+const showBudgetTool = entry.id === '7-habits-couples-build-wealth';
+const showDebtTool = entry.id === 'marrying-someone-with-100k-debt';
 const published = new Intl.DateTimeFormat('en-US', { year:'numeric', month:'long', day:'numeric' }).format(d.pubDate);
 const categoryLabel = d.category.replaceAll('-', ' ').replace(/\b\w/g, (c) => c.toUpperCase());
 const canonical = new URL(`/articles/${entry.id}`, Astro.site);
@@ -46,7 +53,7 @@ const articleSchema = {
 <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
 {showDrafts && d.draft && <div class="preview-bar">Draft preview. This article is not approved for publication and is marked noindex.</div>}
 <section class="article-hero"><div class="container"><span class="eyebrow">DollarAngle {d.franchise}</span><h1>{d.title}</h1><p class="article-deck">{d.description}</p><div class="article-meta"><span>By {editor.name}</span><span class="meta-separator" aria-hidden="true">·</span><span>{published}</span><span class="meta-separator" aria-hidden="true">·</span><span>{d.readTime}</span><span class="meta-separator" aria-hidden="true">·</span><span>{categoryLabel}</span></div></div></section>
-<section class="section" style="padding-top:10px"><div class="container article-layout"><ShareMenu url={canonical.href} title={d.title} /><article class="article-body">{d.keyTakeaway && <blockquote><strong>The DollarAngle</strong><br />{d.keyTakeaway}</blockquote>}<Content /><AuthorBox editor={editor} /><div class="disclaimer"><strong>Financial education disclaimer:</strong> DollarAngle provides financial education, news and commentary for informational purposes only. Nothing here constitutes personalized financial, investment, tax or legal advice. Investing involves risk, including possible loss of principal. Consider your own circumstances and, where appropriate, consult a qualified professional.</div></article><aside class="sidebar"><h2>In this article</h2>{headings.filter((h) => h.depth === 2).map((h) => <a href={`#${h.slug}`}>{h.text}</a>)}<h2 style="margin-top:26px">Editorial standard</h2><p style="font-size:.86rem;color:#64748b">We separate factual claims from interpretation and show risks alongside opportunities.</p><a href="/editorial-policy" style="color:#059669">Read our policy →</a></aside></div></section>
+<section class="section" style="padding-top:10px"><div class="container article-layout"><ShareMenu url={canonical.href} title={d.title} /><article class="article-body">{d.keyTakeaway && <blockquote><strong>The DollarAngle</strong><br />{d.keyTakeaway}</blockquote>}<Content />{showRentTool && <section class="inline-money-tool" aria-label="Interactive rent and bills calculator"><div class="tool-embed-intro"><span class="tool-embed-kicker">PUT IT INTO PRACTICE · INTERACTIVE</span><span class="tool-embed-arrow" aria-hidden="true">↗</span></div><h2>Try it together: Split your shared bills</h2><p>Use your own income and expense amounts below. Your numbers stay in your browser without creating an account.</p><RentSplitter compact /><p class="tool-full-link"><a href="/tools/rent-split-calculator">See the full guide to proportional rent splitting →</a></p></section>}{showBudgetTool && <section class="inline-money-tool" aria-label="Interactive Mine Yours Ours budget calculator"><div class="tool-embed-intro"><span class="tool-embed-kicker">PUT IT INTO PRACTICE · INTERACTIVE</span><span class="tool-embed-arrow" aria-hidden="true">↗</span></div><h2>Build your shared money system</h2><p>Try the Mine, Yours, Ours approach without leaving this article.</p><HybridBudgetAllocator compact /><p class="tool-full-link"><a href="/tools/mine-yours-ours-budget-calculator">Explore the complete three-account budgeting guide →</a></p></section>}{showDebtTool && <section class="inline-money-tool" aria-label="Couples debt payoff simulator"><div class="tool-embed-intro"><span class="tool-embed-kicker">PUT IT INTO PRACTICE · INTERACTIVE</span><span class="tool-embed-arrow" aria-hidden="true">↗</span></div><h2>Explore a debt-free timeline together</h2><p>Add each partner’s debts and compare repayment strategies without leaving this article.</p><CouplesDebtPayoff compact /><p class="tool-full-link"><a href="/tools/couples-debt-payoff-calculator">Read the complete debt payoff guide →</a></p></section>}<AuthorBox editor={editor} /><div class="disclaimer"><strong>Financial education disclaimer:</strong> DollarAngle provides financial education, news and commentary for informational purposes only. Nothing here constitutes personalized financial, investment, tax or legal advice. Investing involves risk, including possible loss of principal. Consider your own circumstances and, where appropriate, consult a qualified professional.</div></article><aside class="sidebar"><h2>In this article</h2>{headings.filter((h) => h.depth === 2).map((h) => <a href={`#${h.slug}`}>{h.text}</a>)}<h2 style="margin-top:26px">Editorial standard</h2><p style="font-size:.86rem;color:#64748b">We separate factual claims from interpretation and show risks alongside opportunities.</p><a href="/editorial-policy" style="color:#059669">Read our policy →</a></aside></div></section>
 {['marrying-someone-with-100k-debt', '7-habits-couples-build-wealth'].includes(entry.id) && <script is:inline>
   document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.article-body input[type="checkbox"]').forEach((checkbox) => {
@@ -56,3 +63,19 @@ const articleSchema = {
   });
 </script>}
 </BaseLayout>
+
+<style>.inline-money-tool{margin:38px 0;padding-top:16px;border-top:1px solid #d7e8de;font-family:Inter,ui-sans-serif,system-ui,sans-serif}.inline-money-tool>h2{font-size:clamp(1.4rem,2.5vw,1.9rem);line-height:1.2;color:#164b3d;letter-spacing:-.03em}.inline-money-tool>p{font-size:.9rem;line-height:1.65;color:#567367}.inline-money-tool .tool-full-link a{color:#087c61;font-weight:800}</style>
+
+<style>
+.inline-money-tool{background:#f5faf6;border:1px solid #cee8d7;border-radius:18px;padding:clamp(16px,3vw,29px);margin:44px -12px;position:relative;overflow:hidden}
+.inline-money-tool:before{content:"";position:absolute;height:5px;left:0;right:0;top:0;background:linear-gradient(90deg,#0a735b,#62d9a4)}
+.tool-embed-intro{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.tool-embed-kicker{font:800 .7rem/1.4 Inter,system-ui,sans-serif;color:#087c61;letter-spacing:.12em}
+.tool-embed-arrow{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:#0b4735;color:#fff;font:800 22px/1 Inter,system-ui,sans-serif}
+.inline-money-tool>h2{font-family:Georgia,Cambria,serif;letter-spacing:-.04em;font-size:clamp(1.55rem,2.8vw,2.15rem);color:#133c2f;line-height:1.16;margin:15px 0 9px}
+.inline-money-tool>p{margin-bottom:20px}
+.inline-money-tool .tool-full-link{margin:20px 0 0}
+.inline-money-tool .tool-full-link a{display:inline-block;color:#075c47;font-weight:850;text-underline-offset:4px}
+.inline-money-tool :is(.rent-tool,.budget-tool,.debt-tool){box-shadow:0 10px 25px #0a4e3510}
+@media(max-width:720px){.inline-money-tool{margin:32px -8px;padding:15px}}
+</style>

@@ -1,0 +1,58 @@
+---
+const {compact=false}=Astro.props;
+---
+<section class:list={['tax-tool',{compact}]} data-marriage-tax aria-label="US marriage tax bonus or penalty estimator">
+<header><p class="eyebrow">DOLLARANGLE · US TAX TOOLS</p><h2>Will marriage change your federal income tax?</h2><p>Compare two 2026 single returns with one married-filing-jointly return using published IRS brackets.</p></header>
+<div class="layout"><form data-form class="inputs">
+<label>Tax year<select disabled aria-label="Tax year"><option>2026 · IRS verified</option></select></label>
+<label>Partner A annual gross ordinary income ($)<input data-a type="number" min="0" max="100000000" step="100" value="85000" required /></label>
+<label>Partner B annual gross ordinary income ($)<input data-b type="number" min="0" max="100000000" step="100" value="45000" required /></label>
+<fieldset><legend>Deduction method</legend><label class="radio"><input type="radio" name="deduction" value="standard" checked/> 2026 standard deduction</label><label class="radio"><input type="radio" name="deduction" value="itemized"/> Enter itemized deductions</label></fieldset>
+<div data-itemized hidden class="itemized"><label>Partner A itemized deductions ($)<input data-da type="number" min="0" max="100000000" value="0"/></label><label>Partner B itemized deductions ($)<input data-db type="number" min="0" max="100000000" value="0"/></label><label>Joint itemized deductions ($)<input data-dj type="number" min="0" max="100000000" value="0"/></label></div>
+<p class="note">Illustrative regular federal income tax only. Excludes state taxes, credits, capital gains rates, payroll taxes, AMT, additional Medicare tax, NIIT, and other limitations. Itemized deductions are entered separately for each filing scenario, not automatically combined. Assumes both people otherwise qualify to file single if unmarried. This is not a complete tax return.</p>
+</form>
+<div class="output" aria-live="polite" aria-atomic="true"><p class="eyebrow">ESTIMATED 2026 DIFFERENCE</p><p data-error class="error" hidden></p><div data-results><div class="verdict"><small>Marriage tax comparison</small><strong data-verdict></strong><span data-delta></span></div><div class="cards"><div><small>Two single returns</small><strong data-single></strong></div><div><small>Married filing jointly</small><strong data-joint></strong></div></div><div class="comparison"><h3>Estimated federal tax</h3><p>Single returns combined</p><div class="track"><span data-bar-single></span></div><p>Married filing jointly</p><div class="track"><span data-bar-joint></span></div></div><p class="insight" data-explainer></p><button type="button" class="copy" data-copy>Copy comparison</button><span data-copy-status class="note" role="status"></span></div></div></div>
+<p class="source">Source: <a href="https://www.irs.gov/irb/2025-45_IRB" rel="noopener noreferrer">IRS Revenue Procedure 2025-32 (2026 tax tables)</a>. Last checked October 22, 2026.</p>
+</section>
+<style>
+.tax-tool{font:inherit;font-family:Inter,system-ui,sans-serif;color:#19392e;background:white;border:1px solid #d7eadf;border-radius:26px;padding:clamp(18px,3vw,36px);box-shadow:0 14px 40px #0959400d}.tax-tool header{max-width:780px;margin-bottom:25px}.tax-tool .eyebrow{font-size:.71rem;font-weight:850;letter-spacing:.1em;color:#087c61;margin:0}.tax-tool h2{font-size:clamp(1.6rem,3vw,2.2rem);line-height:1.14;letter-spacing:-.04em;margin:10px 0}.tax-tool header p:not(.eyebrow){color:#5b7667;line-height:1.6}.tax-tool .layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.03fr);gap:23px}.tax-tool .inputs{display:grid;align-content:start;gap:16px}.tax-tool .inputs>label,.tax-tool .itemized label{display:grid;gap:7px;font-size:.85rem;font-weight:700}.tax-tool input[type=number],.tax-tool select{width:100%;border:1px solid #c7dccf;border-radius:11px;padding:12px;color:#19392e;font:inherit;background:white}.tax-tool select:disabled{background:#f2f6f3;color:#57705f}.tax-tool fieldset{border:0;margin:0;padding:0;display:grid;gap:10px}.tax-tool legend{font-size:.86rem;font-weight:800;margin-bottom:10px}.tax-tool .radio{display:flex;align-items:center;gap:9px;font-size:.83rem}.tax-tool input[type=radio]{accent-color:#087c61}.tax-tool .itemized{display:grid;gap:12px}.tax-tool .note,.tax-tool .source{color:#647c6e;font-size:.77rem;line-height:1.6}.tax-tool .output{background:#f0faf4;border:1px solid #d7e9dd;padding:21px;border-radius:20px;min-width:0}.tax-tool .verdict{display:grid;gap:9px;background:#087c61;color:white;border-radius:15px;padding:20px;margin:16px 0}.tax-tool .verdict strong{font-size:clamp(1.3rem,2.7vw,1.9rem);overflow-wrap:anywhere}.tax-tool .verdict small,.tax-tool .verdict span{color:#e0f6e7}.tax-tool .cards{display:grid;grid-template-columns:1fr 1fr;gap:10px}.tax-tool .cards div{background:white;border:1px solid #d8eadf;border-radius:12px;display:grid;gap:9px;padding:13px;min-width:0}.tax-tool .cards small{font-size:.75rem;color:#607768}.tax-tool .cards strong{font-size:clamp(1.05rem,2vw,1.45rem);overflow-wrap:anywhere}.tax-tool h3{font-size:.9rem;margin:24px 0 14px}.tax-tool .comparison p{font-size:.77rem;color:#597163;margin:12px 0 6px}.tax-tool .track{height:14px;background:#d7e9de;border-radius:999px;overflow:hidden}.tax-tool .track span{display:block;height:100%;background:#087c61;border-radius:inherit}.tax-tool .track:last-child span{background:#71bc9c}.tax-tool .insight{color:#526b5e;font-size:.82rem;line-height:1.7;margin:21px 0}.tax-tool .copy{padding:12px 17px;border:0;border-radius:11px;background:#087c61;color:white;font-weight:800;cursor:pointer}.tax-tool .source{margin:20px 0 0}.tax-tool .source a{color:#087c61;text-decoration:underline}.tax-tool .error{color:#ae3345}.tax-tool [hidden]{display:none!important}.tax-tool :focus-visible{outline:3px solid #8bd5ac;outline-offset:2px}@media(max-width:800px){.tax-tool .layout{grid-template-columns:1fr}}@media(max-width:430px){.tax-tool .cards{grid-template-columns:1fr}.tax-tool .output{padding:15px}}
+</style>
+<script>
+function initMarriageTax(root:Element){
+ if(root.hasAttribute('data-tax-ready'))return;root.setAttribute('data-tax-ready','true');
+ const f=(s:string)=>root.querySelector<HTMLInputElement>('[data-'+s+']')!;
+ const out=(s:string)=>root.querySelector<HTMLElement>('[data-'+s+']')!;
+ const rates=[.10,.12,.22,.24,.32,.35,.37];
+ const single=[12400,50400,105700,201775,256225,640600,Infinity];
+ const joint=[24800,100800,211400,403550,512450,768700,Infinity];
+ function tax(taxable:number,limits:number[]){
+  let remaining=Math.max(0,taxable),prior=0,total=0;
+  for(let i=0;i<rates.length;i++){const width=limits[i]-prior;const amount=Math.min(remaining,width);total+=amount*rates[i];remaining-=amount;prior=limits[i];if(remaining<=0)break;}return total;
+ }
+ const money=(n:number)=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(n);
+ let text='';
+ function calculate(){
+  const item=(root.querySelector('input[name="deduction"]:checked') as HTMLInputElement).value==='itemized';
+  out('itemized').hidden=!item;
+  const nums=[f('a').valueAsNumber,f('b').valueAsNumber,f('da').valueAsNumber,f('db').valueAsNumber,f('dj').valueAsNumber];
+  const valid=nums.every(n=>Number.isFinite(n)&&n>=0&&n<=1e8);
+  out('error').hidden=valid;out('results').hidden=!valid;
+  if(!valid){out('error').textContent='Enter valid, nonnegative annual amounts.';return;}
+  const [a,b,da,db,dj]=nums;
+  const singles=tax(a-(item?da:16100),single)+tax(b-(item?db:16100),single);
+  const married=tax(a+b-(item?dj:32200),joint);
+  const difference=married-singles;
+  const verdict=Math.abs(difference)<.5?'Approximately neutral':difference<0?'Estimated marriage tax bonus':'Estimated marriage tax penalty';
+  out('verdict').textContent=verdict;out('delta').textContent=Math.abs(difference)<.5?'Little or no difference under these assumptions':money(Math.abs(difference))+' '+(difference<0?'less':'more')+' estimated federal income tax';
+  out('single').textContent=money(singles);out('joint').textContent=money(married);
+  const max=Math.max(singles,married,1);out('bar-single').style.width=100*singles/max+'%';out('bar-joint').style.width=100*married/max+'%';
+  out('explainer').textContent='This simplified calculation compares regular federal income tax under 2026 single and married-filing-jointly brackets. Other tax provisions may materially change your actual result.';
+  text='DollarAngle 2026 marriage tax estimate\nTwo single returns: '+money(singles)+'\nMarried filing jointly: '+money(married)+'\nDifference: '+money(difference)+'\nSimplified federal income tax only. dollarangle.com/tools/marriage-tax-calculator';
+ }
+ root.addEventListener('input',calculate);root.addEventListener('change',calculate);
+ root.querySelector<HTMLButtonElement>('[data-copy]')!.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(text);out('copy-status').textContent='Copied!';}catch{out('copy-status').textContent='Copy unavailable in this browser.';}});
+ calculate();
+}
+document.querySelectorAll('[data-marriage-tax]').forEach(initMarriageTax);
+document.addEventListener('astro:page-load',()=>document.querySelectorAll('[data-marriage-tax]').forEach(initMarriageTax));
+</script>
